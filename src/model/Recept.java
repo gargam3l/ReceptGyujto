@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Recept {
     private String megnevezes;
     private String leiras;
-    private ArrayList<String> osszetevok;
+    private ArrayList<Osszetevok> osszetevok;
 
     /**
      * Üres konstruktor
@@ -32,7 +32,7 @@ public class Recept {
      * @param leiras
      * @param osszetevok 
      */
-    public Recept(String megnevezes, String leiras, ArrayList<String> osszetevok) {
+    public Recept(String megnevezes, String leiras, ArrayList<Osszetevok> osszetevok) {
         this.megnevezes = megnevezes;
         this.leiras = leiras;
         this.osszetevok = osszetevok;
@@ -41,9 +41,9 @@ public class Recept {
     /**
      * Egy Recepthez hozzádunk egy összetevőt
     */
-    public void osszetevotHozzaad(String osszetevo)
+    public void osszetevotHozzaad(int mennyiseg_egyseg, String mennyiseg_tipus, String osszetevo_fajta)
     {
-        this.osszetevok.add(osszetevo);
+        this.osszetevok.add(new Osszetevok(mennyiseg_egyseg, mennyiseg_tipus, osszetevo_fajta));
     }
 
     public String getMegnevezes() {
@@ -54,7 +54,7 @@ public class Recept {
         return leiras;
     }
 
-    public ArrayList<String> getOsszetevok() {
+    public ArrayList<Osszetevok> getOsszetevok() {
         return osszetevok;
     }
     

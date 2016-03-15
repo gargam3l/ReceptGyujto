@@ -18,6 +18,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import model.Osszetevok;
 import model.ReceptKezelo;
 
 
@@ -141,7 +142,7 @@ public class ShowRecipePanel  extends JPanel{
         System.out.println("load recipe osszetevok to panel");
         DefaultListModel model = new DefaultListModel();
         //model.setColumnIdentifiers(new String[]{"recept osszetevok"});
-        for (String osszetevok:(kezelo.keres(receptNeve).getOsszetevok()))
+        for (Osszetevok osszetevok:(kezelo.keres(receptNeve).getOsszetevok()))
         {
             model.addElement(osszetevok);
         }
