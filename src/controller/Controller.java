@@ -55,7 +55,10 @@ public class Controller implements ActionListener, ListSelectionListener {
             }
         });
         // Teszt adat
-        rKezelo.ujRecept(new Recept("Gulyás", "Keverj össze mindent és főzd meg", new ArrayList<String>(Arrays.asList("kevés paprika", "0.5kg Hús", "2l Víz"))));
+        ArrayList<Osszetevok> tesztrosszetevok=new ArrayList<Osszetevok>();
+        Osszetevok tesztossz=  new Osszetevok(1, "kg", "hús");
+        tesztrosszetevok.add(tesztossz);
+        rKezelo.ujRecept(new Recept("Gulyás", "Keverj össze mindent és főzd meg", tesztrosszetevok));
     }
 
     @Override
