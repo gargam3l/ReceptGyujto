@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Chlebovics Kornél
  */
-public class ReceptTar {
+public class ReceptTar implements AdatbazisKapcsolat{
     private ArrayList<Recept> tar;
 
     public ReceptTar() {
