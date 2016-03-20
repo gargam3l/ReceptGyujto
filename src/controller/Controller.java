@@ -35,12 +35,6 @@ public class Controller implements ActionListener, ListSelectionListener {
     public Controller() {
         gui = new GUI();
         rKezelo = new ReceptKezelo();
-        
-        
-        
-        
-                    
-        
     }
     
     public void Run()

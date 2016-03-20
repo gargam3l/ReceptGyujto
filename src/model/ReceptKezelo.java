@@ -6,6 +6,7 @@
 
 package model;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -13,13 +14,34 @@ import java.util.Observable;
  *
  * @author Chlebovics Kornél
  */
-public class ReceptKezelo extends Observable{
+public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     private ReceptTar tar;
+    private static Connection kapcsolat;
 
     public ReceptKezelo() {
         tar= new ReceptTar();
     }
+    public static void kapcsolatNyit() {
+    try {
+      Class.forName(DRIVER);
+      kapcsolat = DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+    catch (ClassNotFoundException e) {
+      System.out.println("Hiba! Hiányzik a JDBC driver.");
+    }
+    catch (SQLException e) {
+      System.out.println("Hiba! Nem sikerült megnyitni a kapcsolatot az adatbázis-szerverrel.");
+    }
+  }
 
+  public static void kapcsolatZár() {
+    try {
+      kapcsolat.close();
+    }
+    catch (SQLException e) {
+      System.out.println("Hiba! Nem sikerült lezárni a kapcsolatot az adatbázis-szerverrel.");
+    }
+  }
     
     
     public ReceptKezelo(ReceptTar tar) {
@@ -27,18 +49,68 @@ public class ReceptKezelo extends Observable{
     }
     
     public void ujRecept(Recept recept)
+    
     {
         tar.receptetHozzaad(recept);
         setChanged();
         notifyObservers(recept);
     }
     
+    public void receptetMent (Recept recept)
+    {
+        try {
+            kapcsolatNyit();
+            Statement s=kapcsolat.createStatement();
+            String sql = "SQL mentéshez";
+            s.executeUpdate(sql);
+            kapcsolatZár();
+        }
+    catch(SQLException e) {
+      System.out.println(e.getMessage());
+    }
+    }
+    
+    public ReceptTar keresMegnevezesre (String kulcs)
+    {
+        ReceptTar eredmeny = new ReceptTar();
+        try {
+            kapcsolatNyit();
+            Statement s=kapcsolat.createStatement();
+            String sql = "SQL kereséshez megnevezésre";
+            ResultSet rs=s.executeQuery(sql);
+            while(rs.next()) eredmeny.receptetHozzaad(new Recept());
+            kapcsolatZár();
+        }
+    catch(SQLException e) {
+      System.out.println(e.getMessage());
+    }
+        return eredmeny;
+    }
+    
+    public ReceptTar keresOsszetevore (ArrayList<String> kulcs)
+    {
+        ReceptTar eredmeny = new ReceptTar();
+        try {
+            kapcsolatNyit();
+            Statement s=kapcsolat.createStatement();
+            String sql = "SQL kereséshez összetevőkre";
+            ResultSet rs=s.executeQuery(sql);
+            while(rs.next()) eredmeny.receptetHozzaad(new Recept());
+            kapcsolatZár();
+        }
+    catch(SQLException e) {
+      System.out.println(e.getMessage());
+    }
+        return eredmeny;
+    }
     public Recept keres(String str)
     {
         notifyObservers();
         return tar.megnevezestKeres(str);
         
     }
+    
+    
     
     public ArrayList<String> getNames()
     {
