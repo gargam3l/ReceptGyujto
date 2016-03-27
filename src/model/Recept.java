@@ -37,11 +37,17 @@ public class Recept {
         this.leiras = leiras;
         this.osszetevok = osszetevok;
     }
+
+    public Recept(String megnevezes, String leiras) {
+        this.megnevezes = megnevezes;
+        this.leiras = leiras;
+        this.osszetevok=new ArrayList<>();
+    }
     
     /**
      * Egy Recepthez hozzádunk egy összetevőt
     */
-    public void osszetevotHozzaad(int mennyiseg_egyseg, String mennyiseg_tipus, String osszetevo_fajta)
+    public void osszetevotHozzaad(double mennyiseg_egyseg, String mennyiseg_tipus, String osszetevo_fajta)
     {
         this.osszetevok.add(new Osszetevok(mennyiseg_egyseg, mennyiseg_tipus, osszetevo_fajta));
     }

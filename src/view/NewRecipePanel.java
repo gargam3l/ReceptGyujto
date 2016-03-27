@@ -19,9 +19,10 @@ public class NewRecipePanel  extends JPanel{
     private JFrame pFrame;
     private JLabel cim;
     private JTextField receptNeve;
-    //private JTextField otevoMennyiseg;
-    //private JList otevoTipus;
+    private JTextField otevoMennyiseg;
+    private JList otevoTipus;
     private JTextField otevoMegnevezes;
+    private JTable otevoTabla;
     private JList otevoList;
     private JTextField receptLeiras;
     private JButton btnHozzaad;
@@ -35,9 +36,9 @@ public class NewRecipePanel  extends JPanel{
         cim = new JLabel("Új recept felvétel");
         JLabel rnevLabel = new JLabel("Recept neve");
         this.receptNeve= new JTextField(1);
-        //this.otevoMennyiseg= new JTextField(1);
-        //this.otevoTipus = new JList();
-        //this.otevoMegnevezes= new JTextField(1);
+        this.otevoMennyiseg= new JTextField(1);
+        this.otevoTipus = new JList();
+        this.otevoMegnevezes= new JTextField(1);
         JLabel otevLabel = new JLabel("Összetevők:");
         DefaultListModel plmodel = new DefaultListModel();
         plmodel.addElement(" ");
@@ -67,12 +68,14 @@ public class NewRecipePanel  extends JPanel{
         add(cim);
         add(rnevLabel);
         add(receptNeve);
-        //add(otevoMennyiseg);
-        //add(otevoTipus);
-        //add(otevoMegnevezes);
         add(otevLabel);
+        add(otevoMennyiseg);
+        add(otevoTipus);
+        add(otevoMegnevezes);
+        
         add(otevoList);
         add(btnHozzaad);
+        //add(otevoTabla);
         add(leirLabel);
         add(receptLeiras);
         
@@ -146,6 +149,11 @@ public class NewRecipePanel  extends JPanel{
     public void setReceptLeiras(JTextField receptLeiras) {
         this.receptLeiras = receptLeiras;
     }
+
+    public JTable getOtevoTabla() {
+        return otevoTabla;
+    }
+    
     
     
     

@@ -22,7 +22,7 @@ public class MainPanel extends JPanel{
     private JButton receptMutat;
     private JButton ujRecept;
     private JPanel guiPanel;
-
+    private JButton receptKeres;
     //private JPanel contentPane;
     
 
@@ -33,7 +33,7 @@ public class MainPanel extends JPanel{
         this.cim = new JLabel("Recept Kezelő");
         this.receptMutat = new JButton("Recept megjelenítése");
         this.ujRecept = new JButton("Új recept hozzáadása");
-        
+        this.receptKeres= new JButton("Recept Keresése");
         //panel.add(this.receptKeres);
         //panel.add(this.ujRecept);
         
@@ -78,12 +78,13 @@ public class MainPanel extends JPanel{
             }
         });
         */
-
+        
         //add components
         add (cim);
         add (receptMutat);
         add (ujRecept);
-          
+        add(receptKeres);
+        
     }
     
     public void addController(ActionListener  controller){

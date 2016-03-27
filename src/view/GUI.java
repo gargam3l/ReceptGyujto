@@ -24,7 +24,7 @@ public class GUI extends JPanel implements Observer{
     private JFrame frame = new JFrame();
     private MainPanel mPanel;
     private NewRecipePanel newRPanel;
-    //private SearchRecipePanel srchRPanel;
+    private SearchRecipePanel srchRPanel;
     private ShowRecipePanel shRPanel;
     private ReceptKezelo model;
 
@@ -33,18 +33,20 @@ public class GUI extends JPanel implements Observer{
         mPanel = new MainPanel();
         newRPanel = new NewRecipePanel();
         shRPanel = new ShowRecipePanel();
+        srchRPanel = new SearchRecipePanel();
         mPanel.setGuiPanel(cards);
         shRPanel.setGuiPanel(cards);
         newRPanel.setGuiPanel(cards);
-        
+        srchRPanel.setGuiPanel(cards);
         mPanel.setpFrame(frame);
         shRPanel.setpFrame(frame);
         newRPanel.setpFrame(frame);
+        srchRPanel.setpFrame(frame);
         
         cards.add(mPanel, "card1");
         cards.add(newRPanel, "card2");
         cards.add(shRPanel, "card3");
-        
+        cards.add(srchRPanel, "card4");
         cardLayout.show(cards, "card1");
         /*
         mPanel.setBorder(BorderFactory.createTitledBorder("Main Panel"));
@@ -53,6 +55,7 @@ public class GUI extends JPanel implements Observer{
         */
         setLayout(new BorderLayout());
         add(cards, BorderLayout.CENTER);
+        frame.setTitle("Recept kezelő");
         
         
     }

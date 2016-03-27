@@ -48,7 +48,7 @@ public class Controller implements ActionListener, ListSelectionListener {
                 gui.displayGUI();
             }
         });
-        // Teszt adat
+        // Teszt adatok
         ArrayList<Osszetevok> tesztrosszetevok=new ArrayList<Osszetevok>();
         Osszetevok tesztossz=  new Osszetevok(1, "kg", "hús");
         tesztrosszetevok.add(tesztossz);
@@ -82,11 +82,25 @@ public class Controller implements ActionListener, ListSelectionListener {
                 }
             else if(e.getSource()==gui.getNewRPanel().getBtnHozzaad())
             {
+                //Tesztelésre, debuggolásra
                 System.out.println("hozzad");
             }
             else if(e.getSource()==gui.getNewRPanel().getBtnMentes())
             {
+                //Tesztelésre, debuggolásra
+                System.out.println(gui.getNewRPanel().getReceptNeve().getText() +" "
+                +gui.getNewRPanel().getReceptLeiras().getText() +" "+
+                gui.getNewRPanel().getOtevoList().getSelectedValue());
                 System.out.println("ment");
+                
+                //Működési logika
+                //Recept létrehozása a gui-ból vett adatokkal - megnevezés leírás
+                Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve().getText(), gui.getNewRPanel().getReceptLeiras().getText());
+                //Összetevők hozzáadása recepthez - ciklusba kell tenni, miután gui-ban az összetevők tábla implementálva lesz
+                ujRecept.osszetevotHozzaad((double) gui.getNewRPanel().getOtevoList().getSelectedValue(), null, null);
+                //Recept mentése az adatbázisba
+                rKezelo.receptetMent(ujRecept);
+                
             }
                 
             

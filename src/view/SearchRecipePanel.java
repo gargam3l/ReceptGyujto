@@ -19,11 +19,21 @@ public class SearchRecipePanel  extends JPanel{
     private JTextField receptNeve;
     private JTable talalatTabla;
     private JButton btnVissza;
+    private JFrame pFrame;
+    private JPanel guiPanel;
     
     public SearchRecipePanel() {
         this.setLayout(new FlowLayout());
         
         
+    }
+
+    void setGuiPanel(JPanel guiPanel) {
+        this.guiPanel=guiPanel;
+    }
+
+    void setpFrame(JFrame pFrame) {
+        this.pFrame=pFrame;
     }
     
 }
