@@ -107,6 +107,7 @@ public class GUI extends JPanel implements Observer{
         mPanel.addController(controller);
         newRPanel.addController(controller);
         shRPanel.addController(controller);
+        srchRPanel.addController(controller);
     }
 
     public MainPanel getmPanel() {
@@ -124,6 +125,12 @@ public class GUI extends JPanel implements Observer{
     public JPanel getCards() {
         return cards;
     }
+
+    public SearchRecipePanel getSrchRPanel() {
+        return srchRPanel;
+    }
+    
+    
     
     public JPanel getCurrentCard()
 {

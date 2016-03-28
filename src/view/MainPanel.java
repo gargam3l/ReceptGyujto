@@ -91,6 +91,7 @@ public class MainPanel extends JPanel{
 		System.out.println("View      : adding controller");
 		this.receptMutat.addActionListener(controller);	//need controller before adding it as a listener 
                 this.ujRecept.addActionListener(controller);
+                this.receptKeres.addActionListener(controller);
     } //addController()
     
     /*
@@ -115,6 +116,10 @@ public class MainPanel extends JPanel{
 
     public JButton getUjRecept() {
         return ujRecept;
+    }
+
+    public JButton getReceptKeres() {
+        return receptKeres;
     }
     
     

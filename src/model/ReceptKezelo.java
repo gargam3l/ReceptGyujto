@@ -76,7 +76,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         try {
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
-            String sql = "SQL kereséshez megnevezésre";
+            String sql = "SQL kereséshez megnevezésre"+kulcs;
             ResultSet rs=s.executeQuery(sql);
             while(rs.next()) eredmeny.receptetHozzaad(new Recept());
             kapcsolatZár();

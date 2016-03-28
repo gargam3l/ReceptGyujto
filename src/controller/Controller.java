@@ -75,10 +75,15 @@ public class Controller implements ActionListener, ListSelectionListener {
                     cardLayout.show(gui.getCards(), "card3");
                     gui.getShRPanel().loadRecipeNamesToView(rKezelo);
                 }
-            else if((e.getSource()==gui.getNewRPanel().getBtnVissza()) || (e.getSource()==gui.getShRPanel().getBtnVissza()))
+            else if((e.getSource()==gui.getNewRPanel().getBtnVissza()) || (e.getSource()==gui.getSrchRPanel().getBtnVissza()) || (e.getSource()==gui.getShRPanel().getBtnVissza()))
                 {
                     CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                     cardLayout.show(gui.getCards(), "card1");
+                }
+            else if((e.getSource()==gui.getmPanel().getReceptKeres()))
+                {
+                    CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
+                    cardLayout.show(gui.getCards(), "card4");
                 }
             else if(e.getSource()==gui.getNewRPanel().getBtnHozzaad())
             {
