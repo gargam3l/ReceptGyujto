@@ -20,9 +20,27 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
 
     public ReceptKezelo() {
         //inic();
+        kapcsolatTeszt();
         tar= new ReceptTar();
     }
     
+    public void kapcsolatTeszt()
+    {
+        try {
+            kapcsolatNyit();
+            Statement s=kapcsolat.createStatement();
+            String sql = "select * from COUNTRIES where REGION_ID=2";
+            ResultSet rs=s.executeQuery(sql);
+            while (rs.next()){
+                System.out.println(rs.getString("COUNTRY_NAME"));
+           }
+            kapcsolatZár();
+            
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     
     public boolean tablaLetezik()
     {
