@@ -52,7 +52,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             ResultSet rs=s.executeQuery(sql);
             tablak_szama=rs.getInt(1);
             kapcsolatZár();
-            if(tablak_szama==1) return true;
+            if(tablak_szama>0) return true;
         }
         catch(SQLException e) {
             System.out.println(e.getMessage());
