@@ -15,7 +15,7 @@ import javax.swing.*;
  * @author 604772006
  */
 public class SearchRecipePanel  extends JPanel{
-    private  JLabel cim;
+    private  JLabel rkeres;
     private JTextField receptNeve;
     private JTable talalatTabla;
     private JButton btnVissza;
@@ -23,7 +23,7 @@ public class SearchRecipePanel  extends JPanel{
     private JPanel guiPanel;
     
     public SearchRecipePanel() {
-        cim = new JLabel("Recept Keresése");
+        rkeres = new JLabel("Recept Keresése");
         JLabel rnevLabel = new JLabel("Recept neve");
         this.receptNeve= new JTextField(1);
         this.btnVissza=new JButton("Vissza");
@@ -31,20 +31,22 @@ public class SearchRecipePanel  extends JPanel{
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));
         //setLayout (null);
-        //setLayout(new FlowLayout());
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        /*
+        setLayout(new FlowLayout());
+        
+        
         //set component bounds (only needed by Absolute Positioning)
         this.receptNeve.setBounds (20, 45, 100, 25);
-        this.otevoMennyiseg.setBounds (135, 60, 100, 25);
-        this.otevoTipus.setBounds (260, 35, 100, 25);
-        this.otevoMegnevezes.setBounds (105, 115, 100, 25);
-        */
+        //this.otevoMennyiseg.setBounds (135, 60, 100, 25);
+        //this.otevoTipus.setBounds (260, 35, 100, 25);
+        //this.otevoMegnevezes.setBounds (105, 115, 100, 25);
         
-        
-        
+        this.rkeres.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.rkeres.setAlignmentY(Component.TOP_ALIGNMENT);
+        rnevLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        rnevLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         //add components
-        add(cim);
+        add(rkeres);
         add(rnevLabel);
         add(receptNeve);
         add(btnVissza);
