@@ -342,6 +342,51 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                 }
     }
     
+    public void receptetSzerkeszt(String aktualis, Recept uj)
+    {
+        try {
+            kapcsolatNyit();
+            Statement s=kapcsolat.createStatement();
+            //Recept nevének és elékszítésének módosítása
+            String sql_recept_id="select id from Recept where nev="+aktualis;
+            ResultSet rs1=s.executeQuery(sql_recept_id);
+            String recept_id=rs1.getString(1);
+            String sql_recept_tabla = "update Recept" +
+                    "SET\n" +
+                    "nev="+uj.getMegnevezes()+", elkeszites="+uj.getLeiras()
+                    +"where id="+recept_id;
+            s.executeUpdate(sql_recept_tabla);
+            //Összetevőket töröljük ill központi táblát karban tartjuk
+            String sql1 = "delete from Osszetevo where osszetevo_id in (select osszetevo_id FROM Kozponti"
+                    + "OUTER JOIN Recept ON Kozponti.recept_id=Recept.id"
+                    + "WHERE Recept.nev ="+uj.getMegnevezes()+")";
+            s.executeUpdate(sql1);
+            String sql2 = "delete from Kozponti where recept_id ="+recept_id;
+            //Módosított összetevők hozzáadsa, központi tábla karban tartása
+            for (Osszetevok otevo: uj.getOsszetevok())
+            {
+                String sql_otevo_id="select seq_osszetevo.nextval from dual";
+                ResultSet rs2=s.executeQuery(sql_recept_id);
+                String otevo_id=rs2.getString(1);
+                String sql_otevo_hozzad = "INSERT INTO Osszetevo(id,nev)\n" +
+                    "VALUES\n" +
+                    "("+otevo_id+","+otevo.getOsszetevo_fajta()+")";
+                s.executeUpdate(sql_otevo_hozzad);
+                String sql_mennyiseg_id="select id from Mennyiseg where nev="+otevo.getMennyiseg_tipus();
+                ResultSet rs3=s.executeQuery(sql_recept_id);
+                String mennyiseg_id=rs3.getString(1);
+                String sql_kozponti_hozzaad = "INSERT INTO Kozponti(recept_id,osszetevo_id,mennyiseg,mennyiseg_id)\n" +
+                    "VALUES\n" +
+                    "("+recept_id+","+otevo_id+","+otevo.getMennyiseg_egyseg()+","+mennyiseg_id+ ")";
+                s.executeUpdate(sql_kozponti_hozzaad);
+            }
+            kapcsolatZár();
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public ReceptTar keresMegnevezesre (String kulcs)
     {
         ReceptTar eredmeny = new ReceptTar();
