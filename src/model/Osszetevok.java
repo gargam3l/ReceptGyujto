@@ -12,11 +12,11 @@ package model;
  * @author Kornél
  */
 public class Osszetevok {
-   double mennyiseg_egyseg;
+   String mennyiseg_egyseg;
    String mennyiseg_tipus;
    String osszetevo_fajta;
 
-    public double getMennyiseg_egyseg() {
+    public String getMennyiseg_egyseg() {
         return mennyiseg_egyseg;
     }
 
@@ -28,7 +28,7 @@ public class Osszetevok {
         return osszetevo_fajta;
     }
 
-    public void setMennyiseg_egyseg(double mennyiseg_egyseg) {
+    public void setMennyiseg_egyseg(String mennyiseg_egyseg) {
         this.mennyiseg_egyseg = mennyiseg_egyseg;
     }
 
@@ -40,10 +40,13 @@ public class Osszetevok {
         this.osszetevo_fajta = osszetevo_fajta;
     }
 
-    public Osszetevok(double mennyiseg_egyseg, String mennyiseg_tipus, String osszetevo_fajta) {
+    public Osszetevok(String mennyiseg_egyseg, String mennyiseg_tipus, String osszetevo_fajta) {
         this.mennyiseg_egyseg = mennyiseg_egyseg;
         this.mennyiseg_tipus = mennyiseg_tipus;
         this.osszetevo_fajta = osszetevo_fajta;
+    }
+
+    public Osszetevok() {
     }
 
     @Override

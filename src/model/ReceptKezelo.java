@@ -339,6 +339,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         if (!receptLetezik(recept.getMegnevezes())) receptetBeszur(recept);
                 else{
                     //exception logika -recept már létezik
+                    System.out.println("Recept már létezik");
                 }
     }
     

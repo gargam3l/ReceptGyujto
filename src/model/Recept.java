@@ -47,11 +47,15 @@ public class Recept {
     /**
      * Egy Recepthez hozzádunk egy összetevőt
     */
-    public void osszetevotHozzaad(double mennyiseg_egyseg, String mennyiseg_tipus, String osszetevo_fajta)
+    public void osszetevotHozzaad(String mennyiseg_egyseg, String mennyiseg_tipus, String osszetevo_fajta)
     {
         this.osszetevok.add(new Osszetevok(mennyiseg_egyseg, mennyiseg_tipus, osszetevo_fajta));
     }
-
+    public void osszetevotHozzaad(Osszetevok otevo)
+    {
+        this.osszetevok.add(otevo);
+    }
+    
     public String getMegnevezes() {
         return megnevezes;
     }
