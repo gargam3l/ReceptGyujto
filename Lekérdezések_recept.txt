@@ -1,0 +1,98 @@
+1.Recept keresése:
+
+Ami kell:
+
+Le kell hoznia: 
+Recept.nev
+Recept.elkeszites
+Osszetevo.nev
+Kozponti.mennyiseg
+Mennyiseg.nev
+
+SELECT Recept.nev,Recept.elkeszites,Osszetevo.nev,Kozponti.mennyiseg,Mennyiseg.nev FROM Kozponti
+INNER JOIN Recept ON Recept.id
+INNER JOIN Osszetevo ON Osszetevo.id
+INNER JOIN Mennyiseg ON Mennyiseg.id
+WHERE Recept.nev='Keresett név'
+ORDER BY Recept.nev ASC;
+
+SELECT World.Cities, Azonosítók.CityID
+FROM World
+INNER JOIN Azonosítók
+ON World.AzonosítóID=Azonosítók.AzonosítóID
+ORDER BY World.Cities;
+
+2.Hozzáadás:
+
+A. Recept:
+
+INSERT INTO Recept(id,nev,elkeszites)
+VALUES
+(seq_recept.nextval,'Név','Elkészítés');
+
+B. Összetevő:
+
+INSERT INTO Osszetevo(id,nev)
+VALUES
+(seq_osszetevo.nextval,'Név'),
+
+C. Mennyiség:
+
+INSERT INTO Mennyiseg(id,nev)
+VALUES
+(seq_mennyiseg.nextval,'Név');
+
+D. Komplett recept:
+
+INSERT INTO Kozponti(recept_id,osszetevo_id,mennyiseg,mennyiseg_id)
+VALUES
+(Szám,Szám,Szám,Szám);
+
+3. Szerkesztés(id alapján):
+
+A. Recept:
+
+UPDATE Recept
+SET nev='Új név',elkeszites='Új szöveg'
+WHERE id=adott_id;
+
+B. Összetevő:
+
+UPDATE Osszetevo
+SET nev='Új név'
+WHERE id=adott_id;
+
+C. Mennyiség:
+
+UPDATE Mennyiseg
+SET nev='Új név'
+WHERE id=adott_id;
+
+D. Komplett recept:
+
+UPDATE Kozponti
+SET recept_id=új_id,mennyiseg=új_mennyiség,
+WHERE recept_id=adott_id;
+
+4.Törlés(id alapján):
+
+A. Recept törlése Recept táblából:
+
+DELETE FROM Recept WHERE recept_id='Adott ID';
+
+B. Összetevő törlése Osszetevo táblából:
+
+DELETE FROM Osszetevo WHERE osszetevo_id='Adott ID';
+
+C. Mennyiség fajta törlése Mennyiseg táblából:
+
+DELETE FROM Mennyiseg WHERE mennyiseg_id='Adott ID';
+
+D. Központi táblából törlés:
+
+DELETE FROM Kozponti WHERE recept_id='Adott ID';
+DELETE FROM Kozponti WHERE osszetevo_id='Adott ID';
+DELETE FROM Kozponti WHERE mennyiseg_id='Adott ID';
+
+
+
