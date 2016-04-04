@@ -73,44 +73,50 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                     + "CONNECT Receptgyujto;" +
                     "" +
             */
-            String sql =        
+            String sql_recept_tabla =        
                     "CREATE TABLE Recept" +
                     "(" +
                     "id int NOT NULL PRIMARY KEY," +
                     "nev varchar(30)," +
                     "elkeszites varchar(2000)" +
-                    ");" +
-                    "" +
+                    ");" ;
+            s.executeUpdate(sql_recept_tabla);
+            String sql_recept_sequence=
                     "CREATE SEQUENCE seq_recept" +
                     "MINVALUE 1" +
                     "START WITH 1" +
                     "INCREMENT BY 1" +
-                    "CACHE 100;" +
-                    "" +
+                    "CACHE 100;" ;
+            s.executeUpdate(sql_recept_sequence);
+            String sql_osszetevo_table=
                     "CREATE TABLE Osszetevo" +
                     "(" +
                     "id int NOT NULL PRIMARY KEY," +
                     "nev varchar(30)" +
-                    ");" +
-                    "" +
+                    ");" ;
+            s.executeUpdate(sql_osszetevo_table);
+            String sql_osszetevo_sequence=
                     "CREATE SEQUENCE seq_osszetevo" +
                     "MINVALUE 1" +
                     "START WITH 1" +
                     "INCREMENT BY 1" +
-                    "CACHE 100;" +
-                    "" +
+                    "CACHE 100;" ;
+            s.executeUpdate(sql_osszetevo_sequence);
+            String sql_mennyiseg_tabla=
                     "CREATE TABLE Mennyiseg" +
                     "(" +
                     "id int NOT NULL PRIMARY KEY," +
                     "nev varchar(255)" +
-                    ");" +
-                    "" +
+                    ");" ;
+            s.executeUpdate(sql_mennyiseg_tabla);
+            String sql_mennyiseg_sequence=
                     "CREATE SEQUENCE seq_mennyiseg" +
                     "MINVALUE 1" +
                     "START WITH 1" +
                     "INCREMENT BY 1" +
-                    "CACHE 100;" +
-                    "" +
+                    "CACHE 100;" ;
+            s.executeUpdate(sql_mennyiseg_sequence);
+            String sql_kozponti_tabla=
                     "CREATE TABLE Kozponti" +
                     "(" +
                     "recept_id int NOT NULL," +
@@ -121,7 +127,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                     "CONSTRAINT fk_osszetevo FOREIGN KEY(osszetevo_id) REFERENCES Osszetevo(id)," +
                     "CONSTRAINT fk_mennyiseg FOREIGN KEY(mennyiseg_id) REFERENCES Mennyiseg(id)" +
                     ");";
-            s.executeUpdate(sql);
+            s.executeUpdate(sql_kozponti_tabla);
             kapcsolatZár();
         }
         catch(SQLException e) {
@@ -134,7 +140,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         try {
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
-            String sql = ""
+            String sql_recept_hozzad = ""
                     + "INSERT INTO Recept(id,nev,elkeszites)" +
                     "VALUES" +
                     "(seq_recept.nextval,'Rántott csirkecomb kukoricás rizzsel','A csirkecombokat enyhén sós vízben megfőzzük, aztán bepanírozzuk először lisztbe, aztán tojásba, és végül a zsemlemorzsába forgatjuk bele.Bő olajban kisütjük a rántott csirkecombokat.Közben megfőzzük a rizst, kukoricát pirítunk hozzá, és összekeverjük a kukoricát a rizzsel.'), --1" +
@@ -150,8 +156,10 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                     "A margarinnal kikenünk egy lapos tűzálló tálat, aljára karikázzuk a krumpli felét, kissé megsózzuk, lazán összekeverjük, és elsimítjuk. Arányosan elosztva a tetejére rendezzük a tojást és a kolbászkarikákat, majd megkenjük a tejföl felével. A maradék krumplit felkarikázzuk, és kissé egymásra csúsztatva a tetejére rendezzük. Egyenletesen bevonjuk a maradék tejföllel, végül a tetejére göndörítjük a szalonnaszeleteket." +
                     "A sütőben addig sütjük, amíg a tejföl és a szalonna aranybarnára pirul (35-40 perc). Ezután tálalhatjuk.'), --3" +
                     "(seq_recept.nextval,'Mákos tészta','A darált mákot a porcukorral összekeverjük, majd a tésztát kifőzzük, leszűrjük. Ezután a vajat felmelegítjük egy lábosban. Majd beletesszük a tésztát, elkeverjük. Végül ozzháadjuk a porcukros mákot, majd összekeverjük.'), --4" +
-                    "(seq_recept.nextval,'Babgulyás','A babot előző este beáztatjuk jó sok vízbe. Másnap a répákat felkarikázzuk, a paradicsomot, és a húst is felaprítjuk. A babot egy edénybe tesszük, teszünk bele babérlevelet, felengedjük vízzel, ami ellepi és elkezdjük főzni had, puhuljon. A hagymát apróra vágjuk, kevés olajon üvegesre dinszteljük. Beletesszük az összenyomott fokhagymát, hozzáadjuk a megmosott felkockázott húst és fehéredésig főzzük. Hozzáadjuk, a pirospaprikát elkeverjük. Ezután mehet bele az apró kocára vágott paradicsom, a karikára vágott répa és zöldség. Felöntjük vízzel és hozzáadjuk a kisebb darabokra vágott füstölt húst. Fél óra főzés után a babot is beletesszük, és a bab főzőlevét is adjuk hozzá, nagyon finom lesz tőle. Együtt főzzük, amíg a hús és a bab is puha lesz. Addig elkészítjük a csipetkét. Egy tálba tesszük a lisztet közepébe a tojást, sót, és jól összegyúrjuk, ha kell, még adunk hozzá lisztet az a lényeg a tészta ne ragadjon a kezünkhöz. Ha puha a hús és a bab is, akkor a tésztát tegyük a levesbe, és jól forraljuk össze. A kész tészták feljönnek a leves tetejére.'); --5" +
-                    "" +
+                    "(seq_recept.nextval,'Babgulyás','A babot előző este beáztatjuk jó sok vízbe. Másnap a répákat felkarikázzuk, a paradicsomot, és a húst is felaprítjuk. A babot egy edénybe tesszük, teszünk bele babérlevelet, felengedjük vízzel, ami ellepi és elkezdjük főzni had, puhuljon. A hagymát apróra vágjuk, kevés olajon üvegesre dinszteljük. Beletesszük az összenyomott fokhagymát, hozzáadjuk a megmosott felkockázott húst és fehéredésig főzzük. Hozzáadjuk, a pirospaprikát elkeverjük. Ezután mehet bele az apró kocára vágott paradicsom, a karikára vágott répa és zöldség. Felöntjük vízzel és hozzáadjuk a kisebb darabokra vágott füstölt húst. Fél óra főzés után a babot is beletesszük, és a bab főzőlevét is adjuk hozzá, nagyon finom lesz tőle. Együtt főzzük, amíg a hús és a bab is puha lesz. Addig elkészítjük a csipetkét. Egy tálba tesszük a lisztet közepébe a tojást, sót, és jól összegyúrjuk, ha kell, még adunk hozzá lisztet az a lényeg a tészta ne ragadjon a kezünkhöz. Ha puha a hús és a bab is, akkor a tésztát tegyük a levesbe, és jól forraljuk össze. A kész tészták feljönnek a leves tetejére.'); --5" 
+                    ;
+            s.executeUpdate(sql_recept_hozzad);
+            String sql_osszetevo_hozzaad=
                     "INSERT INTO Osszetevo(id,nev)" +
                     "VALUES" +
                     "(seq_osszetevo.nextval,'csirkecomb'), --1" +
@@ -185,14 +193,16 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                     "(seq_osszetevo.nextval,'sertéstarja'); --29" +
                     "(seq_osszetevo.nextval,'sertéscsülök'); --30" +
                     "(seq_osszetevo.nextval,'petrezselyem'); --31" +
-                    "(seq_osszetevo.nextval,'fűszerpaprika'); --32" +
-                    "" +
+                    "(seq_osszetevo.nextval,'fűszerpaprika'); --32" ;
+            s.executeUpdate(sql_osszetevo_hozzaad);
+        String sql_mennyiseg_hozzaad=
                     "INSERT INTO Mennyiseg(id,nev)" +
                     "VALUES" +
                     "(seq_mennyiseg.nextval,'db'), --1" +
                     "(seq_mennyiseg.nextval,'gramm'), --2" +
-                    "(seq_mennyiseg.nextval,'ml'); --3" +
-                    "" +
+                    "(seq_mennyiseg.nextval,'ml'); --3" ;
+        s.executeUpdate(sql_mennyiseg_hozzaad);
+        String sql_kozponti_hozzaad=
                     "INSERT INTO Kozponti(recept_id,osszetevo_id,mennyiseg,mennyiseg_id)" +
                     "VALUES" +
                     "(1,1,8,1)," +
@@ -230,7 +240,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                     "(5,32,2,1)," +
                     "(5,4,2,2)," +
                     "(5,3,100,3); --eddig az ötödik recept";
-            s.executeUpdate(sql);
+            s.executeUpdate(sql_kozponti_hozzaad);
             kapcsolatZár();
         }
         catch(SQLException e) {
