@@ -392,7 +392,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     {
         
         if (!tablaLetezik()) tablatLetrehoz();
-        tablaTesztAdatok();
+        if (!tesztAdatBetoltve())tablaTesztAdatok();
     }
     
     
@@ -438,9 +438,9 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
             String sql = "select count(*) from Recept where nev="+receptNev;
-            int tablak_szama;
+            int tablak_szama=0;
             ResultSet rs=s.executeQuery(sql);
-            tablak_szama=rs.getInt(1);
+            while (rs.next()) tablak_szama=rs.getInt(1);
             kapcsolatZár();
             if(tablak_szama>0) return true;
         }
@@ -448,6 +448,24 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             System.out.println(e.getMessage());
         }
         
+        return false;
+    }
+    
+    public boolean tesztAdatBetoltve()
+    {
+        try {
+            kapcsolatNyit();
+            Statement s=kapcsolat.createStatement();
+            String sql = "select count(*) from Recept";
+            int sorok_szama=0;
+            ResultSet rs=s.executeQuery(sql);
+            while (rs.next()) sorok_szama=rs.getInt(1);
+            kapcsolatZár();
+            if(sorok_szama>0) return true;
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return false;
     }
     
