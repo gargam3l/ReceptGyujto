@@ -145,7 +145,7 @@ public class Controller implements ActionListener, ListSelectionListener {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public ActionListener getVisszaListener()
+    public ActionListener getVisszaGombListener()
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
@@ -156,7 +156,64 @@ public class Controller implements ActionListener, ListSelectionListener {
          };
     }
     
+    public ActionListener getUjReceptPanelListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
+                cardLayout.show(gui.getCards(), "card2");
+             }
+         };
+    }
     
+    public ActionListener getReceptKeresPanelListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
+                    cardLayout.show(gui.getCards(), "card4");
+             }
+         };
+    }
+    
+    public ActionListener getReceptMutatPanelListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
+                    cardLayout.show(gui.getCards(), "card3");
+                    gui.getShRPanel().loadRecipeNamesToView(rKezelo);
+             }
+         };
+    }
+    
+    public ActionListener getMentesGombListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+    //Tesztelésre, debuggolásra
+                /*System.out.println(gui.getNewRPanel().getReceptNeve().getText() +" "
+                +gui.getNewRPanel().getReceptLeiras().getText() +" ");
+                System.out.println("ment");
+                */
+                //Működési logika
+                //Recept létrehozása a gui-ból vett adatokkal - megnevezés leírás
+                Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve().getText(), gui.getNewRPanel().getReceptLeiras().getText());
+                //Összetevők hozzáadása recepthez - ciklusba kell tenni, miután gui-ban az összetevők tábla implementálva lesz
+                for (int i=0;i<gui.getNewRPanel().getOtevoTabla().getModel().getRowCount();i++)
+                    {
+                        Osszetevok otevo=new Osszetevok();
+                        otevo.setMennyiseg_egyseg(gui.getNewRPanel().getOtevoTabla().getModel().getValueAt(i, 0).toString());
+                        otevo.setOsszetevo_fajta(gui.getNewRPanel().getOtevoTabla().getModel().getValueAt(i, 1).toString());
+                        otevo.setMennyiseg_tipus(gui.getNewRPanel().getOtevoTabla().getModel().getValueAt(i, 2).toString());
+                        ujRecept.osszetevotHozzaad(otevo);
+                    }
+                //ujRecept.osszetevotHozzaad((double) gui.getNewRPanel().getOtevoList().getSelectedValue(), null, null);
+                //Recept mentése az adatbázisba
+                rKezelo.receptetMent(ujRecept);
+                }
+         };
+    }
     
     @Override
     public void valueChanged(ListSelectionEvent e) {

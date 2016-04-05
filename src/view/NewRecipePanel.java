@@ -104,7 +104,7 @@ public class NewRecipePanel  extends JPanel{
     public void addController(ActionListener controller)
     {
         //btnVissza.addActionListener(controller);
-        btnVissza.addActionListener(((Controller)controller).getVisszaListener());
+        btnVissza.addActionListener(((Controller)controller).getVisszaGombListener());
         btnHozzaad.addActionListener( controller);
         btnMentes.addActionListener( controller);
     }
