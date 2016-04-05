@@ -7,6 +7,7 @@
 package view;
 
 
+import controller.Controller;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Observable;
@@ -28,10 +29,10 @@ public class GUI extends JPanel implements Observer{
     private ShowRecipePanel shRPanel;
     private ReceptKezelo model;
 
-    public GUI()
+    public GUI(Controller controller)
     {
         mPanel = new MainPanel();
-        newRPanel = new NewRecipePanel();
+        newRPanel = new NewRecipePanel(controller);
         shRPanel = new ShowRecipePanel();
         srchRPanel = new SearchRecipePanel();
         mPanel.setGuiPanel(cards);
@@ -101,7 +102,7 @@ public class GUI extends JPanel implements Observer{
         
         
     }
-    
+    /*
     public void addController(ActionListener controller)
     {
         mPanel.addController(controller);
@@ -109,7 +110,7 @@ public class GUI extends JPanel implements Observer{
         shRPanel.addController(controller);
         srchRPanel.addController(controller);
     }
-
+*/
     public MainPanel getmPanel() {
         return mPanel;
     }

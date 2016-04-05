@@ -32,7 +32,7 @@ public class NewRecipePanel  extends JPanel{
     private JPanel guiPanel;
             
     
-    public NewRecipePanel() {
+    public NewRecipePanel(Controller controller) {
         //construct components
         cim = new JLabel("Új recept felvétel");
         JLabel rnevLabel = new JLabel("Recept neve");
@@ -49,6 +49,7 @@ public class NewRecipePanel  extends JPanel{
         this.btnHozzaad=new JButton("Összetevő hozzáadása");
         this.btnMentes=new JButton("Mentés");
         this.btnVissza=new JButton("Vissza");
+        btnVissza.addActionListener(controller.getVisszaGombListener());
             
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));
@@ -100,7 +101,7 @@ public class NewRecipePanel  extends JPanel{
         
     }
     
-    
+    /*
     public void addController(ActionListener controller)
     {
         //btnVissza.addActionListener(controller);
@@ -108,7 +109,7 @@ public class NewRecipePanel  extends JPanel{
         btnHozzaad.addActionListener( controller);
         btnMentes.addActionListener( controller);
     }
-
+*/
     public void setGuiPanel(JPanel guiPanel) {
         this.guiPanel = guiPanel;
     }

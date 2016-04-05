@@ -33,14 +33,14 @@ public class Controller implements ActionListener, ListSelectionListener {
     
     
     public Controller() {
-        gui = new GUI();
+        gui = new GUI(this);
         rKezelo = new ReceptKezelo();
     }
     
     public void Run()
     {
         rKezelo.addObserver(gui);
-        gui.addController(this);
+        //gui.addController(this);
         SwingUtilities.invokeLater(new Runnable()
         {
             public void run()
@@ -212,6 +212,24 @@ public class Controller implements ActionListener, ListSelectionListener {
                 //Recept mentése az adatbázisba
                 rKezelo.receptetMent(ujRecept);
                 }
+         };
+    }
+    
+    public ActionListener getReceptTorlesListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 rKezelo.receptetTorol(null);
+             }
+         };
+    }
+    
+    public ActionListener getReceptSzerkesztListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 rKezelo.receptetSzerkeszt(null, null);
+             }
          };
     }
     
