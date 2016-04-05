@@ -1,46 +1,31 @@
 1.Recept keresése:
 
-Ami kell:
-
-Le kell hoznia: 
-Recept.nev
-Recept.elkeszites
-Osszetevo.nev
-Kozponti.mennyiseg
-Mennyiseg.nev
-
-SELECT Recept.nev,Recept.elkeszites,Osszetevo.nev,Kozponti.mennyiseg,Mennyiseg.nev FROM Kozponti
+SELECT Recept.nev,Recept.elkeszites,Recept.datum,Osszetevo.nev,Osszetevo.datum,Kozponti.mennyiseg,Mennyiseg.nev,Mennyiseg.datum FROM Kozponti
 INNER JOIN Recept ON Recept.id
 INNER JOIN Osszetevo ON Osszetevo.id
 INNER JOIN Mennyiseg ON Mennyiseg.id
 WHERE Recept.nev='Keresett név'
 ORDER BY Recept.nev ASC;
 
-SELECT World.Cities, Azonosítók.CityID
-FROM World
-INNER JOIN Azonosítók
-ON World.AzonosítóID=Azonosítók.AzonosítóID
-ORDER BY World.Cities;
-
 2.Hozzáadás:
 
 A. Recept:
 
-INSERT INTO Recept(id,nev,elkeszites)
+INSERT INTO Recept(id,nev,elkeszites,datum)
 VALUES
-(seq_recept.nextval,'Név','Elkészítés');
+(seq_recept.nextval,'Név','Elkészítés',to_date(sysdate,'yyyy/mm/dd hh24:mi:ss'));
 
 B. Összetevő:
 
-INSERT INTO Osszetevo(id,nev)
+INSERT INTO Osszetevo(id,nev,datum)
 VALUES
-(seq_osszetevo.nextval,'Név'),
+(seq_osszetevo.nextval,'Név',to_date(sysdate,'yyyy/mm/dd hh24:mi:ss')),
 
 C. Mennyiség:
 
-INSERT INTO Mennyiseg(id,nev)
+INSERT INTO Mennyiseg(id,nev,datum)
 VALUES
-(seq_mennyiseg.nextval,'Név');
+(seq_mennyiseg.nextval,'Név',to_date(sysdate,'yyyy/mm/dd hh24:mi:ss'));
 
 D. Komplett recept:
 
@@ -53,19 +38,19 @@ VALUES
 A. Recept:
 
 UPDATE Recept
-SET nev='Új név',elkeszites='Új szöveg'
+SET nev='Új név',elkeszites='Új szöveg',datum=to_date(sysdate,'yyyy/mm/dd hh24:mi:ss')
 WHERE id=adott_id;
 
 B. Összetevő:
 
 UPDATE Osszetevo
-SET nev='Új név'
+SET nev='Új név',datum=to_date(sysdate,'yyyy/mm/dd hh24:mi:ss')
 WHERE id=adott_id;
 
 C. Mennyiség:
 
 UPDATE Mennyiseg
-SET nev='Új név'
+SET nev='Új név',datum=to_date(sysdate,'yyyy/mm/dd hh24:mi:ss')
 WHERE id=adott_id;
 
 D. Komplett recept:
