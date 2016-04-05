@@ -6,6 +6,7 @@
 
 package view;
 
+import controller.Controller;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -99,9 +100,11 @@ public class NewRecipePanel  extends JPanel{
         
     }
     
+    
     public void addController(ActionListener controller)
     {
-        btnVissza.addActionListener(controller);
+        //btnVissza.addActionListener(controller);
+        btnVissza.addActionListener(((Controller)controller).getVisszaListener());
         btnHozzaad.addActionListener( controller);
         btnMentes.addActionListener( controller);
     }

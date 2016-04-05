@@ -49,10 +49,12 @@ public class Controller implements ActionListener, ListSelectionListener {
             }
         });
         // Teszt adatok
+        /*
         ArrayList<Osszetevok> tesztrosszetevok=new ArrayList<Osszetevok>();
         Osszetevok tesztossz=  new Osszetevok("1", "kg", "hús");
         tesztrosszetevok.add(tesztossz);
         rKezelo.ujRecept(new Recept("Gulyás", "Keverj össze mindent és főzd meg", tesztrosszetevok));
+        */
     }
 
     @Override
@@ -142,6 +144,19 @@ public class Controller implements ActionListener, ListSelectionListener {
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public ActionListener getVisszaListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 //m.deleteSomething();
+                 CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
+                 cardLayout.show(gui.getCards(), "card1");
+             }
+         };
+    }
+    
+    
     
     @Override
     public void valueChanged(ListSelectionEvent e) {
