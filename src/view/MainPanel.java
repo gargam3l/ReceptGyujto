@@ -27,13 +27,16 @@ public class MainPanel extends JPanel{
     
 
     
-    public MainPanel() {
+    public MainPanel(Controller controller) {
         //contentPane = panel;
         //construct components
         this.cim = new JLabel("Recept Kezelő");
         this.receptMutat = new JButton("Recept megjelenítése");
         this.ujRecept = new JButton("Új recept hozzáadása");
         this.receptKeres= new JButton("Recept Keresése");
+        receptMutat.addActionListener(controller.getReceptMutatPanelListener());
+        ujRecept.addActionListener(controller.getUjReceptPanelListener());
+        receptKeres.addActionListener(controller.getReceptKeresPanelListener());
         //panel.add(this.receptKeres);
         //panel.add(this.ujRecept);
         

@@ -11,6 +11,7 @@
 
 package view;
 
+import controller.Controller;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
@@ -30,6 +31,8 @@ public class ShowRecipePanel  extends JPanel{
     private JPanel guiPanel;
     private JFrame pFrame;
     private JButton btnVissza;
+    private JButton btnMentes;
+    private JButton btnTorles;
     private JList receptNevList;
     private  JList osszetevokList;
     private JTextField leiras;
@@ -45,7 +48,7 @@ public class ShowRecipePanel  extends JPanel{
         private JTextField leiras = new JTextField();
         private JButton btnVissza = new JButton("Vissza");
     */
-    public ShowRecipePanel() {
+    public ShowRecipePanel(Controller controller) {
     
         
         //JPanel shRecipe = new JPanel();
@@ -63,6 +66,9 @@ public class ShowRecipePanel  extends JPanel{
         JLabel leirasLbl = new JLabel("Leírás");
         leiras = new JTextField();
         btnVissza = new JButton("Vissza");
+        btnVissza.addActionListener(controller.getVisszaGombListener());
+        btnTorles.addActionListener(controller.getReceptTorlesListener());
+        btnMentes.addActionListener(controller.getMentesGombListener());
         
         
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -79,6 +85,8 @@ public class ShowRecipePanel  extends JPanel{
         add(leirasLbl);
         add(leiras);
         add(btnVissza);
+        add(btnMentes);
+        add(btnTorles);
         /*
         btnVissza.addActionListener( new ActionListener()
         {
@@ -111,6 +119,14 @@ public class ShowRecipePanel  extends JPanel{
 
     public JButton getBtnVissza() {
         return btnVissza;
+    }
+    
+    public JButton getBtnMentes() {
+        return btnMentes;
+    }
+    
+    public JButton getBtnTorles() {
+        return btnTorles;
     }
 
     public void setReceptNevList(JList receptNevList) {

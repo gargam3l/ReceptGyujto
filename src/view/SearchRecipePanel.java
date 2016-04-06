@@ -6,6 +6,7 @@
 
 package view;
 
+import controller.Controller;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -19,14 +20,18 @@ public class SearchRecipePanel  extends JPanel{
     private JTextField receptNeve;
     private JTable talalatTabla;
     private JButton btnVissza;
+    private JButton btnKereses;
     private JFrame pFrame;
     private JPanel guiPanel;
     
-    public SearchRecipePanel() {
+    public SearchRecipePanel(Controller controller) {
         rkeres = new JLabel("Recept Keresése");
         JLabel rnevLabel = new JLabel("Recept neve");
         this.receptNeve= new JTextField(1);
         this.btnVissza=new JButton("Vissza");
+        this.btnVissza=new JButton("Keresés");
+        btnVissza.addActionListener(controller.getVisszaGombListener());
+        btnKereses.addActionListener(controller.getReceptKeresPanelListener());
             
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));
@@ -50,6 +55,7 @@ public class SearchRecipePanel  extends JPanel{
         add(rnevLabel);
         add(receptNeve);
         add(btnVissza);
+        add(btnKereses);
         //this.setLayout(new FlowLayout());
         
         
@@ -71,6 +77,10 @@ public class SearchRecipePanel  extends JPanel{
 
     public JButton getBtnVissza() {
         return btnVissza;
+    }
+    
+    public JButton getBtnKereses() {
+        return btnKereses;
     }
     
 }
