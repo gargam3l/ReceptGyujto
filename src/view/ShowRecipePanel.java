@@ -87,8 +87,8 @@ public class ShowRecipePanel  extends JPanel{
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnTorles.addActionListener(controller.getReceptTorlesListener());
         btnMentes.addActionListener(controller.getReceptSzerkesztListener());
-        btnHozzaad.addActionListener(controller.getOsszetevotHozzaadListener());
-        osszetevokList.getSelectionModel().addListSelectionListener(controller.getListaElemListener());
+        btnHozzaad.addActionListener(controller.getReceptMutatOsszetevotHozzaadListener());
+        osszetevokList.getSelectionModel().addListSelectionListener(controller.getReceptMutatListaElemListener());
         osszetevokList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         osszetevokTable= new JTable();
         osszetevokTable.setModel(new DefaultTableModel(
@@ -199,7 +199,11 @@ public class ShowRecipePanel  extends JPanel{
 
     
 
-    
+    public String getOtevoListCurrentSelection()
+    {
+        return osszetevokList.getSelectedValue().toString();
+        
+    }
 
     public TableModel getOsszetevokTable() {
         return osszetevokTable.getModel();
@@ -213,7 +217,19 @@ public class ShowRecipePanel  extends JPanel{
         this.receptNeve.setText(receptNeve);
     }
 
-    
+    public void addRowToOtevoTabla(Object[] obj)
+    {
+        DefaultTableModel model = (DefaultTableModel)osszetevokTable.getModel();
+        model.addRow(obj);
+    }
+
+    public String getOtevoMenny() {
+        return otevoMenny.getText();
+    }
+
+    public String getOtevoLeiras() {
+        return otevoLeiras.getText();
+    }
     
     
 }

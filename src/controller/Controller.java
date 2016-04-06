@@ -192,13 +192,13 @@ public class Controller {
                     //összetevő mennyiség típusok betöltése
                     gui.getShRPanel().setOtevokList(rKezelo.otevoMennyTipusok());
                     //Kiválasztott recepthez összetevők betöltésa
-                    rKezelo.getAktualis().setOsszetevok(rKezelo.keresOsszetevoRecepthez(rKezelo.getAktualis().getMegnevezes()));
+                    rKezelo.getAktualisRecept().setOsszetevok(rKezelo.keresOsszetevoRecepthez(rKezelo.getAktualisRecept().getMegnevezes()));
                     //Recept név betöltése guiba
-                    gui.getShRPanel().setReceptNeve(rKezelo.getAktualis().getMegnevezes());
+                    gui.getShRPanel().setReceptNeve(rKezelo.getAktualisRecept().getMegnevezes());
                     //Összetevők töltése guiba
-                    gui.getShRPanel().setOsszetevokTable(rKezelo.getAktualis().getOsszetevokTablaban());
+                    gui.getShRPanel().setOsszetevokTable(rKezelo.getAktualisRecept().getOsszetevokTablaban());
                     //Recept leírás betöltése guiba
-                    gui.getShRPanel().setLeiras(rKezelo.getAktualis().getLeiras());
+                    gui.getShRPanel().setLeiras(rKezelo.getAktualisRecept().getLeiras());
                     
                     
              }
@@ -261,12 +261,24 @@ public class Controller {
          };
     }
     
-    public ActionListener getOsszetevotHozzaadListener()
+    public ActionListener getUjReceptOsszetevotHozzaadListener()
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
                  System.out.println("Hozzáadás gomb");
-                 //rKezelo.receptetSzerkeszt(null, null);
+                 gui.getNewRPanel().addRowToOtevoTabla(new Object[]{gui.getNewRPanel().getOtevoMennyiseg(),rKezelo.getAktualisMennyisegTipus(),gui.getNewRPanel().getOtevoMegnevezes()});
+                //rKezelo.receptetSzerkeszt(null, null);
+             }
+         };
+    }
+    
+    public ActionListener getReceptMutatOsszetevotHozzaadListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 System.out.println("Hozzáadás gomb");
+                 gui.getShRPanel().addRowToOtevoTabla(new Object[]{gui.getShRPanel().getOtevoMenny(),rKezelo.getAktualisMennyisegTipus(),gui.getShRPanel().getOtevoLeiras()});
+                //rKezelo.receptetSzerkeszt(null, null);
              }
          };
     }
@@ -310,15 +322,15 @@ public class Controller {
                 if (!e.getValueIsAdjusting()) {
                     System.out.println("Sor kiválasztva");
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                rKezelo.setAktualis(gui.getSrchRPanel().getTalalatTableAktualisSor());
-                System.out.println(rKezelo.getAktualis().getMegnevezes()+" "+rKezelo.getAktualis().getLeiras());
+                rKezelo.setAktualisRecept(gui.getSrchRPanel().getTalalatTableAktualisSor());
+                System.out.println(rKezelo.getAktualisRecept().getMegnevezes()+" "+rKezelo.getAktualisRecept().getLeiras());
                 }
             }
          };
     }
     
     
-    public ListSelectionListener getListaElemListener()
+    public ListSelectionListener getUjReceptListaElemListener()
     {
         return new ListSelectionListener() {
              
@@ -327,6 +339,23 @@ public class Controller {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     System.out.println("Elem kiválasztva");
+                    rKezelo.setAktualisMennyisegTipus(gui.getNewRPanel().getOtevoListCurrentSelection());
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            }
+         };
+    }
+    
+    public ListSelectionListener getReceptMutatListaElemListener()
+    {
+        return new ListSelectionListener() {
+             
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    System.out.println("Elem kiválasztva");
+                    rKezelo.setAktualisMennyisegTipus(gui.getShRPanel().getOtevoListCurrentSelection());
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             }

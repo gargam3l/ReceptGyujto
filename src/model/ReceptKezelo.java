@@ -15,14 +15,15 @@ import java.util.*;
  */
 public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     private ReceptTar tar;
-    private Recept aktualis;
+    private Recept aktualisRecept;
+    private String aktualisMennyisegTipus;
     private static Connection kapcsolat;
 
     public ReceptKezelo() {
         inic();
         //kapcsolatTeszt();
         tar= new ReceptTar();
-        aktualis = new Recept();
+        aktualisRecept = new Recept();
     }
     
     public void kapcsolatTeszt()
@@ -710,17 +711,25 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         
     }
 
-    public Recept getAktualis() {
-        return aktualis;
+    public Recept getAktualisRecept() {
+        return aktualisRecept;
     }
 
-    public void setAktualis(Recept aktualis) {
-        this.aktualis = aktualis;
+    public void setAktualisRecept(Recept aktualisRecept) {
+        this.aktualisRecept = aktualisRecept;
     }
     
-    public void setAktualis(ArrayList<String> input) {
-        this.aktualis.setMegnevezes(input.get(0));  
-        this.aktualis.setLeiras(input.get(1));
+    public void setAktualisRecept(ArrayList<String> input) {
+        this.aktualisRecept.setMegnevezes(input.get(0));  
+        this.aktualisRecept.setLeiras(input.get(1));
+    }
+
+    public String getAktualisMennyisegTipus() {
+        return aktualisMennyisegTipus;
+    }
+
+    public void setAktualisMennyisegTipus(String aktualisMennyisegTipus) {
+        this.aktualisMennyisegTipus = aktualisMennyisegTipus;
     }
    
 

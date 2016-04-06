@@ -54,8 +54,8 @@ public class NewRecipePanel  extends JPanel{
         btnVissza=new JButton("Vissza");
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnMentes.addActionListener(controller.getMentesGombListener());
-        btnHozzaad.addActionListener(controller.getOsszetevotHozzaadListener());
-        otevoList.getSelectionModel().addListSelectionListener(controller.getListaElemListener());
+        btnHozzaad.addActionListener(controller.getUjReceptOsszetevotHozzaadListener());
+        otevoList.getSelectionModel().addListSelectionListener(controller.getUjReceptListaElemListener());
         otevoList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         otevoTabla= new JTable();
         otevoTabla.setModel(new DefaultTableModel(
@@ -125,6 +125,12 @@ public class NewRecipePanel  extends JPanel{
     public ListModel getOtevoList() {
         return otevoList.getModel();
     }
+    
+    public String getOtevoListCurrentSelection()
+    {
+        return otevoList.getSelectedValue().toString();
+        
+    }
 
     public void setOtevoList(ArrayList<String> otevoList) {
         DefaultListModel dlModel = new DefaultListModel();
@@ -134,6 +140,12 @@ public class NewRecipePanel  extends JPanel{
         }
         
         this.otevoList.setModel(dlModel);
+    }
+    
+    public void addRowToOtevoTabla(Object[] obj)
+    {
+        DefaultTableModel model = (DefaultTableModel)otevoTabla.getModel();
+        model.addRow(obj);
     }
 
     public String getReceptLeiras() {
@@ -150,6 +162,14 @@ public class NewRecipePanel  extends JPanel{
 
     public void setOtevoTabla(TableModel otevoTabla) {
         this.otevoTabla.setModel(otevoTabla);
+    }
+
+    public String getOtevoMennyiseg() {
+        return otevoMennyiseg.getText();
+    }
+
+    public String getOtevoMegnevezes() {
+        return otevoMegnevezes.getText();
     }
     
     
