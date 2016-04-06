@@ -8,6 +8,7 @@ package view;
 
 import controller.Controller;
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -125,8 +126,14 @@ public class NewRecipePanel  extends JPanel{
         return otevoList.getModel();
     }
 
-    public void setOtevoList(ListModel otevoList) {
-        this.otevoList.setModel(otevoList);
+    public void setOtevoList(ArrayList<String> otevoList) {
+        DefaultListModel dlModel = new DefaultListModel();
+        for (int i=0; i<otevoList.size();i++)
+        {
+            dlModel.addElement(otevoList.get(i));
+        }
+        
+        this.otevoList.setModel(dlModel);
     }
 
     public String getReceptLeiras() {

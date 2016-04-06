@@ -14,6 +14,7 @@ package view;
 import controller.Controller;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
@@ -148,8 +149,14 @@ public class ShowRecipePanel  extends JPanel{
     
    
 
-    public void setOsszetevokList(ListModel osszetevokList) {
-        this.osszetevokList.setModel(osszetevokList);
+   public void setOtevokList(ArrayList<String> otevoList) {
+        DefaultListModel dlModel = new DefaultListModel();
+        for (int i=0; i<otevoList.size();i++)
+        {
+            dlModel.addElement(otevoList.get(i));
+        }
+        
+        this.osszetevokList.setModel(dlModel);
     }
 
     public void setLeiras(String leiras) {

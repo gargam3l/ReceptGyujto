@@ -7,8 +7,7 @@
 package model;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Observable;
+import java.util.*;
 
 /**
  *
@@ -432,15 +431,38 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         notifyObservers(recept);
     }
     
+    public ArrayList otevoMennyTipusok()
+    {
+        ArrayList<String> eredmeny = new ArrayList<>() ;
+        try {
+            kapcsolatNyit();
+            Statement s=kapcsolat.createStatement();
+            
+            String sql = "SELECT nev FROM Mennyiseg";
+            ResultSet rs=s.executeQuery(sql);
+            while(rs.next()) 
+            {
+                
+                eredmeny.add(rs.getString("nev"));
+            }
+            kapcsolatZár();
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return eredmeny;
+    }
+    
     public boolean receptLetezik(String receptNev)
     {
         try {
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
-            String sql = "select count(*) from Recept where nev="+receptNev;
+            String sql = "select count(id) from Recept where nev='"+receptNev+"'";
             int tablak_szama=0;
             ResultSet rs=s.executeQuery(sql);
-            while (rs.next()) tablak_szama=rs.getInt(1);
+            while (rs.next())    tablak_szama=rs.getInt(1);
+            System.out.println(sql);
             kapcsolatZár();
             if(tablak_szama>0) return true;
         }
@@ -471,33 +493,45 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     
     public void receptetBeszur (Recept recept)
     {
+        System.out.println("receptet beszúr");
         try {
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
             String sql_recept_id="select seq_recept.nextval from dual";
             ResultSet rs1=s.executeQuery(sql_recept_id);
+            rs1.next();
             String recept_id=rs1.getString(1);
+            System.out.println("recept id sequence kiválasztva");
             String sql_recept_tabla = "INSERT INTO Recept(id,nev,elkeszites)" +
                     "VALUES" +
-                    "("+recept_id+","+recept.getMegnevezes()+","+recept.getLeiras()+")";
+                    "('"+recept_id+"','"+recept.getMegnevezes()+"','"+recept.getLeiras()+"')";
             s.executeUpdate(sql_recept_tabla);
+            System.out.println("recept hozzáadva");
             
             for (Osszetevok otevo: recept.getOsszetevok())
             {
                 String sql_otevo_id="select seq_osszetevo.nextval from dual";
-                ResultSet rs2=s.executeQuery(sql_recept_id);
+                ResultSet rs2=s.executeQuery(sql_otevo_id);
+                rs2.next();
                 String otevo_id=rs2.getString(1);
+                System.out.println("összetevő id sequence kiválasztva");
+                
                 String sql_otevo_hozzad = "INSERT INTO Osszetevo(id,nev)" +
                     "VALUES" +
-                    "("+otevo_id+","+otevo.getOsszetevo_fajta()+")";
+                    "('"+otevo_id+"','"+otevo.getOsszetevo_fajta()+"')";
                 s.executeUpdate(sql_otevo_hozzad);
-                String sql_mennyiseg_id="select id from Mennyiseg where nev="+otevo.getMennyiseg_tipus();
-                ResultSet rs3=s.executeQuery(sql_recept_id);
+                System.out.println("összetevő hozzáadva");
+                
+                String sql_mennyiseg_id="select id from Mennyiseg where nev='"+otevo.getMennyiseg_tipus()+"'";
+                ResultSet rs3=s.executeQuery(sql_mennyiseg_id);
+                rs3.next();
                 String mennyiseg_id=rs3.getString(1);
+                System.out.println("mennyiség id sequence kiválasztva");
                 String sql_kozponti_hozzaad = "INSERT INTO Kozponti(recept_id,osszetevo_id,mennyiseg,mennyiseg_id)" +
                     "VALUES" +
-                    "("+recept_id+","+otevo_id+","+otevo.getMennyiseg_egyseg()+","+mennyiseg_id+ ")";
+                    "('"+recept_id+"','"+otevo_id+"','"+otevo.getMennyiseg_egyseg()+"','"+mennyiseg_id+ "')";
                 s.executeUpdate(sql_kozponti_hozzaad);
+                System.out.println("központi tábla update-elve");
             }
             kapcsolatZár();
         }
@@ -521,7 +555,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
             //Recept nevének és elékszítésének módosítása
-            String sql_recept_id="select id from Recept where nev="+aktualis;
+            String sql_recept_id="select id from Recept where nev='"+aktualis+"'";
             ResultSet rs1=s.executeQuery(sql_recept_id);
             String recept_id=rs1.getString(1);
             String sql_recept_tabla = "update Recept" +
@@ -532,7 +566,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             //Összetevőket töröljük ill központi táblát karban tartjuk
             String sql1 = "delete from Osszetevo where osszetevo_id in (select osszetevo_id FROM Kozponti"
                     + "OUTER JOIN Recept ON Kozponti.recept_id=Recept.id"
-                    + "WHERE Recept.nev ="+uj.getMegnevezes()+")";
+                    + "WHERE Recept.nev ='"+uj.getMegnevezes()+"')";
             s.executeUpdate(sql1);
             String sql2 = "delete from Kozponti where recept_id ="+recept_id;
             //Módosított összetevők hozzáadsa, központi tábla karban tartása
@@ -545,7 +579,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                     "VALUES" +
                     "("+otevo_id+","+otevo.getOsszetevo_fajta()+")";
                 s.executeUpdate(sql_otevo_hozzad);
-                String sql_mennyiseg_id="select id from Mennyiseg where nev="+otevo.getMennyiseg_tipus();
+                String sql_mennyiseg_id="select id from Mennyiseg where nev='"+otevo.getMennyiseg_tipus()+"'";
                 ResultSet rs3=s.executeQuery(sql_recept_id);
                 String mennyiseg_id=rs3.getString(1);
                 String sql_kozponti_hozzaad = "INSERT INTO Kozponti(recept_id,osszetevo_id,mennyiseg,mennyiseg_id)" +
@@ -568,7 +602,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             Statement s=kapcsolat.createStatement();
             
             String sql = "SELECT nev, elkeszites FROM Recept"
-                    + "WHERE nev LIKE %"+ kulcs+"%";
+                    + "WHERE nev LIKE '%"+ kulcs+"%'";
             ResultSet rs=s.executeQuery(sql);
             while(rs.next()) 
             {
@@ -590,10 +624,10 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             Statement s=kapcsolat.createStatement();
             String sql1 = "delete from Osszetevo where osszetevo_id in (select osszetevo_id FROM Kozponti"
                     + "OUTER JOIN Recept ON Kozponti.recept_id=Recept.id"
-                    + "WHERE Recept.nev ="+receptNev+")";
+                    + "WHERE Recept.nev ='"+receptNev+"')";
             s.executeUpdate(sql1);
             String sql2 = "delete from Kozponti where recept_id in (select id FROM Recept"
-                    + "WHERE nev ="+receptNev+")";
+                    + "WHERE nev ='"+receptNev+"')";
             s.executeUpdate(sql2);
             String sql3 = "delete from Recept where nev="+receptNev;
             s.executeUpdate(sql3);

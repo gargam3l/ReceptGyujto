@@ -13,10 +13,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.DefaultListSelectionModel;
-import javax.swing.JList;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import java.util.List;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import model.*;
@@ -168,6 +166,8 @@ public class Controller {
              @Override public void actionPerformed (ActionEvent e) {
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                 cardLayout.show(gui.getCards(), "card2");
+                //összetevő mennyiség típusok betöltése
+                gui.getNewRPanel().setOtevoList(rKezelo.otevoMennyTipusok());
              }
          };
     }
@@ -188,7 +188,10 @@ public class Controller {
              @Override public void actionPerformed (ActionEvent e) {
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                     cardLayout.show(gui.getCards(), "card3");
-                    gui.getShRPanel().loadRecipeNamesToView(rKezelo);
+                    
+                    //összetevő mennyiség típusok betöltése
+                    gui.getShRPanel().setOtevokList(rKezelo.otevoMennyTipusok());
+                    //gui.getShRPanel().loadRecipeNamesToView(rKezelo);
              }
          };
     }
@@ -198,27 +201,33 @@ public class Controller {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
     //Tesztelésre, debuggolásra
+                 /*
                 System.out.println(gui.getNewRPanel().getReceptNeve() +" "
                 +gui.getNewRPanel().getReceptLeiras() +" ");
                 System.out.println("ment");
-                
+                */
                 //Működési logika
                 //Recept létrehozása a gui-ból vett adatokkal - megnevezés leírás
-                 /*
-                Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve().getText(), gui.getNewRPanel().getReceptLeiras().getText());
+                System.out.println("ment"); 
+                Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve(), gui.getNewRPanel().getReceptLeiras());
+                System.out.println(gui.getNewRPanel().getReceptNeve()+" "+ gui.getNewRPanel().getReceptLeiras());
                 //Összetevők hozzáadása recepthez - ciklusba kell tenni, miután gui-ban az összetevők tábla implementálva lesz
-                for (int i=0;i<gui.getNewRPanel().getOtevoTabla().getModel().getRowCount();i++)
+                for (int i=0;i<gui.getNewRPanel().getOtevoTabla().getRowCount();i++)
                     {
                         Osszetevok otevo=new Osszetevok();
-                        otevo.setMennyiseg_egyseg(gui.getNewRPanel().getOtevoTabla().getModel().getValueAt(i, 0).toString());
-                        otevo.setOsszetevo_fajta(gui.getNewRPanel().getOtevoTabla().getModel().getValueAt(i, 1).toString());
-                        otevo.setMennyiseg_tipus(gui.getNewRPanel().getOtevoTabla().getModel().getValueAt(i, 2).toString());
+                        otevo.setMennyiseg_egyseg(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 0).toString());
+                        System.out.println(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 0).toString());
+                                
+                        otevo.setMennyiseg_tipus(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 1).toString());
+                        System.out.println(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 1).toString());
+                        otevo.setOsszetevo_fajta(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 2).toString());
+                        System.out.println(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 2).toString());
                         ujRecept.osszetevotHozzaad(otevo);
                     }
                 //ujRecept.osszetevotHozzaad((double) gui.getNewRPanel().getOtevoList().getSelectedValue(), null, null);
                 //Recept mentése az adatbázisba
                 rKezelo.receptetMent(ujRecept);
-                 */
+                 
                 }
          };
     }
