@@ -33,9 +33,14 @@ public class ShowRecipePanel  extends JPanel{
     private JButton btnVissza;
     private JButton btnMentes;
     private JButton btnTorles;
-    private JList receptNevList;
+    
     private  JList osszetevokList;
     private JTextField leiras;
+    private JTextField receptNeve;
+    private JTable osszetevokTable;
+    private JTextField otevoMenny;
+    private JTextField otevoLeiras;
+    private JButton btnHozzaad;
     
     //JPanel shRecipe = new JPanel();
     /*
@@ -43,7 +48,7 @@ public class ShowRecipePanel  extends JPanel{
         private JLabel receptek = new JLabel("Receptek");
        private  JTable receptNevList = new JTable();
         private JLabel osszetevok = new JLabel("Összetevők");
-        private JTable osszetevokList = new JTable();
+        
         private JLabel leirasLbl = new JLabel("Leírás");
         private JTextField leiras = new JTextField();
         private JButton btnVissza = new JButton("Vissza");
@@ -60,29 +65,70 @@ public class ShowRecipePanel  extends JPanel{
         *plmodel.addElement("pl1");
         *plmodel.addElement("pl2");
         * */
-        receptNevList = new JList();
+        
+        receptNeve=new JTextField("");
+        
         JLabel osszetevok = new JLabel("Összetevők");
-        osszetevokList = new JList();
+        osszetevokList = new JList(new String[]{"listelem1","listaelem2"});
+        
         JLabel leirasLbl = new JLabel("Leírás");
+        JLabel otevoHozzaadLabel = new JLabel("Összetevő hozzáadás");
+        JLabel otevoMennyisegLabel = new JLabel("Mennyiség");
+        JLabel otevoMennyisegTipusLabel = new JLabel("Mennyiség Típus");
+        JLabel otevoMegnevezesLabel = new JLabel("Összetevő");
+        otevoMenny= new JTextField("");
+        otevoLeiras= new JTextField("");
         leiras = new JTextField();
         btnVissza = new JButton("Vissza");
         btnTorles = new JButton("Törlés");
         btnMentes = new JButton("Mentes");
+        btnHozzaad= new JButton("Hozáad");
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnTorles.addActionListener(controller.getReceptTorlesListener());
         btnMentes.addActionListener(controller.getReceptSzerkesztListener());
+        btnHozzaad.addActionListener(controller.getOsszetevotHozzaadListener());
+        osszetevokList.getSelectionModel().addListSelectionListener(controller.getListaElemListener());
+        osszetevokList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        osszetevokTable= new JTable();
+        osszetevokTable.setModel(new DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null}
+                
+            },
+            new String [] {
+                "Mennyiség", "Egység", "Összetevő"
+            }
+        ));
+        
+        ListSelectionModel rowSelectionModel=osszetevokTable.getSelectionModel();
+        rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        rowSelectionModel.addListSelectionListener(controller.getTablaSorListener());
+        JScrollPane tableScrollPane=new JScrollPane();
+        tableScrollPane.setViewportView(osszetevokTable);
         
         
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setPreferredSize (new Dimension (395, 156));
-        receptNevList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        
         
         
         add(cim);
         add(receptek);
-        add(receptNevList);
+        add(receptNeve);
+        
         add(osszetevok);
-        add(osszetevokList);
+        add(tableScrollPane);
+        add(otevoHozzaadLabel);
+        add(otevoMennyisegLabel);
+        add(otevoMenny);
+        add(otevoMennyisegTipusLabel);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.getViewport().setView(osszetevokList);
+        add(scrollPane);
+        add(otevoMegnevezesLabel);
+        add(otevoLeiras);
+        add(btnHozzaad);
         add(leirasLbl);
         add(leiras);
         add(btnVissza);
@@ -99,28 +145,15 @@ public class ShowRecipePanel  extends JPanel{
         this.pFrame = pFrame;
     }
 
-    public JButton getBtnVissza() {
-        return btnVissza;
-    }
     
-    public JButton getBtnMentes() {
-        return btnMentes;
-    }
-    
-    public JButton getBtnTorles() {
-        return btnTorles;
+   
+
+    public void setOsszetevokList(ListModel osszetevokList) {
+        this.osszetevokList.setModel(osszetevokList);
     }
 
-    public void setReceptNevList(JList receptNevList) {
-        this.receptNevList = receptNevList;
-    }
-
-    public void setOsszetevokList(JList osszetevokList) {
-        this.osszetevokList = osszetevokList;
-    }
-
-    public void setLeiras(JTextField leiras) {
-        this.leiras = leiras;
+    public void setLeiras(String leiras) {
+        this.leiras.setText(leiras);
     }
     
     public void loadRecipeNamesToView(ReceptKezelo kezelo)
@@ -132,7 +165,7 @@ public class ShowRecipePanel  extends JPanel{
         {
             model.addElement(name);
         }
-        receptNevList.setModel(model);
+        //receptNevList.setModel(model);
     }
     
     public void loadRecipeOsszetevokToView(String receptNeve, ReceptKezelo kezelo)
@@ -153,13 +186,23 @@ public class ShowRecipePanel  extends JPanel{
         leiras.setText(kezelo.keres(receptNeve).getLeiras());
     }
 
-    public JList getOsszetevokList() {
-        return osszetevokList;
+    public ListModel getOsszetevokList() {
+        return osszetevokList.getModel();
     }
 
-    public JList getReceptNevList() {
-        return receptNevList;
+    
+
+    
+
+    public TableModel getOsszetevokTable() {
+        return osszetevokTable.getModel();
     }
+
+    public void setOsszetevokTable(TableModel osszetevokTable) {
+        this.osszetevokTable.setModel(osszetevokTable);
+    }
+
+    
     
     
 }

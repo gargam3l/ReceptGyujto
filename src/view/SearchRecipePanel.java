@@ -10,6 +10,8 @@ import controller.Controller;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -23,6 +25,8 @@ public class SearchRecipePanel  extends JPanel{
     private JButton btnKereses;
     private JFrame pFrame;
     private JPanel guiPanel;
+    private JButton btnMegnyitas;
+    private JScrollPane tablaPanel;
     
     public SearchRecipePanel(Controller controller) {
         rkeres = new JLabel("Recept Keresése");
@@ -30,9 +34,29 @@ public class SearchRecipePanel  extends JPanel{
         this.receptNeve= new JTextField(1);
         this.btnVissza=new JButton("Vissza");
         this.btnKereses=new JButton("Keresés");
+        this.btnMegnyitas=new JButton("Megnyitas");
+        this.talalatTabla=new JTable();
+        this.tablaPanel=new JScrollPane();
+        
+        talalatTabla.setModel(new DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null}
+                
+            },
+            new String [] {
+                "Megnevezés", "Elkészítés"
+            }
+        ));
+        
+        ListSelectionModel rowSelectionModel=talalatTabla.getSelectionModel();
+        rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        rowSelectionModel.addListSelectionListener(controller.getTablaSorListener());
+        tablaPanel.setViewportView(talalatTabla);
+        
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnKereses.addActionListener(controller.getReceptKeresListener());
-            
+        btnMegnyitas.addActionListener(controller.getReceptMutatPanelListener());    
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));
         
@@ -47,8 +71,10 @@ public class SearchRecipePanel  extends JPanel{
         add(rkeres);
         add(rnevLabel);
         add(receptNeve);
-        add(btnVissza);
         add(btnKereses);
+        add(tablaPanel);
+        add(btnVissza);
+        add(btnMegnyitas);
     
         
     }
@@ -60,13 +86,19 @@ public class SearchRecipePanel  extends JPanel{
     void setpFrame(JFrame pFrame) {
         this.pFrame=pFrame;
     }
-    
-    public JButton getBtnVissza() {
-        return btnVissza;
+
+    public String getReceptNeve() {
+        return receptNeve.getText();
+    }
+
+    public TableModel getTalalatTabla() {
+        return talalatTabla.getModel();
+    }
+
+    public void setTalalatTabla(TableModel talalatTabla) {
+        this.talalatTabla.setModel(talalatTabla);
     }
     
-    public JButton getBtnKereses() {
-        return btnKereses;
-    }
+    
     
 }
