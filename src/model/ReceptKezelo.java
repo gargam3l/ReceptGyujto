@@ -674,14 +674,33 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         try {
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
-            String sql1 = "delete from Osszetevo where osszetevo_id in (select osszetevo_id FROM Kozponti"
-                    + "OUTER JOIN Recept ON Kozponti.recept_id=Recept.id"
-                    + "WHERE Recept.nev ='"+receptNev+"')";
-            s.executeUpdate(sql1);
-            String sql2 = "delete from Kozponti where recept_id in (select id FROM Recept"
-                    + "WHERE nev ='"+receptNev+"')";
+            String sql_recept_id="select id from Recept where nev='"+receptNev+"'";
+            ResultSet rs1=s.executeQuery(sql_recept_id);
+            rs1.next();
+            String recept_id=rs1.getString(1);
+            
+            ArrayList<String> osszetevo_id = new ArrayList<>();
+            String sql_osszetevok_lista ="select id from Osszetevo where id in (select osszetevo_id FROM Kozponti "
+                    + "FULL OUTER JOIN Recept ON Kozponti.recept_id=Recept.id "
+                    + "WHERE Recept.nev ='"+recept_id+"')";
+            ResultSet rsOsszetevok = s.executeQuery(sql_osszetevok_lista);
+            while (rsOsszetevok.next())
+            {
+                osszetevo_id.add(rsOsszetevok.getString("id"));
+            }
+            
+            String sql2 = "delete from Kozponti where recept_id ='"+recept_id+"'";
             s.executeUpdate(sql2);
-            String sql3 = "delete from Recept where nev="+receptNev;
+            System.out.println("delete from központi");
+            for (String id : osszetevo_id)
+            {
+            String sql1 = "delete from Osszetevo where id ='"+id+"'";
+            s.executeUpdate(sql1);
+            }
+            System.out.println("delete összetevő");
+            
+            
+            String sql3 = "delete from Recept where nev='"+receptNev+"'";
             s.executeUpdate(sql3);
             kapcsolatZár();
         }

@@ -247,7 +247,7 @@ public class Controller {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
                  System.out.println("Törlés gomb");
-                 //rKezelo.receptetTorol(null);
+                 rKezelo.receptetTorol(rKezelo.getAktualisRecept().getMegnevezes());
              }
          };
     }
