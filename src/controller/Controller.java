@@ -27,7 +27,7 @@ import view.*;
  *
  * @author 604772006
  */
-public class Controller implements ListSelectionListener {
+public class Controller {
     private ReceptKezelo rKezelo;
     private GUI gui;
     
@@ -198,8 +198,8 @@ public class Controller implements ListSelectionListener {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
     //Tesztelésre, debuggolásra
-                System.out.println(gui.getNewRPanel().getReceptNeve().getText() +" "
-                +gui.getNewRPanel().getReceptLeiras().getText() +" ");
+                System.out.println(gui.getNewRPanel().getReceptNeve() +" "
+                +gui.getNewRPanel().getReceptLeiras() +" ");
                 System.out.println("ment");
                 
                 //Működési logika
@@ -263,6 +263,36 @@ public class Controller implements ListSelectionListener {
          };
     }
     
+    public ListSelectionListener getTablaSorListener()
+    {
+        return new ListSelectionListener() {
+             
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    System.out.println("Sor kiválasztva");
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            }
+         };
+    }
+    
+    public ListSelectionListener getListaElemListener()
+    {
+        return new ListSelectionListener() {
+             
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    System.out.println("Elem kiválasztva");
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            }
+         };
+    }
+    /*
     @Override
     public void valueChanged(ListSelectionEvent e) {
         //ArrayList<String> Stringtemp = new ArrayList<String>(e.getSource());
@@ -286,7 +316,7 @@ public class Controller implements ListSelectionListener {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    /*
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         System.out.println("mouse click on recept nev tabla");
