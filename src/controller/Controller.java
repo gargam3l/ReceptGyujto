@@ -191,7 +191,16 @@ public class Controller {
                     
                     //összetevő mennyiség típusok betöltése
                     gui.getShRPanel().setOtevokList(rKezelo.otevoMennyTipusok());
-                    //gui.getShRPanel().loadRecipeNamesToView(rKezelo);
+                    //Kiválasztott recepthez összetevők betöltésa
+                    rKezelo.getAktualis().setOsszetevok(rKezelo.keresOsszetevoRecepthez(rKezelo.getAktualis().getMegnevezes()));
+                    //Recept név betöltése guiba
+                    gui.getShRPanel().setReceptNeve(rKezelo.getAktualis().getMegnevezes());
+                    //Összetevők töltése guiba
+                    gui.getShRPanel().setOsszetevokTable(rKezelo.getAktualis().getOsszetevokTablaban());
+                    //Recept leírás betöltése guiba
+                    gui.getShRPanel().setLeiras(rKezelo.getAktualis().getLeiras());
+                    
+                    
              }
          };
     }
@@ -268,6 +277,10 @@ public class Controller {
              @Override public void actionPerformed (ActionEvent e) {
                  System.out.println("Keres gomb");
                  //rKezelo.receptetSzerkeszt(null, null);
+                 String kulcs=gui.getSrchRPanel().getReceptNeve();
+            ReceptTar tar=rKezelo.keresMegnevezesre(kulcs);
+            //
+            gui.getSrchRPanel().setTalalatTabla(tar.getReceptTablaFoAdatok());
              }
          };
     }
@@ -286,6 +299,24 @@ public class Controller {
             }
          };
     }
+    
+    public ListSelectionListener getReceptTablaSorListener()
+    {
+        return new ListSelectionListener() {
+             
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    System.out.println("Sor kiválasztva");
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                rKezelo.setAktualis(gui.getSrchRPanel().getTalalatTableAktualisSor());
+                System.out.println(rKezelo.getAktualis().getMegnevezes()+" "+rKezelo.getAktualis().getLeiras());
+                }
+            }
+         };
+    }
+    
     
     public ListSelectionListener getListaElemListener()
     {

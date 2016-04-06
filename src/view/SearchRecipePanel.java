@@ -9,6 +9,7 @@ package view;
 import controller.Controller;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -51,7 +52,7 @@ public class SearchRecipePanel  extends JPanel{
         
         ListSelectionModel rowSelectionModel=talalatTabla.getSelectionModel();
         rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        rowSelectionModel.addListSelectionListener(controller.getTablaSorListener());
+        rowSelectionModel.addListSelectionListener(controller.getReceptTablaSorListener());
         tablaPanel.setViewportView(talalatTabla);
         
         btnVissza.addActionListener(controller.getVisszaGombListener());
@@ -99,6 +100,16 @@ public class SearchRecipePanel  extends JPanel{
         this.talalatTabla.setModel(talalatTabla);
     }
     
+    public ArrayList<String> getTalalatTableAktualisSor()
+    {
+        ArrayList<String> eredmeny=new ArrayList<>();
+        for (int i=0; i<talalatTabla.getColumnCount();i++)
+            {   
+            eredmeny.add(talalatTabla.getModel().getValueAt(talalatTabla.getSelectedRow(), i).toString());
+                
+                }
+        return eredmeny;
+    }
     
     
 }

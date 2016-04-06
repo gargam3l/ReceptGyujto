@@ -7,6 +7,7 @@
 package model;
 
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,6 +42,23 @@ public class ReceptTar{
         
         
     }
+    
+    public DefaultTableModel getReceptTablaFoAdatok()
+    {
+        String[] columnName ={ "Megnevezés", "Elkészítés"};
+        DefaultTableModel eredmeny = new DefaultTableModel(columnName,0);
+        
+            
+        for(int i=0; i<tar.size(); i++)
+        {
+                Object[] obj={tar.get(i).getMegnevezes(), tar.get(i).getLeiras()}; 
+                eredmeny.addRow(obj);
+            
+        }
+        return eredmeny;
+    }
+    
+    
 
     public ArrayList<Recept> getTar() {
         return tar;

@@ -7,6 +7,7 @@
 package model;
 
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -66,6 +67,36 @@ public class Recept {
 
     public ArrayList<Osszetevok> getOsszetevok() {
         return osszetevok;
+    }
+
+    public DefaultTableModel getOsszetevokTablaban()
+    {
+        String[] columnName ={ "Mennyiség", "Egység", "Összetevő"};
+        DefaultTableModel eredmeny = new DefaultTableModel(columnName,0);
+        
+            
+        for(int i=0; i<osszetevok.size(); i++)
+        {
+                Object[] obj={osszetevok.get(i).getMennyiseg_egyseg(), osszetevok.get(i).getMennyiseg_tipus(), osszetevok.get(i).getOsszetevo_fajta()}; 
+                eredmeny.addRow(obj);
+            
+        }
+        return eredmeny;
+    }
+
+    public void setOsszetevok(ArrayList<Osszetevok> osszetevok) {
+        this.osszetevok = osszetevok;
+    }
+    
+    
+    
+    
+    public void setMegnevezes(String megnevezes) {
+        this.megnevezes = megnevezes;
+    }
+
+    public void setLeiras(String leiras) {
+        this.leiras = leiras;
     }
     
     

@@ -15,12 +15,14 @@ import java.util.*;
  */
 public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     private ReceptTar tar;
+    private Recept aktualis;
     private static Connection kapcsolat;
 
     public ReceptKezelo() {
         inic();
         //kapcsolatTeszt();
         tar= new ReceptTar();
+        aktualis = new Recept();
     }
     
     public void kapcsolatTeszt()
@@ -601,8 +603,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
             
-            String sql = "SELECT nev, elkeszites FROM Recept"
-                    + "WHERE nev LIKE '%"+ kulcs+"%'";
+            String sql = "SELECT nev, elkeszites FROM Recept WHERE nev LIKE '%"+ kulcs+"%'";
             ResultSet rs=s.executeQuery(sql);
             while(rs.next()) 
             {
@@ -616,6 +617,38 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         }
         return eredmeny;
     }
+    
+    public ArrayList<Osszetevok> keresOsszetevoRecepthez(String kulcs)
+    
+    {
+        System.out.println("Keres összetevőt recepthez");
+        ArrayList<Osszetevok> eredmeny = new ArrayList<>();
+        try {
+            kapcsolatNyit();
+            Statement s=kapcsolat.createStatement();
+            /*
+            String sql = "SELECT Kozponti.Mennyiseg,Mennyiseg.Nev,Osszetevo.Nev "
+                    +"FROM Kozponti "
+                    +"FULL OUTER JOIN Recept ON Kozponti.Recept_id=Recept.id "
+                    +"FULL OUTER JOIN Osszetevo ON Kozponti.Osszetevo_id=Osszetevo.id "
+                    +"FULL OUTER JOIN Mennyiseg ON Kozponti.Mennyiseg_id=Mennyiseg.id"
+                    +"WHERE Recept.nev = '"+ kulcs+"';";*/
+            String sql = "SELECT Kozponti.Mennyiseg,Mennyiseg.Nev,Osszetevo.Nev FROM Kozponti FULL OUTER JOIN Recept ON Kozponti.Recept_id=Recept.id FULL OUTER JOIN Osszetevo ON Kozponti.Osszetevo_id=Osszetevo.id FULL OUTER JOIN Mennyiseg ON Kozponti.Mennyiseg_id=Mennyiseg.id WHERE Recept.nev = '"+ kulcs+"'";
+            ResultSet rs=s.executeQuery(sql);
+            while(rs.next()) 
+            {
+                
+                eredmeny.add(new Osszetevok(rs.getString(1),rs.getString(2),rs.getString(3)));
+                
+            }
+            kapcsolatZár();
+        }
+        catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return eredmeny;
+    }
+    
     
     public void receptetTorol(String receptNev)
     {
@@ -676,8 +709,19 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         return names;
         
     }
+
+    public Recept getAktualis() {
+        return aktualis;
+    }
+
+    public void setAktualis(Recept aktualis) {
+        this.aktualis = aktualis;
+    }
     
-    
+    public void setAktualis(ArrayList<String> input) {
+        this.aktualis.setMegnevezes(input.get(0));  
+        this.aktualis.setLeiras(input.get(1));
+    }
    
 
     @Override

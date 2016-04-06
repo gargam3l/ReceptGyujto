@@ -209,6 +209,10 @@ public class ShowRecipePanel  extends JPanel{
         this.osszetevokTable.setModel(osszetevokTable);
     }
 
+    public void setReceptNeve(String receptNeve) {
+        this.receptNeve.setText(receptNeve);
+    }
+
     
     
     
