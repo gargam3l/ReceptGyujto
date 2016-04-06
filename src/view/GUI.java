@@ -19,7 +19,7 @@ import model.ReceptKezelo;
  *
  * @author 604772006
  */
-public class GUI extends JPanel implements Observer{
+public class GUI extends JPanel{
     private CardLayout cardLayout = new CardLayout();
     private JPanel cards= new JPanel(cardLayout);
     private JFrame frame = new JFrame();
@@ -49,11 +49,7 @@ public class GUI extends JPanel implements Observer{
         cards.add(shRPanel, "card3");
         cards.add(srchRPanel, "card4");
         cardLayout.show(cards, "card1");
-        /*
-        mPanel.setBorder(BorderFactory.createTitledBorder("Main Panel"));
-        newRPanel.setBorder(BorderFactory.createTitledBorder("Új Recept Panel"));
-        shRPanel.setBorder(BorderFactory.createTitledBorder("Recept megjelenítés Panel"));
-        */
+        
         setLayout(new BorderLayout());
         add(cards, BorderLayout.CENTER);
         frame.setTitle("Recept kezelő");
@@ -64,53 +60,14 @@ public class GUI extends JPanel implements Observer{
     {
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*
-        JPanel cards = new JPanel();
-        cards.setBorder(
-            BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        cards.setLayout(new CardLayout());
-        mPanel = new MainPanel(cards);
-        newRPanel = new NewRecipePanel();
-        //srchRPanel = new SearchRecipePanel();
-        shRPanel = new ShowRecipePanel();
-        cards.add(mPanel, "Recept Kezelő"); 
-        cards.add(newRPanel, "Új recept felvétele");
-        //contentPane.add(srchRPanel, "Recept keres");
-        cards.add(shRPanel, "Recept megjelenítése");
-                */
+        
         frame.getContentPane().add(this);
         frame.pack();   
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        System.out.println ("View      : Observable is " + o.getClass() + ", object passed is " + arg.getClass());
-        
-        Object src=arg;
-        if (getCurrentCard()==newRPanel)
-        {
-            System.out.println("new panel upd");
-        }else if (getCurrentCard()==shRPanel)
-        {
-             System.out.println("show panel upd");   
-        }
-        
-        
-        
-    }
-    /*
-    public void addController(ActionListener controller)
-    {
-        mPanel.addController(controller);
-        newRPanel.addController(controller);
-        shRPanel.addController(controller);
-        srchRPanel.addController(controller);
-    }
-*/
+    
     public MainPanel getmPanel() {
         return mPanel;
     }

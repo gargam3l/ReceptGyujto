@@ -43,29 +43,11 @@ public class ShowRecipePanel  extends JPanel{
     private JTextField otevoLeiras;
     private JButton btnHozzaad;
     
-    //JPanel shRecipe = new JPanel();
-    /*
-        private JLabel cim=new JLabel("Recept megjelenítése");
-        private JLabel receptek = new JLabel("Receptek");
-       private  JTable receptNevList = new JTable();
-        private JLabel osszetevok = new JLabel("Összetevők");
-        
-        private JLabel leirasLbl = new JLabel("Leírás");
-        private JTextField leiras = new JTextField();
-        private JButton btnVissza = new JButton("Vissza");
-    */
     public ShowRecipePanel(Controller controller) {
     
         
-        //JPanel shRecipe = new JPanel();
         JLabel cim = new JLabel("Receptek megjelenítése");
         JLabel receptek = new JLabel("Receptek");
-        //receptNevTabla = new JTable(2, 1);
-        /**tesztelő adat Listhez
-        *DefaultListModel plmodel = new DefaultListModel();
-        *plmodel.addElement("pl1");
-        *plmodel.addElement("pl2");
-        * */
         
         receptNeve=new JTextField("");
         
@@ -175,24 +157,8 @@ public class ShowRecipePanel  extends JPanel{
         //receptNevList.setModel(model);
     }
     
-    public void loadRecipeOsszetevokToView(String receptNeve, ReceptKezelo kezelo)
-    {
-        System.out.println("load recipe osszetevok to panel");
-        DefaultListModel model = new DefaultListModel();
-        //model.setColumnIdentifiers(new String[]{"recept osszetevok"});
-        for (Osszetevok osszetevok:(kezelo.keres(receptNeve).getOsszetevok()))
-        {
-            model.addElement(osszetevok);
-        }
-        osszetevokList.setModel(model);
-    }
     
-    public void loadRecipeLeirasToView(String receptNeve, ReceptKezelo kezelo)
-    {
-        System.out.println("load recipe leiras to panel");
-        leiras.setText(kezelo.keres(receptNeve).getLeiras());
-    }
-
+    
     public ListModel getOsszetevokList() {
         return osszetevokList.getModel();
     }

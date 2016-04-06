@@ -72,12 +72,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         try {
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
-            /*
-            String sql = "CREATE DATABASE IF NOT EXISTS Receptgyujto;+"
-                    + ""
-                    + "CONNECT Receptgyujto;" +
-                    "" +
-            */
+            
             System.out.println("Recept tábla létrehozása");
             String sql_recept_tabla =        
                     "CREATE TABLE Recept(id int NOT NULL PRIMARY KEY,nev varchar(255),elkeszites varchar(2000))" ;
@@ -645,13 +640,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         try {
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
-            /*
-            String sql = "SELECT Kozponti.Mennyiseg,Mennyiseg.Nev,Osszetevo.Nev "
-                    +"FROM Kozponti "
-                    +"FULL OUTER JOIN Recept ON Kozponti.Recept_id=Recept.id "
-                    +"FULL OUTER JOIN Osszetevo ON Kozponti.Osszetevo_id=Osszetevo.id "
-                    +"FULL OUTER JOIN Mennyiseg ON Kozponti.Mennyiseg_id=Mennyiseg.id"
-                    +"WHERE Recept.nev = '"+ kulcs+"';";*/
+            
             String sql = "SELECT Kozponti.Mennyiseg,Mennyiseg.Nev,Osszetevo.Nev FROM Kozponti FULL OUTER JOIN Recept ON Kozponti.Recept_id=Recept.id FULL OUTER JOIN Osszetevo ON Kozponti.Osszetevo_id=Osszetevo.id FULL OUTER JOIN Mennyiseg ON Kozponti.Mennyiseg_id=Mennyiseg.id WHERE Recept.nev = '"+ kulcs+"'";
             ResultSet rs=s.executeQuery(sql);
             while(rs.next()) 
@@ -708,24 +697,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             System.out.println(e.getMessage());
         }
     }
-    /*
-    public ReceptTar keresOsszetevore (ArrayList<String> kulcs)
-    {
-        ReceptTar eredmeny = new ReceptTar();
-        try {
-            kapcsolatNyit();
-            Statement s=kapcsolat.createStatement();
-            String sql = "SQL kereséshez összetevőkre";
-            ResultSet rs=s.executeQuery(sql);
-            while(rs.next()) eredmeny.receptetHozzaad(new Recept());
-            kapcsolatZár();
-        }
-        catch(SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return eredmeny;
-    }
-    */
+    
     
     public Recept keres(String str)
     {
