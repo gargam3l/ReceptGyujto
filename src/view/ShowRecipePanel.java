@@ -205,8 +205,8 @@ public class ShowRecipePanel  extends JPanel{
         
     }
 
-    public TableModel getOsszetevokTable() {
-        return osszetevokTable.getModel();
+    public DefaultTableModel getOsszetevokTable() {
+        return (DefaultTableModel)osszetevokTable.getModel();
     }
 
     public void setOsszetevokTable(TableModel osszetevokTable) {
@@ -229,6 +229,14 @@ public class ShowRecipePanel  extends JPanel{
 
     public String getOtevoLeiras() {
         return otevoLeiras.getText();
+    }
+
+    public String getReceptNeve() {
+        return receptNeve.getText();
+    }
+
+    public String getLeiras() {
+        return leiras.getText();
     }
     
     

@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import model.*;
 import model.ReceptKezelo;
 import view.*;
@@ -256,7 +257,20 @@ public class Controller {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
                  System.out.println("Recept szerkesztés gomb");
-                 //rKezelo.receptetSzerkeszt(null, null);
+                 Recept ujRecept = new Recept();
+                 ujRecept.setMegnevezes(gui.getShRPanel().getReceptNeve());
+                 ujRecept.setLeiras(gui.getShRPanel().getLeiras());
+                 DefaultTableModel model = gui.getShRPanel().getOsszetevokTable();
+                 for (int i=0; i<model.getRowCount(); i++)
+                 {
+                     Osszetevok otevo=new Osszetevok();
+                     otevo.setMennyiseg_egyseg(model.getValueAt(i, 0).toString());
+                     otevo.setMennyiseg_tipus(model.getValueAt(i, 1).toString());
+                     otevo.setOsszetevo_fajta(model.getValueAt(i, 2).toString());
+                     ujRecept.osszetevotHozzaad(otevo);
+                 }
+                 
+                    rKezelo.receptetSzerkeszt(rKezelo.getAktualisRecept().getMegnevezes(), ujRecept);
              }
          };
     }
