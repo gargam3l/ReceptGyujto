@@ -50,6 +50,8 @@ public class NewRecipePanel  extends JPanel{
         this.btnMentes=new JButton("Mentés");
         this.btnVissza=new JButton("Vissza");
         btnVissza.addActionListener(controller.getVisszaGombListener());
+        btnHozzaad.addActionListener(controller.getReceptSzerkesztListener());
+        btnMentes.addActionListener(controller.getMentesGombListener());
             
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));

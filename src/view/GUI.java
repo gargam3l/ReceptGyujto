@@ -31,10 +31,10 @@ public class GUI extends JPanel implements Observer{
 
     public GUI(Controller controller)
     {
-        mPanel = new MainPanel();
+        mPanel = new MainPanel(controller);
         newRPanel = new NewRecipePanel(controller);
-        shRPanel = new ShowRecipePanel();
-        srchRPanel = new SearchRecipePanel();
+        shRPanel = new ShowRecipePanel(controller);
+        srchRPanel = new SearchRecipePanel(controller);
         mPanel.setGuiPanel(cards);
         shRPanel.setGuiPanel(cards);
         newRPanel.setGuiPanel(cards);
