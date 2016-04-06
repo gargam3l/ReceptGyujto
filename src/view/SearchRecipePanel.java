@@ -29,35 +29,27 @@ public class SearchRecipePanel  extends JPanel{
         JLabel rnevLabel = new JLabel("Recept neve");
         this.receptNeve= new JTextField(1);
         this.btnVissza=new JButton("Vissza");
-        this.btnVissza=new JButton("Keresés");
+        this.btnKereses=new JButton("Keresés");
         btnVissza.addActionListener(controller.getVisszaGombListener());
-        btnKereses.addActionListener(controller.getReceptKeresPanelListener());
+        btnKereses.addActionListener(controller.getReceptKeresListener());
             
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));
-        //setLayout (null);
-        setLayout(new FlowLayout());
-        
         
         //set component bounds (only needed by Absolute Positioning)
         this.receptNeve.setBounds (20, 45, 100, 25);
-        //this.otevoMennyiseg.setBounds (135, 60, 100, 25);
-        //this.otevoTipus.setBounds (260, 35, 100, 25);
-        //this.otevoMegnevezes.setBounds (105, 115, 100, 25);
-        
         this.rkeres.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.rkeres.setAlignmentY(Component.TOP_ALIGNMENT);
         rnevLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         rnevLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
-        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         //add components
         add(rkeres);
         add(rnevLabel);
         add(receptNeve);
         add(btnVissza);
         add(btnKereses);
-        //this.setLayout(new FlowLayout());
-        
+    
         
     }
 
@@ -69,12 +61,6 @@ public class SearchRecipePanel  extends JPanel{
         this.pFrame=pFrame;
     }
     
-    public void addController(ActionListener  controller){
-		//System.out.println("View      : adding controller");
-		this.btnVissza.addActionListener(controller);	//need controller before adding it as a listener 
-                //this.ujRecept.addActionListener(controller);
-    }
-
     public JButton getBtnVissza() {
         return btnVissza;
     }

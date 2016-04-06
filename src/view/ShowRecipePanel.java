@@ -66,13 +66,14 @@ public class ShowRecipePanel  extends JPanel{
         JLabel leirasLbl = new JLabel("Leírás");
         leiras = new JTextField();
         btnVissza = new JButton("Vissza");
+        btnTorles = new JButton("Törlés");
+        btnMentes = new JButton("Mentes");
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnTorles.addActionListener(controller.getReceptTorlesListener());
-        btnMentes.addActionListener(controller.getMentesGombListener());
+        btnMentes.addActionListener(controller.getReceptSzerkesztListener());
         
         
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        //setLayout(new FlowLayout());
         setPreferredSize (new Dimension (395, 156));
         receptNevList.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         
@@ -87,28 +88,9 @@ public class ShowRecipePanel  extends JPanel{
         add(btnVissza);
         add(btnMentes);
         add(btnTorles);
-        /*
-        btnVissza.addActionListener( new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                CardLayout cardLayout = (CardLayout) guiPanel.getLayout();
-                cardLayout.show(guiPanel, "card1");
-            }
-        });
         
-        */
     }
     
-    public void addController(ActionListener controller)
-    {
-        btnVissza.addActionListener(controller);
-        receptNevList.getSelectionModel().addListSelectionListener((ListSelectionListener)controller);
-        //receptNevTabla.addMouseListener((MouseListener)controller);
-        
-    }
-
     public void setGuiPanel(JPanel guiPanel) {
         this.guiPanel = guiPanel;
     }

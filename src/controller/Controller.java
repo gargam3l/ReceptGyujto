@@ -27,7 +27,7 @@ import view.*;
  *
  * @author 604772006
  */
-public class Controller implements ActionListener, ListSelectionListener {
+public class Controller implements ListSelectionListener {
     private ReceptKezelo rKezelo;
     private GUI gui;
     
@@ -57,6 +57,10 @@ public class Controller implements ActionListener, ListSelectionListener {
         */
     }
 
+    
+    //Kitörölni, amikor az összes esménykezelő külön meg lett írva
+    
+    /*
     @Override
     public void actionPerformed(ActionEvent e) {
         //System.out.println("controller -action performed");
@@ -105,7 +109,7 @@ public class Controller implements ActionListener, ListSelectionListener {
                 /*System.out.println(gui.getNewRPanel().getReceptNeve().getText() +" "
                 +gui.getNewRPanel().getReceptLeiras().getText() +" ");
                 System.out.println("ment");
-                */
+                
                 //Működési logika
                 //Recept létrehozása a gui-ból vett adatokkal - megnevezés leírás
                 Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve().getText(), gui.getNewRPanel().getReceptLeiras().getText());
@@ -144,6 +148,8 @@ public class Controller implements ActionListener, ListSelectionListener {
         
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+  
+*/
     
     public ActionListener getVisszaGombListener()
     {
@@ -192,12 +198,13 @@ public class Controller implements ActionListener, ListSelectionListener {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
     //Tesztelésre, debuggolásra
-                /*System.out.println(gui.getNewRPanel().getReceptNeve().getText() +" "
+                System.out.println(gui.getNewRPanel().getReceptNeve().getText() +" "
                 +gui.getNewRPanel().getReceptLeiras().getText() +" ");
                 System.out.println("ment");
-                */
+                
                 //Működési logika
                 //Recept létrehozása a gui-ból vett adatokkal - megnevezés leírás
+                 /*
                 Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve().getText(), gui.getNewRPanel().getReceptLeiras().getText());
                 //Összetevők hozzáadása recepthez - ciklusba kell tenni, miután gui-ban az összetevők tábla implementálva lesz
                 for (int i=0;i<gui.getNewRPanel().getOtevoTabla().getModel().getRowCount();i++)
@@ -211,6 +218,7 @@ public class Controller implements ActionListener, ListSelectionListener {
                 //ujRecept.osszetevotHozzaad((double) gui.getNewRPanel().getOtevoList().getSelectedValue(), null, null);
                 //Recept mentése az adatbázisba
                 rKezelo.receptetMent(ujRecept);
+                 */
                 }
          };
     }
@@ -219,7 +227,8 @@ public class Controller implements ActionListener, ListSelectionListener {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-                 rKezelo.receptetTorol(null);
+                 System.out.println("Törlés gomb");
+                 //rKezelo.receptetTorol(null);
              }
          };
     }
@@ -228,7 +237,28 @@ public class Controller implements ActionListener, ListSelectionListener {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-                 rKezelo.receptetSzerkeszt(null, null);
+                 System.out.println("Recept szerkesztés gomb");
+                 //rKezelo.receptetSzerkeszt(null, null);
+             }
+         };
+    }
+    
+    public ActionListener getOsszetevotHozzaadListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 System.out.println("Hozzáadás gomb");
+                 //rKezelo.receptetSzerkeszt(null, null);
+             }
+         };
+    }
+    
+    public ActionListener getReceptKeresListener()
+    {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 System.out.println("Keres gomb");
+                 //rKezelo.receptetSzerkeszt(null, null);
              }
          };
     }

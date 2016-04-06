@@ -8,7 +8,6 @@ package view;
 
 import controller.Controller;
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 /**
@@ -50,23 +49,12 @@ public class NewRecipePanel  extends JPanel{
         this.btnMentes=new JButton("Mentés");
         this.btnVissza=new JButton("Vissza");
         btnVissza.addActionListener(controller.getVisszaGombListener());
-        btnHozzaad.addActionListener(controller.getReceptSzerkesztListener());
         btnMentes.addActionListener(controller.getMentesGombListener());
-            
+        btnHozzaad.addActionListener(controller.getOsszetevotHozzaadListener());   
+        
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));
-        //setLayout (null);
-        //setLayout(new FlowLayout());
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        /*
-        //set component bounds (only needed by Absolute Positioning)
-        this.receptNeve.setBounds (20, 45, 100, 25);
-        this.otevoMennyiseg.setBounds (135, 60, 100, 25);
-        this.otevoTipus.setBounds (260, 35, 100, 25);
-        this.otevoMegnevezes.setBounds (105, 115, 100, 25);
-        */
-        
-        
         
         //add components
         add(cim);
@@ -76,42 +64,15 @@ public class NewRecipePanel  extends JPanel{
         add(otevoMennyiseg);
         add(otevoTipus);
         add(otevoMegnevezes);
-        
         add(otevoList);
         add(btnHozzaad);
         //add(otevoTabla);
         add(leirLabel);
         add(receptLeiras);
-        
         add(btnMentes);
         add(btnVissza);
-        /*
-        btnVissza.addActionListener( new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                CardLayout cardLayout = (CardLayout) guiPanel.getLayout();
-                cardLayout.show(guiPanel, "card1");
-            }
-        });
-                
-        btnHozzaad.addActionListener( new ActionListener());
-        btnMentes.addActionListener( new ActionListener());
-        */
-        
-        
     }
-    
-    /*
-    public void addController(ActionListener controller)
-    {
-        //btnVissza.addActionListener(controller);
-        btnVissza.addActionListener(((Controller)controller).getVisszaGombListener());
-        btnHozzaad.addActionListener( controller);
-        btnMentes.addActionListener( controller);
-    }
-*/
+  
     public void setGuiPanel(JPanel guiPanel) {
         this.guiPanel = guiPanel;
     }
