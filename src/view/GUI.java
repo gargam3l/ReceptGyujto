@@ -53,7 +53,7 @@ public class GUI extends JPanel{
         
         setLayout(new BorderLayout());
         add(cards, BorderLayout.CENTER);
-        frame.setTitle("Recept kezelő");
+        frame.setTitle("Chlebovics Kornél(VYSQGW) & Papp Zoltán(N3GM04)");
         
         
     }

@@ -19,10 +19,10 @@ public class MainPanel extends JPanel{
     
     private JFrame pFrame;
     private JLabel cim;
-    private JButton receptMutat;
     private JButton ujRecept;
     private JPanel guiPanel;
     private JButton receptKeres;
+    private JButton kilepes;
 
     
 
@@ -31,12 +31,12 @@ public class MainPanel extends JPanel{
 
         //construct components
         this.cim = new JLabel("Recept Kezelő");
-        this.receptMutat = new JButton("Recept megjelenítése");
         this.ujRecept = new JButton("Új recept hozzáadása");
         this.receptKeres= new JButton("Recept Keresése");
-        receptMutat.addActionListener(controller.getReceptMutatPanelListener());
+        this.kilepes= new JButton("Kilépés");
         ujRecept.addActionListener(controller.getUjReceptPanelListener());
         receptKeres.addActionListener(controller.getReceptKeresPanelListener());
+        kilepes.addActionListener(controller.getKilepes());
 
         
         //adjust size and set layout
@@ -48,32 +48,29 @@ public class MainPanel extends JPanel{
         cim.setFont(new java.awt.Font("Courier New", 1, 24));
         cim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
-        receptMutat.setBackground(new java.awt.Color(255, 0, 51));
-        receptMutat.setForeground(new java.awt.Color(51, 0, 255));
-        receptMutat.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
-        
         ujRecept.setBackground(new java.awt.Color(255, 0, 51));
         ujRecept.setForeground(new java.awt.Color(51, 0, 255));
         ujRecept.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
         
         receptKeres.setBackground(new java.awt.Color(255, 0, 51));
         receptKeres.setForeground(new java.awt.Color(51, 0, 255));
-        receptKeres.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14)); 
+        receptKeres.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
         
-
-        
+        kilepes.setBackground(new java.awt.Color(255, 0, 51));
+        kilepes.setForeground(new java.awt.Color(51, 0, 255));
+        kilepes.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+                
         //add components
         add (cim);
-        add (receptMutat);
         add (ujRecept);
         add(receptKeres);
+        add(kilepes);
         
     }
     
     public void addController(ActionListener  controller){
 		System.out.println("View      : adding controller");
-		this.receptMutat.addActionListener(controller);	//need controller before adding it as a listener 
-                this.ujRecept.addActionListener(controller);
+		this.ujRecept.addActionListener(controller);
                 this.receptKeres.addActionListener(controller);
     } //addController()
     
@@ -86,16 +83,16 @@ public class MainPanel extends JPanel{
         this.pFrame = pFrame;
     }
 
-    public JButton getReceptMutat() {
-        return receptMutat;
-    }
-
     public JButton getUjRecept() {
         return ujRecept;
     }
 
     public JButton getReceptKeres() {
         return receptKeres;
+    }
+    
+    public JButton getKilepes() {
+        return kilepes;
     }
     
     
