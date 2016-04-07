@@ -75,6 +75,7 @@ public class Controller {
                 
                 //összetevő mennyiség típusok betöltése
                 gui.getNewRPanel().setOtevoList(rKezelo.otevoMennyTipusok());
+                rKezelo.setAktualisMennyisegTipus("");
              }
          };
     }
@@ -95,9 +96,10 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
+                 gui.getShRPanel().setInitialized(false);
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                     cardLayout.show(gui.getCards(), "card3");
-                    
+                    gui.getShRPanel().inicShowRecipePanelDefault();
                     //összetevő mennyiség típusok betöltése
                     gui.getShRPanel().setOtevokList(rKezelo.otevoMennyTipusok());
                     //Kiválasztott recepthez összetevők betöltésa
@@ -108,7 +110,7 @@ public class Controller {
                     gui.getShRPanel().setOsszetevokTable(rKezelo.getAktualisRecept().getOsszetevokTablaban());
                     //Recept leírás betöltése guiba
                     gui.getShRPanel().setLeiras(rKezelo.getAktualisRecept().getLeiras());
-                    
+                    rKezelo.setAktualisMennyisegTipus("");
                     
              }
          };
@@ -118,13 +120,8 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-    //Tesztelésre, debuggolásra
-                 /*
-                System.out.println(gui.getNewRPanel().getReceptNeve() +" "
-                +gui.getNewRPanel().getReceptLeiras() +" ");
-                System.out.println("ment");
-                */
-                //Működési logika
+    
+                
                 //Recept létrehozása a gui-ból vett adatokkal - megnevezés leírás
                  
                 try
@@ -176,21 +173,28 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-                 System.out.println("Recept szerkesztés gomb");
+                 
+                 try{
                  Recept ujRecept = new Recept();
                  ujRecept.setMegnevezes(gui.getShRPanel().getReceptNeve());
                  ujRecept.setLeiras(gui.getShRPanel().getLeiras());
-                 DefaultTableModel model = gui.getShRPanel().getOsszetevokTable();
-                 for (int i=0; i<model.getRowCount(); i++)
+                 
+                 for (int i=0; i<gui.getShRPanel().getOtevoTablaSorokSzama(); i++)
                  {
                      Osszetevok otevo=new Osszetevok();
-                     otevo.setMennyiseg_egyseg(model.getValueAt(i, 0).toString());
-                     otevo.setMennyiseg_tipus(model.getValueAt(i, 1).toString());
-                     otevo.setOsszetevo_fajta(model.getValueAt(i, 2).toString());
+                     otevo.setMennyiseg_egyseg(gui.getShRPanel().getOsszetevokTable().getValueAt(i, 0).toString());
+                     otevo.setMennyiseg_tipus(gui.getShRPanel().getOsszetevokTable().getValueAt(i, 1).toString());
+                     otevo.setOsszetevo_fajta(gui.getShRPanel().getOsszetevokTable().getValueAt(i, 2).toString());
                      ujRecept.osszetevotHozzaad(otevo);
                  }
                  
                     rKezelo.receptetSzerkeszt(rKezelo.getAktualisRecept().getMegnevezes(), ujRecept);
+                    
+                    } catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+
+                }
              }
          };
     }
@@ -199,9 +203,14 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-                 System.out.println("Hozzáadás gomb");
+                 try {
                  gui.getNewRPanel().addRowToOtevoTabla(new Object[]{gui.getNewRPanel().getOtevoMennyiseg(),rKezelo.getAktualisMennyisegTipus(),gui.getNewRPanel().getOtevoMegnevezes()});
-                
+                 
+                 } catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+
+                }
              }
          };
     }
@@ -210,9 +219,13 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-                 System.out.println("Hozzáadás gomb");
+                 try{
                  gui.getShRPanel().addRowToOtevoTabla(new Object[]{gui.getShRPanel().getOtevoMenny(),rKezelo.getAktualisMennyisegTipus(),gui.getShRPanel().getOtevoLeiras()});
-                
+                    } catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+
+                }
              }
          };
     }
@@ -272,7 +285,7 @@ public class Controller {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()&& gui.getNewRPanel().isInitialized()) {
-                    System.out.println("Elem kiválasztva");
+                    
                     rKezelo.setAktualisMennyisegTipus(gui.getNewRPanel().getOtevoListCurrentSelection());
                 
                 }
@@ -287,8 +300,8 @@ public class Controller {
 
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    System.out.println("Elem kiválasztva");
+                if (!e.getValueIsAdjusting()&& gui.getShRPanel().isInitialized()) {
+                    
                     rKezelo.setAktualisMennyisegTipus(gui.getShRPanel().getOtevoListCurrentSelection());
                 
                 }

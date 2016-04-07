@@ -42,6 +42,7 @@ public class ShowRecipePanel  extends JPanel{
     private JTextField otevoMenny;
     private JTextField otevoLeiras;
     private JButton btnHozzaad;
+    private boolean initialized;
     
     public ShowRecipePanel(Controller controller) {
     
@@ -49,18 +50,18 @@ public class ShowRecipePanel  extends JPanel{
         JLabel cim = new JLabel("Receptek megjelenítése");
         JLabel receptek = new JLabel("Receptek");
         
-        receptNeve=new JTextField("");
+        receptNeve=new JTextField();
         
         JLabel osszetevok = new JLabel("Összetevők");
-        osszetevokList = new JList(new String[]{"listelem1","listaelem2"});
+        osszetevokList = new JList();
         
         JLabel leirasLbl = new JLabel("Leírás");
         JLabel otevoHozzaadLabel = new JLabel("Összetevő hozzáadás");
         JLabel otevoMennyisegLabel = new JLabel("Mennyiség");
         JLabel otevoMennyisegTipusLabel = new JLabel("Mennyiség Típus");
         JLabel otevoMegnevezesLabel = new JLabel("Összetevő");
-        otevoMenny= new JTextField("");
-        otevoLeiras= new JTextField("");
+        otevoMenny= new JTextField();
+        otevoLeiras= new JTextField();
         leiras = new JTextField();
         btnVissza = new JButton("Vissza");
         btnTorles = new JButton("Törlés");
@@ -73,16 +74,7 @@ public class ShowRecipePanel  extends JPanel{
         osszetevokList.getSelectionModel().addListSelectionListener(controller.getReceptMutatListaElemListener());
         osszetevokList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         osszetevokTable= new JTable();
-        osszetevokTable.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null}
-                
-            },
-            new String [] {
-                "Mennyiség", "Egység", "Összetevő"
-            }
-        ));
+        
         
         ListSelectionModel rowSelectionModel=osszetevokTable.getSelectionModel();
         rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -173,6 +165,22 @@ public class ShowRecipePanel  extends JPanel{
         
     }
     
+    public void inicShowRecipePanelDefault()
+    {
+        
+        receptNeve.setText("");
+        otevoMenny.setText("");
+        otevoLeiras.setText("");
+        leiras.setText("");
+        osszetevokTable.setModel(new DefaultTableModel(new String[]{"Mennyiség", "Egység", "Összetevő"},0));
+        DefaultListModel listModel= new DefaultListModel();
+        listModel.addElement("");
+        osszetevokList.setModel(listModel);
+        
+        initialized = true;
+        
+    }
+    
     public void setGuiPanel(JPanel guiPanel) {
         this.guiPanel = guiPanel;
     }
@@ -198,17 +206,6 @@ public class ShowRecipePanel  extends JPanel{
         this.leiras.setText(leiras);
     }
     
-    public void loadRecipeNamesToView(ReceptKezelo kezelo)
-    {
-        System.out.println("load recipe names to panel");
-        DefaultListModel model = new DefaultListModel();
-        //model.setColumnIdentifiers(new String[]{"recept nevek"});
-        for (String name:kezelo.getNames())
-        {
-            model.addElement(name);
-        }
-        //receptNevList.setModel(model);
-    }
     
     
     
@@ -228,6 +225,13 @@ public class ShowRecipePanel  extends JPanel{
         return (DefaultTableModel)osszetevokTable.getModel();
     }
 
+    public int getOtevoTablaSorokSzama()
+    {
+        if (osszetevokTable.getModel().getRowCount()==0) throw new RuntimeException("Nincs összetevő hozzáadva a recepthez. Kérem adjon meg legalább egy összetevőt a recepthez!");
+        
+        return osszetevokTable.getModel().getRowCount();
+    }
+    
     public void setOsszetevokTable(TableModel osszetevokTable) {
         this.osszetevokTable.setModel(osszetevokTable);
     }
@@ -243,19 +247,31 @@ public class ShowRecipePanel  extends JPanel{
     }
 
     public String getOtevoMenny() {
+        if (otevoMenny.getText().equals("")) throw new RuntimeException("Összetevő mennyiség üres. Kérem adjon meg egy mennyiséget az összetevőhöz!");
         return otevoMenny.getText();
     }
 
     public String getOtevoLeiras() {
+        if (otevoLeiras.getText().equals("")) throw new RuntimeException("Összetevő leírása üres. Kérem adjon meg egy leírást a összetevőhöz!");
         return otevoLeiras.getText();
     }
 
     public String getReceptNeve() {
+        if (receptNeve.getText().equals("")) throw new RuntimeException("Recept neve üres. Kérem adjon meg egy recept nevet!");
         return receptNeve.getText();
     }
 
     public String getLeiras() {
+        if (leiras.getText().equals("")) throw new RuntimeException("Recept leírása üres. Kérem adjon meg egy leírást a recepthez!");
         return leiras.getText();
+    }
+
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    public void setInitialized(boolean initialized) {
+        this.initialized = initialized;
     }
     
     

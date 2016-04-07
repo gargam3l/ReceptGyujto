@@ -214,7 +214,7 @@ public class NewRecipePanel  extends JPanel{
     }
             
     public String getReceptLeiras() {
-        if (receptLeiras.getText().equals("")) throw new RuntimeException("Recept leírása üres. Kérem adjon meg egy leríást a recepthez!");
+        if (receptLeiras.getText().equals("")) throw new RuntimeException("Recept leírása üres. Kérem adjon meg egy leírást a recepthez!");
         return receptLeiras.getText();
     }
 
@@ -231,10 +231,12 @@ public class NewRecipePanel  extends JPanel{
     }
 
     public String getOtevoMennyiseg() {
+        if (otevoMennyiseg.getText().equals("")) throw new RuntimeException("Összetevő mennyiség üres. Kérem adjon meg egy mennyiséget az összetevőhöz!");
         return otevoMennyiseg.getText();
     }
 
     public String getOtevoMegnevezes() {
+        if (otevoMegnevezes.getText().equals("")) throw new RuntimeException("Összetevő leírása üres. Kérem adjon meg egy leírást a összetevőhöz!");
         return otevoMegnevezes.getText();
     }
 

@@ -24,6 +24,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         //kapcsolatTeszt();
         tar= new ReceptTar();
         aktualisRecept = new Recept();
+        aktualisMennyisegTipus = "";
     }
     
     public void kapcsolatTeszt()
@@ -737,6 +738,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     }
 
     public String getAktualisMennyisegTipus() {
+        if (aktualisMennyisegTipus.equals("")) throw new RuntimeException("Összetevő mennyiség típus üres. Kérem adjon meg egy mennyiség típust az összetevőhöz!");
         return aktualisMennyisegTipus;
     }
 
