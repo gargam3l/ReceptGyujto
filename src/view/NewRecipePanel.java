@@ -172,6 +172,7 @@ public class NewRecipePanel  extends JPanel{
     
 
     public String getReceptNeve() {
+        if (receptNeve.getText()=="") throw new RuntimeException("Recept neve üres. Kérem adjon meg egy recept nevet");
         return receptNeve.getText();
     }
 
@@ -206,6 +207,7 @@ public class NewRecipePanel  extends JPanel{
     }
 
     public String getReceptLeiras() {
+        if (receptLeiras.getText()=="") throw new RuntimeException("Recept leírása üres. Kérem adjon meg egy leríást a recepthez");
         return receptLeiras.getText();
     }
 

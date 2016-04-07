@@ -543,9 +543,12 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         if (!receptLetezik(recept.getMegnevezes())) receptetBeszur(recept);
                 else{
                     //exception logika -recept már létezik
-                    System.out.println("Recept már létezik");
+                    throw new RuntimeException("Recept már létezik ezzel a névvel. Kérem adjon meg másik recept nevet.");
+            //System.out.println("Recept már létezik");
                 }
     }
+    
+    
     
     public void receptetSzerkeszt(String aktualis, Recept uj)
     {

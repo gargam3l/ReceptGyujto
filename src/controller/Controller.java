@@ -127,6 +127,10 @@ public class Controller {
                 //Működési logika
                 //Recept létrehozása a gui-ból vett adatokkal - megnevezés leírás
                 System.out.println("ment"); 
+                try
+                {
+                    gui.getNewRPanel().getReceptNeve();
+                    
                 Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve(), gui.getNewRPanel().getReceptLeiras());
                 System.out.println(gui.getNewRPanel().getReceptNeve()+" "+ gui.getNewRPanel().getReceptLeiras());
                 //Összetevők hozzáadása recepthez - ciklusba kell tenni, miután gui-ban az összetevők tábla implementálva lesz
@@ -144,7 +148,15 @@ public class Controller {
                     }
                 
                 //Recept mentése az adatbázisba
+                
                 rKezelo.receptetMent(ujRecept);
+                 
+                            
+                } catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+
+                }
                  
                 }
          };
