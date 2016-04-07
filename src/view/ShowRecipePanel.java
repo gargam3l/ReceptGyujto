@@ -91,10 +91,10 @@ public class ShowRecipePanel  extends JPanel{
         tableScrollPane.setViewportView(osszetevokTable);
         
         
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        setPreferredSize (new Dimension (395, 156));
-        setBackground(new java.awt.Color(0, 255, 255));
-        setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 102, 255)));
+        setPreferredSize (new Dimension (400, 500));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBackground(Color.decode("#3AAACF"));
+        setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
                 
         cim.setFont(new java.awt.Font("Courier New", 1, 24));
         cim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
