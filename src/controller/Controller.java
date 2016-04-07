@@ -80,7 +80,10 @@ public class Controller {
                 
                 //összetevő mennyiség típusok betöltése
                 gui.getNewRPanel().setOtevoList(rKezelo.otevoMennyTipusok());
+                
                 rKezelo.setAktualisMennyisegTipus("");
+                
+                
              }
          };
     }
@@ -110,6 +113,7 @@ public class Controller {
                     gui.getShRPanel().inicShowRecipePanelDefault();
                     //összetevő mennyiség típusok betöltése
                     gui.getShRPanel().setOtevokList(rKezelo.otevoMennyTipusok());
+                    
                     //Kiválasztott recepthez összetevők betöltésa
                     rKezelo.getAktualisRecept().setOsszetevok(rKezelo.keresOsszetevoRecepthez(rKezelo.getAktualisRecept().getMegnevezes()));
                     //Recept név betöltése guiba
@@ -118,6 +122,7 @@ public class Controller {
                     gui.getShRPanel().setOsszetevokTable(rKezelo.getAktualisRecept().getOsszetevokTablaban());
                     //Recept leírás betöltése guiba
                     gui.getShRPanel().setLeiras(rKezelo.getAktualisRecept().getLeiras());
+                    gui.getShRPanel().otevoOszlopotBeallit(gui.getShRPanel().getOsszetevokTable(), rKezelo.otevoMennyTipusok());
                     rKezelo.setAktualisMennyisegTipus("");
                     rKezelo.getAktualisRecept().setMegnevezes("");
                     
@@ -149,13 +154,13 @@ public class Controller {
                 for (int i=0;i<gui.getNewRPanel().getOtevoTablaSorokSzama();i++)
                     {
                         Osszetevok otevo=new Osszetevok();
-                        otevo.setMennyiseg_egyseg(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 0).toString());
-                        System.out.println(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 0).toString());
+                        otevo.setMennyiseg_egyseg(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 0).toString());
+                        System.out.println(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 0).toString());
                                 
-                        otevo.setMennyiseg_tipus(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 1).toString());
-                        System.out.println(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 1).toString());
-                        otevo.setOsszetevo_fajta(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 2).toString());
-                        System.out.println(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 2).toString());
+                        otevo.setMennyiseg_tipus(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 1).toString());
+                        System.out.println(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 1).toString());
+                        otevo.setOsszetevo_fajta(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 2).toString());
+                        System.out.println(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 2).toString());
                         ujRecept.osszetevotHozzaad(otevo);
                     }
                 
@@ -197,9 +202,9 @@ public class Controller {
                  for (int i=0; i<gui.getShRPanel().getOtevoTablaSorokSzama(); i++)
                  {
                      Osszetevok otevo=new Osszetevok();
-                     otevo.setMennyiseg_egyseg(gui.getShRPanel().getOsszetevokTable().getValueAt(i, 0).toString());
-                     otevo.setMennyiseg_tipus(gui.getShRPanel().getOsszetevokTable().getValueAt(i, 1).toString());
-                     otevo.setOsszetevo_fajta(gui.getShRPanel().getOsszetevokTable().getValueAt(i, 2).toString());
+                     otevo.setMennyiseg_egyseg(gui.getShRPanel().getOsszetevokTableAdat().getValueAt(i, 0).toString());
+                     otevo.setMennyiseg_tipus(gui.getShRPanel().getOsszetevokTableAdat().getValueAt(i, 1).toString());
+                     otevo.setOsszetevo_fajta(gui.getShRPanel().getOsszetevokTableAdat().getValueAt(i, 2).toString());
                      ujRecept.osszetevotHozzaad(otevo);
                  }
                  
@@ -220,7 +225,7 @@ public class Controller {
              @Override public void actionPerformed (ActionEvent e) {
                  try {
                  gui.getNewRPanel().addRowToOtevoTabla(new Object[]{gui.getNewRPanel().getOtevoMennyiseg(),rKezelo.getAktualisMennyisegTipus(),gui.getNewRPanel().getOtevoMegnevezes()});
-                 
+                 if (gui.getNewRPanel().getOtevoTablaAdat().getRowCount()==1) gui.getNewRPanel().otevoOszlopotBeallit(gui.getNewRPanel().getOtevoTabla(), rKezelo.otevoMennyTipusok());
                  } catch (Exception ex)
                 {
                     JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
@@ -274,7 +279,7 @@ public class Controller {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting() && gui.getNewRPanel().isInitialized()) {
                     System.out.println("Sor kiválasztva");
-                
+                    
                 }
             }
          };
@@ -336,6 +341,24 @@ public class Controller {
                  gui.getFrame().dispose();
              }
         };  
+    }
+
+    public ActionListener getReceptMutatOsszetevotEltavolitListener() {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 //gui.getFrame().dispose();
+             }
+        };        
+
+    }
+
+    public ActionListener getUjReceptOsszetevotEltavolitListener() {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 //gui.getFrame().dispose();
+             }
+        }; 
+
     }
     
     

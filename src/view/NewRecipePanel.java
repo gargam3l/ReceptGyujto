@@ -11,6 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 /**
@@ -32,6 +33,7 @@ public class NewRecipePanel  extends JPanel{
     private JButton btnVissza;
     private JPanel guiPanel;
     private boolean initialized;
+    private JButton btnOtevotEltavolit;
             
     
     public NewRecipePanel(Controller controller) {
@@ -54,9 +56,11 @@ public class NewRecipePanel  extends JPanel{
         btnHozzaad=new JButton("Hozzáad");
         btnMentes=new JButton("Mentés");
         btnVissza=new JButton("Vissza");
+        btnOtevotEltavolit = new JButton("Eltávolít");
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnMentes.addActionListener(controller.getMentesGombListener());
         btnHozzaad.addActionListener(controller.getUjReceptOsszetevotHozzaadListener());
+        btnOtevotEltavolit.addActionListener(controller.getUjReceptOsszetevotEltavolitListener());
         otevoList.getSelectionModel().addListSelectionListener(controller.getUjReceptListaElemListener());
         otevoList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         otevoTabla= new JTable();
@@ -115,6 +119,10 @@ public class NewRecipePanel  extends JPanel{
         btnVissza.setForeground(new java.awt.Color(51, 0, 255));
         btnVissza.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
         
+        btnOtevotEltavolit.setBackground(new java.awt.Color(255, 0, 51));
+        btnOtevotEltavolit.setForeground(new java.awt.Color(51, 0, 255));
+        btnOtevotEltavolit.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
         otevoList.setBackground(new java.awt.Color(255, 255, 102));
         
         otevoTabla.setBackground(new java.awt.Color(255, 255, 102));
@@ -139,6 +147,7 @@ public class NewRecipePanel  extends JPanel{
         
         
         add(btnHozzaad);
+        add(btnOtevotEltavolit);
         //add(otevoTabla);
         add(leirLabel);
         add(receptLeiras);
@@ -161,6 +170,24 @@ public class NewRecipePanel  extends JPanel{
         initialized = true;
         
     }
+    
+    public void otevoOszlopotBeallit(JTable table, ArrayList<String> otevoList) {
+        
+        TableColumn otevoOszlop = table.getColumnModel().getColumn(1);
+        JComboBox comboBox = new JComboBox();
+        
+        for (int i=0; i<otevoList.size();i++)
+        {
+            comboBox.addItem(otevoList.get(i));
+            
+        }
+        
+        
+        otevoOszlop.setCellEditor(new DefaultCellEditor(comboBox));
+    
+        
+    }
+    
     public void setGuiPanel(JPanel guiPanel) {
         this.guiPanel = guiPanel;
     }
@@ -222,7 +249,7 @@ public class NewRecipePanel  extends JPanel{
         this.receptLeiras.setText(receptLeiras);
     }
 
-    public TableModel getOtevoTabla() {
+    public TableModel getOtevoTablaAdat() {
         return otevoTabla.getModel();
     }
 
@@ -246,6 +273,10 @@ public class NewRecipePanel  extends JPanel{
 
     public void setInitialized(boolean initialized) {
         this.initialized = initialized;
+    }
+
+    public JTable getOtevoTabla() {
+        return otevoTabla;
     }
     
     

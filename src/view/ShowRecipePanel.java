@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import javax.swing.table.*;
 import model.Osszetevok;
 import model.ReceptKezelo;
 
@@ -43,6 +42,7 @@ public class ShowRecipePanel  extends JPanel{
     private JTextField otevoLeiras;
     private JButton btnHozzaad;
     private boolean initialized;
+    private JButton btnOtevotEltavolit;
     
     public ShowRecipePanel(Controller controller) {
     
@@ -67,10 +67,12 @@ public class ShowRecipePanel  extends JPanel{
         btnTorles = new JButton("Törlés");
         btnMentes = new JButton("Mentés");
         btnHozzaad= new JButton("Hozáad");
+        btnOtevotEltavolit = new JButton("Eltávolít");
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnTorles.addActionListener(controller.getReceptTorlesListener());
         btnMentes.addActionListener(controller.getReceptSzerkesztListener());
         btnHozzaad.addActionListener(controller.getReceptMutatOsszetevotHozzaadListener());
+        btnOtevotEltavolit.addActionListener(controller.getReceptMutatOsszetevotEltavolitListener());
         osszetevokList.getSelectionModel().addListSelectionListener(controller.getReceptMutatListaElemListener());
         osszetevokList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         osszetevokTable= new JTable();
@@ -141,6 +143,10 @@ public class ShowRecipePanel  extends JPanel{
         btnHozzaad.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
         
         
+        btnOtevotEltavolit.setBackground(new java.awt.Color(255, 0, 51));
+        btnOtevotEltavolit.setForeground(new java.awt.Color(51, 0, 255));
+        btnOtevotEltavolit.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+                
         add(cim);
         add(receptek);
         add(receptNeve);
@@ -157,6 +163,7 @@ public class ShowRecipePanel  extends JPanel{
         add(otevoMegnevezesLabel);
         add(otevoLeiras);
         add(btnHozzaad);
+        add(btnOtevotEltavolit);
         add(leirasLbl);
         add(leiras);
         add(btnVissza);
@@ -178,6 +185,23 @@ public class ShowRecipePanel  extends JPanel{
         osszetevokList.setModel(listModel);
         
         initialized = true;
+        
+    }
+    
+    public void otevoOszlopotBeallit(JTable table, ArrayList<String> otevoList) {
+        
+        TableColumn otevoOszlop = table.getColumnModel().getColumn(1);
+        JComboBox comboBox = new JComboBox();
+        
+        for (int i=0; i<otevoList.size();i++)
+        {
+            comboBox.addItem(otevoList.get(i));
+            
+        }
+        
+        
+        otevoOszlop.setCellEditor(new DefaultCellEditor(comboBox));
+    
         
     }
     
@@ -221,7 +245,7 @@ public class ShowRecipePanel  extends JPanel{
         
     }
 
-    public DefaultTableModel getOsszetevokTable() {
+    public DefaultTableModel getOsszetevokTableAdat() {
         return (DefaultTableModel)osszetevokTable.getModel();
     }
 
@@ -272,6 +296,10 @@ public class ShowRecipePanel  extends JPanel{
 
     public void setInitialized(boolean initialized) {
         this.initialized = initialized;
+    }
+
+    public JTable getOsszetevokTable() {
+        return osszetevokTable;
     }
     
     

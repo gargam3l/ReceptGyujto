@@ -41,7 +41,7 @@ public class MainPanel extends JPanel{
         this.kilepes= new JButton("Kilépés");
         ujRecept.addActionListener(controller.getUjReceptPanelListener());
         receptKeres.addActionListener(controller.getReceptKeresPanelListener());
-        //kilepes.addActionListener(controller.getKilepes());
+        kilepes.addActionListener(controller.getKilepes());
 
         
         //adjust size and set layout
