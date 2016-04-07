@@ -47,6 +47,9 @@ public class Osszetevok {
     }
 
     public Osszetevok() {
+        this.mennyiseg_egyseg = "";
+        this.mennyiseg_tipus = "";
+        this.osszetevo_fajta = "";
     }
 
     @Override

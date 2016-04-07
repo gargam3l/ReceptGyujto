@@ -68,7 +68,7 @@ public class NewRecipePanel  extends JPanel{
         
         ListSelectionModel rowSelectionModel=otevoTabla.getSelectionModel();
         rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        rowSelectionModel.addListSelectionListener(controller.getTablaSorListener());
+        rowSelectionModel.addListSelectionListener(controller.getUjReceptTablaSorListener());
         JScrollPane tableScrollPane=new JScrollPane();
         tableScrollPane.setViewportView(otevoTabla);
         
@@ -233,6 +233,13 @@ public class NewRecipePanel  extends JPanel{
         model.addRow(obj);
     }
     
+    public void removeRowToOtevoTabla(int rowNum)
+    {
+        DefaultTableModel model = (DefaultTableModel)otevoTabla.getModel();
+        model.removeRow(rowNum);
+        
+    }
+    
     public int getOtevoTablaSorokSzama()
     {
         if (otevoTabla.getModel().getRowCount()==0) throw new RuntimeException("Nincs összetevő hozzáadva a recepthez. Kérem adjon meg legalább egy összetevőt a recepthez!");
@@ -279,7 +286,11 @@ public class NewRecipePanel  extends JPanel{
         return otevoTabla;
     }
     
-    
+    public int getOtevoTableAktualisSor()
+    {
+        //if (otevoTabla.getSelectedRow()== -1) throw new RuntimeException("Nincs összetevő kiválasztva. Eltávolításhoz válasszon ki összetevőt!");
+        return otevoTabla.getSelectedRow();
+    }
     
     
     

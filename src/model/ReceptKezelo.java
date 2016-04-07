@@ -16,14 +16,17 @@ import java.util.*;
 public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     private ReceptTar tar;
     private Recept aktualisRecept;
+    private Osszetevok aktualisOsszetevo;
     private String aktualisMennyisegTipus;
     private static Connection kapcsolat;
+    private int aktualisOtevoSor;
 
     public ReceptKezelo() {
         inic();
         //kapcsolatTeszt();
         tar= new ReceptTar();
         aktualisRecept = new Recept();
+        aktualisOsszetevo = new Osszetevok();
         aktualisMennyisegTipus = "";
     }
     
@@ -746,7 +749,27 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     public void setAktualisMennyisegTipus(String aktualisMennyisegTipus) {
         this.aktualisMennyisegTipus = aktualisMennyisegTipus;
     }
+
+    public Osszetevok getAktualisOsszetevo() {
+        if (aktualisOsszetevo.getOsszetevo_fajta().equals("")) throw new RuntimeException("Nincs összetevő kijelölve. Válasszon ki összetevőt az eltávolításhoz!");
+        return aktualisOsszetevo;
+    }
+
+    public void setAktualisOsszetevo(ArrayList<String> input) {
+        this.aktualisOsszetevo.setMennyiseg_egyseg(input.get(0));
+        this.aktualisOsszetevo.setMennyiseg_tipus(input.get(1));
+        this.aktualisOsszetevo.setOsszetevo_fajta(input.get(2));
+    }
+
+    public int getAktualisOtevoSor() {
+        return aktualisOtevoSor;
+    }
+
+    public void setAktualisOtevoSor(int aktualisOtevoSor) {
+        this.aktualisOtevoSor = aktualisOtevoSor;
+    }
    
+    
 
     @Override
     public String toString() {

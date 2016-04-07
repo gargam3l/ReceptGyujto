@@ -270,7 +270,23 @@ public class Controller {
          };
     }
     
-    public ListSelectionListener getTablaSorListener()
+    public ListSelectionListener getReceptMutatTablaSorListener()
+    {
+        return new ListSelectionListener() {
+             
+
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting() && gui.getShRPanel().isInitialized()) {
+                    
+                    rKezelo.setAktualisOtevoSor(gui.getShRPanel().getOtevoTableAktualisSor());
+                    //rKezelo.setAktualisOsszetevo(gui.getShRPanel().getOtevoTableAktualisSor());
+                }
+            }
+         };
+    }
+    
+    public ListSelectionListener getUjReceptTablaSorListener()
     {
         return new ListSelectionListener() {
              
@@ -278,8 +294,8 @@ public class Controller {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting() && gui.getNewRPanel().isInitialized()) {
-                    System.out.println("Sor kiválasztva");
                     
+                    rKezelo.setAktualisOtevoSor(gui.getNewRPanel().getOtevoTableAktualisSor());
                 }
             }
          };
@@ -347,6 +363,8 @@ public class Controller {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
                  //gui.getFrame().dispose();
+                 
+                 gui.getShRPanel().removeRowToOtevoTabla(rKezelo.getAktualisOtevoSor());
              }
         };        
 
@@ -356,6 +374,8 @@ public class Controller {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
                  //gui.getFrame().dispose();
+                 gui.getNewRPanel().removeRowToOtevoTabla(rKezelo.getAktualisOtevoSor());
+                 
              }
         }; 
 
