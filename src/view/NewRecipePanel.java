@@ -78,6 +78,53 @@ public class NewRecipePanel  extends JPanel{
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        setBackground(new java.awt.Color(0, 255, 255));
+        setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 102, 255)));
+                
+        cim.setFont(new java.awt.Font("Courier New", 1, 24));
+        cim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevoHozzaadLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        otevoHozzaadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        otevLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevoMennyisegLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        otevoMennyisegLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevoMennyisegTipusLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        otevoMennyisegTipusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        ujOtevLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        ujOtevLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        leirLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        leirLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        receptNeve.setBackground(new java.awt.Color(255, 255, 102));
+        
+        otevoMennyiseg.setBackground(new java.awt.Color(255, 255, 102));
+        
+        otevoMegnevezes.setBackground(new java.awt.Color(255, 255, 102));
+        
+        receptLeiras.setBackground(new java.awt.Color(255, 255, 102));
+        
+        btnHozzaad.setBackground(new java.awt.Color(255, 0, 51));
+        btnHozzaad.setForeground(new java.awt.Color(51, 0, 255));
+        btnHozzaad.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
+        btnMentes.setBackground(new java.awt.Color(255, 0, 51));
+        btnMentes.setForeground(new java.awt.Color(51, 0, 255));
+        btnMentes.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
+        btnVissza.setBackground(new java.awt.Color(255, 0, 51));
+        btnVissza.setForeground(new java.awt.Color(51, 0, 255));
+        btnVissza.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
+        otevoList.setBackground(new java.awt.Color(255, 255, 102));
+        
+        otevoTabla.setBackground(new java.awt.Color(255, 255, 102));
         
         //add components
         add(cim);

@@ -93,7 +93,60 @@ public class ShowRecipePanel  extends JPanel{
         
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         setPreferredSize (new Dimension (395, 156));
+        setBackground(new java.awt.Color(0, 255, 255));
+        setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 102, 255)));
+                
+        cim.setFont(new java.awt.Font("Courier New", 1, 24));
+        cim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
+        receptek.setFont(new java.awt.Font("Courier New", 0, 14));
+        receptek.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        osszetevok.setFont(new java.awt.Font("Courier New", 0, 14));
+        osszetevok.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        leirasLbl.setFont(new java.awt.Font("Courier New", 0, 14));
+        leirasLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevoHozzaadLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        otevoHozzaadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevoMennyisegLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        otevoMennyisegLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevoMennyisegTipusLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        otevoMennyisegTipusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevoMegnevezesLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        otevoMegnevezesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        receptNeve.setBackground(new java.awt.Color(255, 255, 102));
+        
+        osszetevokList.setBackground(new java.awt.Color(255, 255, 102));
+        
+        otevoMenny.setBackground(new java.awt.Color(255, 255, 102));
+        
+        otevoLeiras.setBackground(new java.awt.Color(255, 255, 102));
+        
+        leiras.setBackground(new java.awt.Color(255, 255, 102));
+        
+        osszetevokTable.setBackground(new java.awt.Color(255, 255, 102));
+        
+        btnVissza.setBackground(new java.awt.Color(255, 0, 51));
+        btnVissza.setForeground(new java.awt.Color(51, 0, 255));
+        btnVissza.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
+        btnMentes.setBackground(new java.awt.Color(255, 0, 51));
+        btnMentes.setForeground(new java.awt.Color(51, 0, 255));
+        btnMentes.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
+        btnTorles.setBackground(new java.awt.Color(255, 0, 51));
+        btnTorles.setForeground(new java.awt.Color(51, 0, 255));
+        btnTorles.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
+        btnHozzaad.setBackground(new java.awt.Color(255, 0, 51));
+        btnHozzaad.setForeground(new java.awt.Color(51, 0, 255));
+        btnHozzaad.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
         
         
         add(cim);
