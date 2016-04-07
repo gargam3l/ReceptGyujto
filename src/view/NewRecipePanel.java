@@ -11,6 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 /**
@@ -161,6 +162,24 @@ public class NewRecipePanel  extends JPanel{
         initialized = true;
         
     }
+    
+    public void otevoOszlopotBeallit(JTable table, ArrayList<String> otevoList) {
+        
+        TableColumn otevoOszlop = table.getColumnModel().getColumn(1);
+        JComboBox comboBox = new JComboBox();
+        
+        for (int i=0; i<otevoList.size();i++)
+        {
+            comboBox.addItem(otevoList.get(i));
+            
+        }
+        
+        
+        otevoOszlop.setCellEditor(new DefaultCellEditor(comboBox));
+    
+        
+    }
+    
     public void setGuiPanel(JPanel guiPanel) {
         this.guiPanel = guiPanel;
     }
@@ -222,7 +241,7 @@ public class NewRecipePanel  extends JPanel{
         this.receptLeiras.setText(receptLeiras);
     }
 
-    public TableModel getOtevoTabla() {
+    public TableModel getOtevoTablaAdat() {
         return otevoTabla.getModel();
     }
 
@@ -246,6 +265,10 @@ public class NewRecipePanel  extends JPanel{
 
     public void setInitialized(boolean initialized) {
         this.initialized = initialized;
+    }
+
+    public JTable getOtevoTabla() {
+        return otevoTabla;
     }
     
     
