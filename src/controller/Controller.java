@@ -67,9 +67,10 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-                 gui.getNewRPanel().inicNewRecipePanelDefault();
+                 gui.getNewRPanel().setInitialized(false);
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                 cardLayout.show(gui.getCards(), "card2");
+                gui.getNewRPanel().inicNewRecipePanelDefault();
                 
                 
                 //összetevő mennyiség típusok betöltése
@@ -258,7 +259,7 @@ public class Controller {
 
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+                if (!e.getValueIsAdjusting()&& gui.getNewRPanel().isInitialized()) {
                     System.out.println("Elem kiválasztva");
                     rKezelo.setAktualisMennyisegTipus(gui.getNewRPanel().getOtevoListCurrentSelection());
                 
