@@ -52,6 +52,32 @@ public class SearchRecipePanel  extends JPanel{
         btnMegnyitas.addActionListener(controller.getReceptMutatPanelListener());    
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));
+        setBackground(new java.awt.Color(0, 255, 255));
+        setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 102, 255)));
+                
+        rkeres.setFont(new java.awt.Font("Courier New", 1, 24));
+        rkeres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        rnevLabel.setFont(new java.awt.Font("Courier New", 0, 14));
+        rnevLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        receptNeve.setBackground(new java.awt.Color(255, 255, 102));
+        
+        talalatTabla.setBackground(new java.awt.Color(255, 255, 102));
+        
+        tablaPanel.setBackground(new java.awt.Color(255, 255, 102));
+        
+        btnVissza.setBackground(new java.awt.Color(255, 0, 51));
+        btnVissza.setForeground(new java.awt.Color(51, 0, 255));
+        btnVissza.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
+        btnKereses.setBackground(new java.awt.Color(255, 0, 51));
+        btnKereses.setForeground(new java.awt.Color(51, 0, 255));
+        btnKereses.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
+        btnMegnyitas.setBackground(new java.awt.Color(255, 0, 51));
+        btnMegnyitas.setForeground(new java.awt.Color(51, 0, 255));
+        btnMegnyitas.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
         
         //set component bounds (only needed by Absolute Positioning)
         this.receptNeve.setBounds (20, 45, 100, 25);
