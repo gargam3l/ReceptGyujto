@@ -42,6 +42,7 @@ public class ShowRecipePanel  extends JPanel{
     private JTextField otevoLeiras;
     private JButton btnHozzaad;
     private boolean initialized;
+    private JButton btnOtevotEltavolit;
     
     public ShowRecipePanel(Controller controller) {
     
@@ -66,10 +67,12 @@ public class ShowRecipePanel  extends JPanel{
         btnTorles = new JButton("Törlés");
         btnMentes = new JButton("Mentés");
         btnHozzaad= new JButton("Hozáad");
+        btnOtevotEltavolit = new JButton("Eltávolít");
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnTorles.addActionListener(controller.getReceptTorlesListener());
         btnMentes.addActionListener(controller.getReceptSzerkesztListener());
         btnHozzaad.addActionListener(controller.getReceptMutatOsszetevotHozzaadListener());
+        btnOtevotEltavolit.addActionListener(controller.getReceptMutatOsszetevotEltavolitListener());
         osszetevokList.getSelectionModel().addListSelectionListener(controller.getReceptMutatListaElemListener());
         osszetevokList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         osszetevokTable= new JTable();
@@ -140,6 +143,10 @@ public class ShowRecipePanel  extends JPanel{
         btnHozzaad.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
         
         
+        btnOtevotEltavolit.setBackground(new java.awt.Color(255, 0, 51));
+        btnOtevotEltavolit.setForeground(new java.awt.Color(51, 0, 255));
+        btnOtevotEltavolit.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+                
         add(cim);
         add(receptek);
         add(receptNeve);
@@ -156,6 +163,7 @@ public class ShowRecipePanel  extends JPanel{
         add(otevoMegnevezesLabel);
         add(otevoLeiras);
         add(btnHozzaad);
+        add(btnOtevotEltavolit);
         add(leirasLbl);
         add(leiras);
         add(btnVissza);

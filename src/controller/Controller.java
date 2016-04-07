@@ -342,6 +342,24 @@ public class Controller {
              }
         };  
     }
+
+    public ActionListener getReceptMutatOsszetevotEltavolitListener() {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 //gui.getFrame().dispose();
+             }
+        };        
+
+    }
+
+    public ActionListener getUjReceptOsszetevotEltavolitListener() {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 //gui.getFrame().dispose();
+             }
+        }; 
+
+    }
     
     
 }

@@ -33,6 +33,7 @@ public class NewRecipePanel  extends JPanel{
     private JButton btnVissza;
     private JPanel guiPanel;
     private boolean initialized;
+    private JButton btnOtevotEltavolit;
             
     
     public NewRecipePanel(Controller controller) {
@@ -55,9 +56,11 @@ public class NewRecipePanel  extends JPanel{
         btnHozzaad=new JButton("Hozzáad");
         btnMentes=new JButton("Mentés");
         btnVissza=new JButton("Vissza");
+        btnOtevotEltavolit = new JButton("Eltávolít");
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnMentes.addActionListener(controller.getMentesGombListener());
         btnHozzaad.addActionListener(controller.getUjReceptOsszetevotHozzaadListener());
+        btnOtevotEltavolit.addActionListener(controller.getUjReceptOsszetevotEltavolitListener());
         otevoList.getSelectionModel().addListSelectionListener(controller.getUjReceptListaElemListener());
         otevoList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         otevoTabla= new JTable();
@@ -116,6 +119,10 @@ public class NewRecipePanel  extends JPanel{
         btnVissza.setForeground(new java.awt.Color(51, 0, 255));
         btnVissza.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
         
+        btnOtevotEltavolit.setBackground(new java.awt.Color(255, 0, 51));
+        btnOtevotEltavolit.setForeground(new java.awt.Color(51, 0, 255));
+        btnOtevotEltavolit.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        
         otevoList.setBackground(new java.awt.Color(255, 255, 102));
         
         otevoTabla.setBackground(new java.awt.Color(255, 255, 102));
@@ -140,6 +147,7 @@ public class NewRecipePanel  extends JPanel{
         
         
         add(btnHozzaad);
+        add(btnOtevotEltavolit);
         //add(otevoTabla);
         add(leirLabel);
         add(receptLeiras);
