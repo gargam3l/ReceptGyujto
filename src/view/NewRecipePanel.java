@@ -51,7 +51,7 @@ public class NewRecipePanel  extends JPanel{
         otevoList= new JList();
         JLabel leirLabel = new JLabel("Recept leírása:");
         receptLeiras=new JTextField(100);
-        btnHozzaad=new JButton("Összetevő hozzáadása");
+        btnHozzaad=new JButton("Hozzáad");
         btnMentes=new JButton("Mentés");
         btnVissza=new JButton("Vissza");
         btnVissza.addActionListener(controller.getVisszaGombListener());

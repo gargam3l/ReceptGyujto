@@ -65,7 +65,7 @@ public class ShowRecipePanel  extends JPanel{
         leiras = new JTextField();
         btnVissza = new JButton("Vissza");
         btnTorles = new JButton("Törlés");
-        btnMentes = new JButton("Mentes");
+        btnMentes = new JButton("Mentés");
         btnHozzaad= new JButton("Hozáad");
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnTorles.addActionListener(controller.getReceptTorlesListener());

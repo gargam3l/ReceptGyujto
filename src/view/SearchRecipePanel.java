@@ -117,6 +117,7 @@ public class SearchRecipePanel  extends JPanel{
     }
 
     public String getReceptNeve() {
+        if (receptNeve.getText().equals("")) throw new RuntimeException("Recept neve üres. Kérem adjon meg egy recept nevet a kereséshez!");
         return receptNeve.getText();
     }
 

@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,8 +33,12 @@ public class Controller {
     
     
     public Controller() {
+        
         gui = new GUI(this);
         rKezelo = new ReceptKezelo();
+        
+        
+        
     }
     
     public void Run()
@@ -47,7 +52,7 @@ public class Controller {
                 gui.displayGUI();
             }
         });
-        
+       
     }
 
     
@@ -87,7 +92,8 @@ public class Controller {
                  gui.getSrchRPanel().setInitialized(false);
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                     cardLayout.show(gui.getCards(), "card4");
-                 gui.getSrchRPanel().inicSearchRecipePanelDefault();   
+                 gui.getSrchRPanel().inicSearchRecipePanelDefault(); 
+                 
              }
          };
     }
@@ -96,6 +102,8 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
+                 try{
+                     String aktReceptNeve=rKezelo.getAktualisRecept().getMegnevezes();
                  gui.getShRPanel().setInitialized(false);
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                     cardLayout.show(gui.getCards(), "card3");
@@ -105,12 +113,19 @@ public class Controller {
                     //Kiválasztott recepthez összetevők betöltésa
                     rKezelo.getAktualisRecept().setOsszetevok(rKezelo.keresOsszetevoRecepthez(rKezelo.getAktualisRecept().getMegnevezes()));
                     //Recept név betöltése guiba
-                    gui.getShRPanel().setReceptNeve(rKezelo.getAktualisRecept().getMegnevezes());
+                    gui.getShRPanel().setReceptNeve(aktReceptNeve);
                     //Összetevők töltése guiba
                     gui.getShRPanel().setOsszetevokTable(rKezelo.getAktualisRecept().getOsszetevokTablaban());
                     //Recept leírás betöltése guiba
                     gui.getShRPanel().setLeiras(rKezelo.getAktualisRecept().getLeiras());
                     rKezelo.setAktualisMennyisegTipus("");
+                    rKezelo.getAktualisRecept().setMegnevezes("");
+                    
+                    } catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+
+                }
                     
              }
          };
@@ -234,12 +249,18 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-                 
+                 try{
                  
                  String kulcs=gui.getSrchRPanel().getReceptNeve();
             ReceptTar tar=rKezelo.keresMegnevezesre(kulcs);
-            //
+            
             gui.getSrchRPanel().setTalalatTabla(tar.getReceptTablaFoAdatok());
+             }
+              catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+
+                }
              }
          };
     }
@@ -267,10 +288,10 @@ public class Controller {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting() && gui.getSrchRPanel().isInitialized()) {
-                    System.out.println("Sor kiválasztva");
+                    
                 
                 rKezelo.setAktualisRecept(gui.getSrchRPanel().getTalalatTableAktualisSor());
-                System.out.println(rKezelo.getAktualisRecept().getMegnevezes()+" "+rKezelo.getAktualisRecept().getLeiras());
+                
                 }
             }
          };
