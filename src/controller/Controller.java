@@ -126,7 +126,7 @@ public class Controller {
                 */
                 //Működési logika
                 //Recept létrehozása a gui-ból vett adatokkal - megnevezés leírás
-                System.out.println("ment"); 
+                 
                 try
                 {
                     gui.getNewRPanel().getReceptNeve();
@@ -134,7 +134,7 @@ public class Controller {
                 Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve(), gui.getNewRPanel().getReceptLeiras());
                 System.out.println(gui.getNewRPanel().getReceptNeve()+" "+ gui.getNewRPanel().getReceptLeiras());
                 //Összetevők hozzáadása recepthez - ciklusba kell tenni, miután gui-ban az összetevők tábla implementálva lesz
-                for (int i=0;i<gui.getNewRPanel().getOtevoTabla().getRowCount();i++)
+                for (int i=0;i<gui.getNewRPanel().getOtevoTablaSorokSzama();i++)
                     {
                         Osszetevok otevo=new Osszetevok();
                         otevo.setMennyiseg_egyseg(gui.getNewRPanel().getOtevoTabla().getValueAt(i, 0).toString());
