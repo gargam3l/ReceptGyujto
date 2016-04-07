@@ -104,7 +104,13 @@ public class GUI extends JPanel{
     //System.out.println();
 
     return card;
+    
+    
 }
+
+    public JFrame getFrame() {
+        return frame;
+    }
     
     
     

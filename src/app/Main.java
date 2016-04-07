@@ -7,6 +7,7 @@
 package app;
 
 import controller.Controller;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import view.GUI;
 
@@ -26,8 +27,15 @@ public class Main {
             }
         });
                 */
+        try{
         Controller myController = new Controller();
         myController.Run();
+        }catch (Exception ex)
+        {
+            
+        JOptionPane.showMessageDialog(null, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+        
+        }
         
         //new comment , commit, push merge test
     }

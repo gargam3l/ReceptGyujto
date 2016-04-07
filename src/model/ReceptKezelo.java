@@ -24,6 +24,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         //kapcsolatTeszt();
         tar= new ReceptTar();
         aktualisRecept = new Recept();
+        aktualisMennyisegTipus = "";
     }
     
     public void kapcsolatTeszt()
@@ -400,10 +401,12 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             kapcsolat = DriverManager.getConnection(URL, USER, PASSWORD);
         }
         catch (ClassNotFoundException e) {
-            System.out.println("Hiba! Hiányzik a JDBC driver.");
+            //System.out.println("Hiba! Hiányzik a JDBC driver.");
+            throw new RuntimeException("Hiba! Hiányzik a JDBC driver.");
         }
         catch (SQLException e) {
-            System.out.println("Hiba! Nem sikerült megnyitni a kapcsolatot az adatbázis-szerverrel.");
+            //System.out.println("Hiba! Nem sikerült megnyitni a kapcsolatot az adatbázis-szerverrel.");
+            throw new RuntimeException("Hiba! Nem sikerült megnyitni a kapcsolatot az adatbázis-szerverrel. Kérem ellenőrizze, hogy a \"hr\" felhasználó megfelelően van konfigurálva az Oracle adatbázisban!");
         }
   }
 
@@ -724,12 +727,11 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     }
 
     public Recept getAktualisRecept() {
+        if (aktualisRecept.getMegnevezes().equals("")) throw new RuntimeException("Nincs recept kiválasztva. Kérem válasszon ki egy receptet a megjelenítéshez!");
         return aktualisRecept;
     }
 
-    public void setAktualisRecept(Recept aktualisRecept) {
-        this.aktualisRecept = aktualisRecept;
-    }
+    
     
     public void setAktualisRecept(ArrayList<String> input) {
         this.aktualisRecept.setMegnevezes(input.get(0));  
@@ -737,6 +739,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     }
 
     public String getAktualisMennyisegTipus() {
+        if (aktualisMennyisegTipus.equals("")) throw new RuntimeException("Összetevő mennyiség típus üres. Kérem adjon meg egy mennyiség típust az összetevőhöz!");
         return aktualisMennyisegTipus;
     }
 
