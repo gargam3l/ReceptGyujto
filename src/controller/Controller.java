@@ -308,6 +308,14 @@ public class Controller {
             }
          };
     }
+
+    public ActionListener getKilepes() {
+        return new ActionListener() {
+             @Override public void actionPerformed (ActionEvent e) {
+                 gui.getFrame().dispose();
+             }
+        };  
+    }
     
     
 }
