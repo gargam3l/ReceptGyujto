@@ -762,6 +762,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
     }
 
     public int getAktualisOtevoSor() {
+        if (aktualisOtevoSor== -1) throw new RuntimeException("Nincs összetevő kijelölve. Válasszon ki összetevőt az eltávolításhoz!");
         return aktualisOtevoSor;
     }
 

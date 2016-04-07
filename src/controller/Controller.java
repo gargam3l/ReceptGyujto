@@ -82,6 +82,7 @@ public class Controller {
                 gui.getNewRPanel().setOtevoList(rKezelo.otevoMennyTipusok());
                 
                 rKezelo.setAktualisMennyisegTipus("");
+                rKezelo.setAktualisOtevoSor(-1);
                 
                 
              }
@@ -125,7 +126,7 @@ public class Controller {
                     gui.getShRPanel().otevoOszlopotBeallit(gui.getShRPanel().getOsszetevokTable(), rKezelo.otevoMennyTipusok());
                     rKezelo.setAktualisMennyisegTipus("");
                     rKezelo.getAktualisRecept().setMegnevezes("");
-                    
+                    rKezelo.setAktualisOtevoSor(-1);
                     } catch (Exception ex)
                 {
                     JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
@@ -363,8 +364,16 @@ public class Controller {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
                  //gui.getFrame().dispose();
+                 try{
+                     
                  
                  gui.getShRPanel().removeRowToOtevoTabla(rKezelo.getAktualisOtevoSor());
+                 }
+                 catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+
+                }
              }
         };        
 
@@ -373,9 +382,14 @@ public class Controller {
     public ActionListener getUjReceptOsszetevotEltavolitListener() {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-                 //gui.getFrame().dispose();
+                 try{
                  gui.getNewRPanel().removeRowToOtevoTabla(rKezelo.getAktualisOtevoSor());
-                 
+                 }
+                 catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+
+                }
              }
         }; 
 
