@@ -172,7 +172,7 @@ public class NewRecipePanel  extends JPanel{
     
 
     public String getReceptNeve() {
-        if (receptNeve.getText()=="") throw new RuntimeException("Recept neve üres. Kérem adjon meg egy recept nevet");
+        if (receptNeve.getText().equals("")) throw new RuntimeException("Recept neve üres. Kérem adjon meg egy recept nevet!");
         return receptNeve.getText();
     }
 
@@ -205,9 +205,16 @@ public class NewRecipePanel  extends JPanel{
         DefaultTableModel model = (DefaultTableModel)otevoTabla.getModel();
         model.addRow(obj);
     }
-
+    
+    public int getOtevoTablaSorokSzama()
+    {
+        if (otevoTabla.getModel().getRowCount()==0) throw new RuntimeException("Nincs összetevő hozzáadva a recepthez. Kérem adjon meg legalább egy összetevőt a recepthez!");
+        
+        return otevoTabla.getModel().getRowCount();
+    }
+            
     public String getReceptLeiras() {
-        if (receptLeiras.getText()=="") throw new RuntimeException("Recept leírása üres. Kérem adjon meg egy leríást a recepthez");
+        if (receptLeiras.getText().equals("")) throw new RuntimeException("Recept leírása üres. Kérem adjon meg egy leríást a recepthez!");
         return receptLeiras.getText();
     }
 
