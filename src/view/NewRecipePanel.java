@@ -31,24 +31,26 @@ public class NewRecipePanel  extends JPanel{
     private JButton btnMentes;
     private JButton btnVissza;
     private JPanel guiPanel;
+    private boolean initialized;
             
     
     public NewRecipePanel(Controller controller) {
         //construct components
+        initialized = false;
         cim = new JLabel("Új recept felvétel");
         JLabel rnevLabel = new JLabel("Recept neve");
-        receptNeve= new JTextField(1);
-        otevoMennyiseg= new JTextField(1);
-        otevoMegnevezes= new JTextField(1);
+        receptNeve= new JTextField(30);
+        otevoMennyiseg= new JTextField(30);
+        otevoMegnevezes= new JTextField(30);
         JLabel otevLabel = new JLabel("Összetevők:");
         JLabel otevoHozzaadLabel = new JLabel("Összetevő hozzáadás");
         JLabel otevoMennyisegLabel = new JLabel("Mennyiség");
         JLabel otevoMennyisegTipusLabel = new JLabel("Mennyiség Típus");
         JLabel ujOtevLabel = new JLabel("Összetevő");
         
-        otevoList= new JList(new String[]{"listelem1","listaelem2"});
+        otevoList= new JList();
         JLabel leirLabel = new JLabel("Recept leírása:");
-        receptLeiras=new JTextField("leírás...");
+        receptLeiras=new JTextField(100);
         btnHozzaad=new JButton("Összetevő hozzáadása");
         btnMentes=new JButton("Mentés");
         btnVissza=new JButton("Vissza");
@@ -58,16 +60,7 @@ public class NewRecipePanel  extends JPanel{
         otevoList.getSelectionModel().addListSelectionListener(controller.getUjReceptListaElemListener());
         otevoList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         otevoTabla= new JTable();
-        otevoTabla.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null}
-                
-            },
-            new String [] {
-                "Mennyiség", "Egység", "Összetevő"
-            }
-        ));
+        
         
         ListSelectionModel rowSelectionModel=otevoTabla.getSelectionModel();
         rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -78,6 +71,8 @@ public class NewRecipePanel  extends JPanel{
         //adjust size and set layout
         setPreferredSize (new Dimension (395, 156));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        
+        inicNewRecipePanelDefault();
         
         //add components
         add(cim);
@@ -104,6 +99,21 @@ public class NewRecipePanel  extends JPanel{
         add(btnVissza);
     }
   
+    public void inicNewRecipePanelDefault()
+    {
+        
+        receptNeve.setText("");
+        otevoMennyiseg.setText("");
+        otevoMegnevezes.setText("");
+        receptLeiras.setText("");
+        otevoTabla.setModel(new DefaultTableModel(new String[]{"Mennyiség", "Egység", "Összetevő"},0));
+        DefaultListModel listModel= new DefaultListModel();
+        listModel.addElement("");
+        otevoList.setModel(listModel);
+        
+        initialized = true;
+        
+    }
     public void setGuiPanel(JPanel guiPanel) {
         this.guiPanel = guiPanel;
     }
@@ -170,6 +180,14 @@ public class NewRecipePanel  extends JPanel{
 
     public String getOtevoMegnevezes() {
         return otevoMegnevezes.getText();
+    }
+
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    public void setInitialized(boolean initialized) {
+        this.initialized = initialized;
     }
     
     

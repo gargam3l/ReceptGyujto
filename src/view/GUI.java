@@ -28,6 +28,7 @@ public class GUI extends JPanel{
     private SearchRecipePanel srchRPanel;
     private ShowRecipePanel shRPanel;
     private ReceptKezelo model;
+    public final String[] RECEPT_OSZLOP_NEVEK = {"Mennyiség", "Egység", "Összetevő"};
 
     public GUI(Controller controller)
     {

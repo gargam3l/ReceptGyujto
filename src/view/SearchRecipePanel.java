@@ -28,27 +28,19 @@ public class SearchRecipePanel  extends JPanel{
     private JPanel guiPanel;
     private JButton btnMegnyitas;
     private JScrollPane tablaPanel;
+    private boolean initialized;
     
     public SearchRecipePanel(Controller controller) {
+        initialized = false;
         rkeres = new JLabel("Recept Keresése");
         JLabel rnevLabel = new JLabel("Recept neve");
-        this.receptNeve= new JTextField(1);
+        this.receptNeve= new JTextField(30);
         this.btnVissza=new JButton("Vissza");
         this.btnKereses=new JButton("Keresés");
         this.btnMegnyitas=new JButton("Megnyitas");
         this.talalatTabla=new JTable();
         this.tablaPanel=new JScrollPane();
         
-        talalatTabla.setModel(new DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null}
-                
-            },
-            new String [] {
-                "Megnevezés", "Elkészítés"
-            }
-        ));
         
         ListSelectionModel rowSelectionModel=talalatTabla.getSelectionModel();
         rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -68,6 +60,8 @@ public class SearchRecipePanel  extends JPanel{
         rnevLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         rnevLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        
+        
         //add components
         add(rkeres);
         add(rnevLabel);
@@ -78,6 +72,14 @@ public class SearchRecipePanel  extends JPanel{
         add(btnMegnyitas);
     
         
+    }
+    
+    public void inicSearchRecipePanelDefault()
+    {
+        
+        receptNeve.setText("");
+        talalatTabla.setModel(new DefaultTableModel(new String [] {"Megnevezés", "Elkészítés"},0));
+        initialized = true;
     }
 
     void setGuiPanel(JPanel guiPanel) {
@@ -109,6 +111,14 @@ public class SearchRecipePanel  extends JPanel{
                 
                 }
         return eredmeny;
+    }
+
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    public void setInitialized(boolean initialized) {
+        this.initialized = initialized;
     }
     
     

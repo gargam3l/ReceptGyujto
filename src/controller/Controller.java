@@ -67,8 +67,11 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
+                 gui.getNewRPanel().inicNewRecipePanelDefault();
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                 cardLayout.show(gui.getCards(), "card2");
+                
+                
                 //összetevő mennyiség típusok betöltése
                 gui.getNewRPanel().setOtevoList(rKezelo.otevoMennyTipusok());
              }
@@ -79,8 +82,10 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
+                 gui.getSrchRPanel().setInitialized(false);
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                     cardLayout.show(gui.getCards(), "card4");
+                 gui.getSrchRPanel().inicSearchRecipePanelDefault();   
              }
          };
     }
@@ -220,7 +225,7 @@ public class Controller {
 
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+                if (!e.getValueIsAdjusting() && gui.getNewRPanel().isInitialized()) {
                     System.out.println("Sor kiválasztva");
                 
                 }
@@ -235,7 +240,7 @@ public class Controller {
 
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+                if (!e.getValueIsAdjusting() && gui.getSrchRPanel().isInitialized()) {
                     System.out.println("Sor kiválasztva");
                 
                 rKezelo.setAktualisRecept(gui.getSrchRPanel().getTalalatTableAktualisSor());
