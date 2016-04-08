@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
 
 import controller.Controller;
@@ -11,13 +5,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-/**
- *
- * @author 604772006
- */
 public class SearchRecipePanel  extends JPanel{
     private  JLabel rkeres;
     private JTextField receptNeve;
@@ -29,6 +20,10 @@ public class SearchRecipePanel  extends JPanel{
     private JButton btnMegnyitas;
     private JScrollPane tablaPanel;
     private boolean initialized;
+    private JLabel space1;
+    private JLabel space2;
+    private JLabel space3;
+    private JLabel space4;
     
     public SearchRecipePanel(Controller controller) {
         initialized = false;
@@ -37,11 +32,14 @@ public class SearchRecipePanel  extends JPanel{
         this.receptNeve= new JTextField(30);
         this.btnVissza=new JButton("Vissza");
         this.btnKereses=new JButton("Keresés");
-        this.btnMegnyitas=new JButton("Megnyitas");
+        this.btnMegnyitas=new JButton("Megnyitás");
         this.talalatTabla=new JTable();
         this.tablaPanel=new JScrollPane();
-        
-        
+        space1 = new JLabel("");
+        space2 = new JLabel("");
+        space3 = new JLabel("");
+        space4 = new JLabel("");
+                
         ListSelectionModel rowSelectionModel=talalatTabla.getSelectionModel();
         rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         rowSelectionModel.addListSelectionListener(controller.getReceptTablaSorListener());
@@ -49,53 +47,54 @@ public class SearchRecipePanel  extends JPanel{
         
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnKereses.addActionListener(controller.getReceptKeresListener());
-        btnMegnyitas.addActionListener(controller.getReceptMutatPanelListener());    
+        btnMegnyitas.addActionListener(controller.getReceptMutatPanelListener());  
+        
         //adjust size and set layout
-        setPreferredSize (new Dimension (400, 500));
+        setPreferredSize (new Dimension (400, 650));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.decode("#3AAACF"));
         setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
                 
-        rkeres.setFont(new java.awt.Font("Courier New", 1, 24));
-        rkeres.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rkeres.setFont(new Font("Courier New", 1, 24));
+        rkeres.setBorder(new EmptyBorder(new Insets(1, 50, 50, 1)));
         
-        rnevLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        rnevLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rnevLabel.setFont(new Font("Courier New", 0, 14));
+               
+        receptNeve.setBackground(Color.decode("#62B4CF"));
         
-        receptNeve.setBackground(new java.awt.Color(255, 255, 102));
+        space1.setFont(new Font("Courier New", 1, 24));
+        space1.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
-        talalatTabla.setBackground(new java.awt.Color(255, 255, 102));
+        btnKereses.setFont(new Font("Courier New", 1, 14));
         
-        tablaPanel.setBackground(new java.awt.Color(255, 255, 102));
+        space2.setFont(new Font("Courier New", 1, 24));
+        space2.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
-        btnVissza.setBackground(new java.awt.Color(255, 0, 51));
-        btnVissza.setForeground(new java.awt.Color(51, 0, 255));
-        btnVissza.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        talalatTabla.setBackground(Color.decode("#62B4CF"));
         
-        btnKereses.setBackground(new java.awt.Color(255, 0, 51));
-        btnKereses.setForeground(new java.awt.Color(51, 0, 255));
-        btnKereses.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        tablaPanel.setBackground(Color.decode("#62B4CF"));
         
-        btnMegnyitas.setBackground(new java.awt.Color(255, 0, 51));
-        btnMegnyitas.setForeground(new java.awt.Color(51, 0, 255));
-        btnMegnyitas.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        space3.setFont(new Font("Courier New", 1, 24));
+        space3.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
-        //set component bounds (only needed by Absolute Positioning)
-        this.receptNeve.setBounds (20, 45, 100, 25);
-        this.rkeres.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.rkeres.setAlignmentY(Component.TOP_ALIGNMENT);
-        rnevLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        rnevLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        btnVissza.setFont(new Font("Courier New", 1, 14));
         
+        space4.setFont(new Font("Courier New", 1, 24));
+        space4.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
+        btnMegnyitas.setFont(new Font("Courier New", 1, 14));
         
         //add components
         add(rkeres);
         add(rnevLabel);
         add(receptNeve);
+        add(space1);
         add(btnKereses);
+        add(space2);
         add(tablaPanel);
+        add(space3);
         add(btnVissza);
+        add(space4);
         add(btnMegnyitas);
     
         

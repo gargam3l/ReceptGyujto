@@ -1,14 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/** TO DO
-* Set title on parent frame - of window
-* Resize window depending on which panel comes up
-*/
-
 package view;
 
 import controller.Controller;
@@ -17,23 +6,18 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
 import model.Osszetevok;
 import model.ReceptKezelo;
 
-
-/**
- *
- * @author 604772006
- */
 public class ShowRecipePanel  extends JPanel{
     private JPanel guiPanel;
     private JFrame pFrame;
     private JButton btnVissza;
     private JButton btnMentes;
     private JButton btnTorles;
-    
     private  JList osszetevokList;
     private JTextField leiras;
     private JTextField receptNeve;
@@ -43,10 +27,18 @@ public class ShowRecipePanel  extends JPanel{
     private JButton btnHozzaad;
     private boolean initialized;
     private JButton btnOtevotEltavolit;
-    
+    private JLabel space1;
+    private JLabel space2;
+    private JLabel space3;
+    private JLabel space4;
+    private JLabel space5;
+    private JLabel space6;
+    private JLabel space7;
+    private JLabel space8;
+    private JLabel space9;
+     
     public ShowRecipePanel(Controller controller) {
     
-        
         JLabel cim = new JLabel("Receptek megjelenítése");
         JLabel receptek = new JLabel("Receptek");
         
@@ -66,7 +58,7 @@ public class ShowRecipePanel  extends JPanel{
         btnVissza = new JButton("Vissza");
         btnTorles = new JButton("Törlés");
         btnMentes = new JButton("Mentés");
-        btnHozzaad= new JButton("Hozáad");
+        btnHozzaad= new JButton("Hozzáad");
         btnOtevotEltavolit = new JButton("Eltávolít");
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnTorles.addActionListener(controller.getReceptTorlesListener());
@@ -76,98 +68,125 @@ public class ShowRecipePanel  extends JPanel{
         osszetevokList.getSelectionModel().addListSelectionListener(controller.getReceptMutatListaElemListener());
         osszetevokList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         osszetevokTable= new JTable();
-        
-        
+        space1 = new JLabel("");
+        space2 = new JLabel("");
+        space3 = new JLabel("");
+        space4 = new JLabel("");
+        space5 = new JLabel("");
+        space6 = new JLabel("");
+        space7 = new JLabel("");
+        space8 = new JLabel("");
+        space9 = new JLabel("");
+               
         ListSelectionModel rowSelectionModel=osszetevokTable.getSelectionModel();
         rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         rowSelectionModel.addListSelectionListener(controller.getReceptMutatTablaSorListener());
         JScrollPane tableScrollPane=new JScrollPane();
         tableScrollPane.setViewportView(osszetevokTable);
         
-        
-        setPreferredSize (new Dimension (400, 500));
+        //adjust size and set layout
+        setPreferredSize (new Dimension (400, 650));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.decode("#3AAACF"));
         setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
                 
-        cim.setFont(new java.awt.Font("Courier New", 1, 24));
-        cim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cim.setFont(new Font("Courier New", 1, 24));
+        cim.setBorder(new EmptyBorder(new Insets(1, 50, 50, 1)));
         
         receptek.setFont(new java.awt.Font("Courier New", 0, 14));
-        receptek.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
+        receptNeve.setBackground(Color.decode("#62B4CF"));
+        
+        space1.setFont(new Font("Courier New", 1, 24));
+        space1.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
+                
         osszetevok.setFont(new java.awt.Font("Courier New", 0, 14));
-        osszetevok.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
-        leirasLbl.setFont(new java.awt.Font("Courier New", 0, 14));
-        leirasLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        osszetevokTable.setBackground(Color.decode("#62B4CF"));
         
-        otevoHozzaadLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        otevoHozzaadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        otevoHozzaadLabel.setFont(new java.awt.Font("Courier New", 1, 16));
+        otevoHozzaadLabel.setBorder(new EmptyBorder(new Insets(10, 1, 10, 1)));
         
         otevoMennyisegLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        otevoMennyisegLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevoMenny.setBackground(Color.decode("#62B4CF"));
+        
+        space2.setFont(new Font("Courier New", 1, 24));
+        space2.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
         otevoMennyisegTipusLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        otevoMennyisegTipusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        osszetevokList.setBackground(Color.decode("#62B4CF"));
+        
+        space3.setFont(new Font("Courier New", 1, 24));
+        space3.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
         otevoMegnevezesLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        otevoMegnevezesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
-        receptNeve.setBackground(new java.awt.Color(255, 255, 102));
+        otevoLeiras.setBackground(Color.decode("#62B4CF"));
         
-        osszetevokList.setBackground(new java.awt.Color(255, 255, 102));
+        space4.setFont(new Font("Courier New", 1, 24));
+        space4.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
-        otevoMenny.setBackground(new java.awt.Color(255, 255, 102));
+        btnHozzaad.setFont(new java.awt.Font("Courier New", 1, 14));
         
-        otevoLeiras.setBackground(new java.awt.Color(255, 255, 102));
-        
-        leiras.setBackground(new java.awt.Color(255, 255, 102));
-        
-        osszetevokTable.setBackground(new java.awt.Color(255, 255, 102));
-        
-        btnVissza.setBackground(new java.awt.Color(255, 0, 51));
-        btnVissza.setForeground(new java.awt.Color(51, 0, 255));
-        btnVissza.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
-        
-        btnMentes.setBackground(new java.awt.Color(255, 0, 51));
-        btnMentes.setForeground(new java.awt.Color(51, 0, 255));
-        btnMentes.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
-        
-        btnTorles.setBackground(new java.awt.Color(255, 0, 51));
-        btnTorles.setForeground(new java.awt.Color(51, 0, 255));
-        btnTorles.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
-        
-        btnHozzaad.setBackground(new java.awt.Color(255, 0, 51));
-        btnHozzaad.setForeground(new java.awt.Color(51, 0, 255));
-        btnHozzaad.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
-        
-        
-        btnOtevotEltavolit.setBackground(new java.awt.Color(255, 0, 51));
-        btnOtevotEltavolit.setForeground(new java.awt.Color(51, 0, 255));
-        btnOtevotEltavolit.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        space5.setFont(new Font("Courier New", 1, 24));
+        space5.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
                 
+        btnOtevotEltavolit.setFont(new java.awt.Font("Courier New", 1, 14));
+        
+        space6.setFont(new Font("Courier New", 1, 24));
+        space6.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
+                
+        leirasLbl.setFont(new java.awt.Font("Courier New", 0, 14));
+                
+        leiras.setBackground(Color.decode("#62B4CF"));
+        
+        space7.setFont(new Font("Courier New", 1, 24));
+        space7.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
+        
+        btnVissza.setFont(new java.awt.Font("Courier New", 1, 14));
+        
+        space8.setFont(new Font("Courier New", 1, 24));
+        space8.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
+        
+        btnMentes.setFont(new java.awt.Font("Courier New", 1, 14));
+        
+        space9.setFont(new Font("Courier New", 1, 24));
+        space9.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
+        
+        btnTorles.setFont(new java.awt.Font("Courier New", 1, 14));
+        
+        //add components        
         add(cim);
         add(receptek);
         add(receptNeve);
-        
+        add(space1);
         add(osszetevok);
         add(tableScrollPane);
         add(otevoHozzaadLabel);
         add(otevoMennyisegLabel);
         add(otevoMenny);
+        add(space2);
         add(otevoMennyisegTipusLabel);
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.getViewport().setView(osszetevokList);
         add(scrollPane);
+        add(space3);
         add(otevoMegnevezesLabel);
         add(otevoLeiras);
+        add(space4);
         add(btnHozzaad);
+        add(space5);
         add(btnOtevotEltavolit);
+        add(space6);
         add(leirasLbl);
         add(leiras);
+        add(space7);
         add(btnVissza);
+        add(space8);
         add(btnMentes);
+        add(space9);
         add(btnTorles);
         
     }

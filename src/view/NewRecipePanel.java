@@ -1,30 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
 
 import controller.Controller;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-/**
- *
- * @author 604772006
- */
 public class NewRecipePanel  extends JPanel{
 
     private JFrame pFrame;
     private JLabel cim;
     private JTextField receptNeve;
     private JTextField otevoMennyiseg;
-   private JTextField otevoMegnevezes;
+    private JTextField otevoMegnevezes;
     private JTable otevoTabla;
     private JList otevoList;
     private JTextField receptLeiras;
@@ -34,7 +25,14 @@ public class NewRecipePanel  extends JPanel{
     private JPanel guiPanel;
     private boolean initialized;
     private JButton btnOtevotEltavolit;
-            
+    private JLabel space1;
+    private JLabel space2;
+    private JLabel space3;
+    private JLabel space4;
+    private JLabel space5;
+    private JLabel space6;
+    private JLabel space7;
+    private JLabel space8;
     
     public NewRecipePanel(Controller controller) {
         //construct components
@@ -49,7 +47,15 @@ public class NewRecipePanel  extends JPanel{
         JLabel otevoMennyisegLabel = new JLabel("Mennyiség");
         JLabel otevoMennyisegTipusLabel = new JLabel("Mennyiség Típus");
         JLabel ujOtevLabel = new JLabel("Összetevő");
-        
+        space1 = new JLabel("");
+        space2 = new JLabel("");
+        space3 = new JLabel("");
+        space4 = new JLabel("");
+        space5 = new JLabel("");
+        space6 = new JLabel("");
+        space7 = new JLabel("");
+        space8 = new JLabel("");
+                
         otevoList= new JList();
         JLabel leirLabel = new JLabel("Recept leírása:");
         receptLeiras=new JTextField(100);
@@ -57,15 +63,15 @@ public class NewRecipePanel  extends JPanel{
         btnMentes=new JButton("Mentés");
         btnVissza=new JButton("Vissza");
         btnOtevotEltavolit = new JButton("Eltávolít");
+        otevoTabla= new JTable();
+        
         btnVissza.addActionListener(controller.getVisszaGombListener());
         btnMentes.addActionListener(controller.getMentesGombListener());
         btnHozzaad.addActionListener(controller.getUjReceptOsszetevotHozzaadListener());
         btnOtevotEltavolit.addActionListener(controller.getUjReceptOsszetevotEltavolitListener());
         otevoList.getSelectionModel().addListSelectionListener(controller.getUjReceptListaElemListener());
         otevoList.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        otevoTabla= new JTable();
-        
-        
+                        
         ListSelectionModel rowSelectionModel=otevoTabla.getSelectionModel();
         rowSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         rowSelectionModel.addListSelectionListener(controller.getUjReceptTablaSorListener());
@@ -73,59 +79,72 @@ public class NewRecipePanel  extends JPanel{
         tableScrollPane.setViewportView(otevoTabla);
         
         //adjust size and set layout
-        setPreferredSize (new Dimension (400, 500));
+        setPreferredSize (new Dimension (400, 650));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.decode("#3AAACF"));
         setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
                 
-        cim.setFont(new java.awt.Font("Courier New", 1, 24));
-        cim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cim.setFont(new Font("Courier New", 1, 24));
+        cim.setBorder(new EmptyBorder(new Insets(1, 50, 50, 1)));
         
-        otevoHozzaadLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        otevoHozzaadLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rnevLabel.setFont(new Font("Courier New", 0, 14));
+        
+        receptNeve.setBackground(Color.decode("#62B4CF"));
+        
+        space1.setFont(new Font("Courier New", 1, 24));
+        space1.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
         otevLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        otevLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        
+                
+        otevoHozzaadLabel.setFont(new java.awt.Font("Courier New", 1, 16));
+        otevoHozzaadLabel.setBorder(new EmptyBorder(new Insets(10, 1, 10, 1)));
+                
         otevoMennyisegLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        otevoMennyisegLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                
+        otevoMennyiseg.setBackground(Color.decode("#62B4CF"));
+        
+        space2.setFont(new Font("Courier New", 1, 24));
+        space2.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
         otevoMennyisegTipusLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        otevoMennyisegTipusLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
+        space3.setFont(new Font("Courier New", 1, 24));
+        space3.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
+                
         ujOtevLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        ujOtevLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        
+        otevoMegnevezes.setBackground(Color.decode("#62B4CF"));
+        
+        space4.setFont(new Font("Courier New", 1, 24));
+        space4.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
+        
+        btnHozzaad.setFont(new Font("Courier New", 1, 14));
+        
+        space5.setFont(new Font("Courier New", 1, 24));
+        space5.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
+        
+        btnOtevotEltavolit.setFont(new Font("Courier New", 1, 14));
+        
+        space6.setFont(new Font("Courier New", 1, 24));
+        space6.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
         leirLabel.setFont(new java.awt.Font("Courier New", 0, 14));
-        leirLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         
-        receptNeve.setBackground(new java.awt.Color(255, 255, 102));
+        receptLeiras.setBackground(Color.decode("#62B4CF"));
         
-        otevoMennyiseg.setBackground(new java.awt.Color(255, 255, 102));
+        space7.setFont(new Font("Courier New", 1, 24));
+        space7.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
-        otevoMegnevezes.setBackground(new java.awt.Color(255, 255, 102));
+        btnMentes.setFont(new Font("Courier New", 1, 14));
         
-        receptLeiras.setBackground(new java.awt.Color(255, 255, 102));
+        space8.setFont(new Font("Courier New", 1, 24));
+        space8.setBorder(new EmptyBorder(new Insets(1, 1, 10, 1)));
         
-        btnHozzaad.setBackground(new java.awt.Color(255, 0, 51));
-        btnHozzaad.setForeground(new java.awt.Color(51, 0, 255));
-        btnHozzaad.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        btnVissza.setFont(new Font("Courier New", 1, 14));
         
-        btnMentes.setBackground(new java.awt.Color(255, 0, 51));
-        btnMentes.setForeground(new java.awt.Color(51, 0, 255));
-        btnMentes.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
+        otevoList.setBackground(Color.decode("#62B4CF"));
         
-        btnVissza.setBackground(new java.awt.Color(255, 0, 51));
-        btnVissza.setForeground(new java.awt.Color(51, 0, 255));
-        btnVissza.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
-        
-        btnOtevotEltavolit.setBackground(new java.awt.Color(255, 0, 51));
-        btnOtevotEltavolit.setForeground(new java.awt.Color(51, 0, 255));
-        btnOtevotEltavolit.setFont(new java.awt.Font("Tempus Sans ITC", 0, 14));
-        
-        otevoList.setBackground(new java.awt.Color(255, 255, 102));
-        
-        otevoTabla.setBackground(new java.awt.Color(255, 255, 102));
+        otevoTabla.setBackground(Color.decode("#62B4CF"));
         
         inicNewRecipePanelDefault();
         
@@ -133,25 +152,30 @@ public class NewRecipePanel  extends JPanel{
         add(cim);
         add(rnevLabel);
         add(receptNeve);
+        add(space1);
         add(otevLabel);
         add(tableScrollPane);
         add(otevoHozzaadLabel);
         add(otevoMennyisegLabel);
         add(otevoMennyiseg);
+        add(space2);
         add(otevoMennyisegTipusLabel);
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.getViewport().setView(otevoList);
         add(scrollPane);
+        add(space3);
         add(ujOtevLabel);
         add(otevoMegnevezes);
-        
-        
+        add(space4);
         add(btnHozzaad);
+        add(space5);
         add(btnOtevotEltavolit);
-        //add(otevoTabla);
+        add(space6);
         add(leirLabel);
         add(receptLeiras);
+        add(space7);
         add(btnMentes);
+        add(space8);
         add(btnVissza);
     }
   
