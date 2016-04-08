@@ -259,6 +259,11 @@ public class NewRecipePanel  extends JPanel{
     public TableModel getOtevoTablaAdat() {
         return otevoTabla.getModel();
     }
+    
+    public String getOtevoTablaAdatCella(int x, int y) {
+        if (otevoTabla.getModel().getValueAt(x, y).toString().equals("")) throw new RuntimeException("Összetevő mennyiség vagy leírás üres. Kérem adjon meg mennyiség ill leírás értéket az összetevőhöz!");
+        return otevoTabla.getModel().getValueAt(x, y).toString();
+    }
 
     public void setOtevoTabla(TableModel otevoTabla) {
         this.otevoTabla.setModel(otevoTabla);

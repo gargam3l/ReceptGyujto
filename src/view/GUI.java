@@ -51,6 +51,7 @@ public class GUI extends JPanel{
         cards.add(srchRPanel, "card4");
         cardLayout.show(cards, "card1");
         
+        this.frame.setLayout(cardLayout);
         setLayout(new BorderLayout());
         add(cards, BorderLayout.CENTER);
         frame.setTitle("Chlebovics Kornél(VYSQGW) & Papp Zoltán(N3GM04)");
@@ -62,7 +63,8 @@ public class GUI extends JPanel{
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
-        frame.getContentPane().add(this);
+        frame.add(this, BorderLayout.CENTER);
+        //frame.getContentPane().add(this);
         frame.pack();   
         frame.setLocationByPlatform(true);
         frame.setVisible(true);

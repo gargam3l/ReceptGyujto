@@ -18,6 +18,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import model.*;
 import model.ReceptKezelo;
@@ -147,6 +148,8 @@ public class Controller {
                  
                 try
                 {
+                    
+                    
                     gui.getNewRPanel().getReceptNeve();
                     
                 Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve(), gui.getNewRPanel().getReceptLeiras());
@@ -155,13 +158,12 @@ public class Controller {
                 for (int i=0;i<gui.getNewRPanel().getOtevoTablaSorokSzama();i++)
                     {
                         Osszetevok otevo=new Osszetevok();
-                        otevo.setMennyiseg_egyseg(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 0).toString());
-                        System.out.println(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 0).toString());
-                                
-                        otevo.setMennyiseg_tipus(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 1).toString());
-                        System.out.println(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 1).toString());
-                        otevo.setOsszetevo_fajta(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 2).toString());
-                        System.out.println(gui.getNewRPanel().getOtevoTablaAdat().getValueAt(i, 2).toString());
+                        otevo.setMennyiseg_egyseg(gui.getNewRPanel().getOtevoTablaAdatCella(i, 0));
+                        System.out.println(gui.getNewRPanel().getOtevoTablaAdatCella(i, 0));                           ;
+                        otevo.setMennyiseg_tipus(gui.getNewRPanel().getOtevoTablaAdatCella(i, 1));
+             
+                        otevo.setOsszetevo_fajta(gui.getNewRPanel().getOtevoTablaAdatCella(i, 2));
+
                         ujRecept.osszetevotHozzaad(otevo);
                     }
                 
@@ -196,6 +198,7 @@ public class Controller {
              @Override public void actionPerformed (ActionEvent e) {
                  
                  try{
+                 gui.getShRPanel().getOsszetevokTable().doLayout();
                  Recept ujRecept = new Recept();
                  ujRecept.setMegnevezes(gui.getShRPanel().getReceptNeve());
                  ujRecept.setLeiras(gui.getShRPanel().getLeiras());
@@ -203,9 +206,9 @@ public class Controller {
                  for (int i=0; i<gui.getShRPanel().getOtevoTablaSorokSzama(); i++)
                  {
                      Osszetevok otevo=new Osszetevok();
-                     otevo.setMennyiseg_egyseg(gui.getShRPanel().getOsszetevokTableAdat().getValueAt(i, 0).toString());
-                     otevo.setMennyiseg_tipus(gui.getShRPanel().getOsszetevokTableAdat().getValueAt(i, 1).toString());
-                     otevo.setOsszetevo_fajta(gui.getShRPanel().getOsszetevokTableAdat().getValueAt(i, 2).toString());
+                     otevo.setMennyiseg_egyseg(gui.getShRPanel().getOtevoTablaAdatCella(i, 0));
+                     otevo.setMennyiseg_tipus(gui.getShRPanel().getOtevoTablaAdatCella(i, 0));
+                     otevo.setOsszetevo_fajta(gui.getShRPanel().getOtevoTablaAdatCella(i, 0));
                      ujRecept.osszetevotHozzaad(otevo);
                  }
                  

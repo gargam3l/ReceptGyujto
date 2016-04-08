@@ -315,4 +315,9 @@ public class ShowRecipePanel  extends JPanel{
         return osszetevokTable.getSelectedRow();
     }
     
+    public String getOtevoTablaAdatCella(int x, int y) {
+        if (osszetevokTable.getModel().getValueAt(x, y).toString().equals("")) throw new RuntimeException("Összetevő mennyiség vagy leírás üres. Kérem adjon meg mennyiség ill leírás értéket az összetevőhöz!");
+        return osszetevokTable.getModel().getValueAt(x, y).toString();
+    }
+    
 }
