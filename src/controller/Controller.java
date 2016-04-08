@@ -65,6 +65,8 @@ public class Controller {
                  
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                  cardLayout.show(gui.getCards(), "card1");
+                 rKezelo.setAktualisMennyisegTipus("");
+                 rKezelo.getAktualisRecept().setMegnevezes("");
              }
          };
     }
@@ -125,8 +127,7 @@ public class Controller {
                     //Recept leírás betöltése guiba
                     gui.getShRPanel().setLeiras(rKezelo.getAktualisRecept().getLeiras());
                     gui.getShRPanel().otevoOszlopotBeallit(gui.getShRPanel().getOsszetevokTable(), rKezelo.otevoMennyTipusok());
-                    rKezelo.setAktualisMennyisegTipus("");
-                    rKezelo.getAktualisRecept().setMegnevezes("");
+                    
                     rKezelo.setAktualisOtevoSor(-1);
                     } catch (Exception ex)
                 {
@@ -186,9 +187,30 @@ public class Controller {
     {
         return new ActionListener() {
              @Override public void actionPerformed (ActionEvent e) {
-                 System.out.println("Törlés gomb");
-                 rKezelo.receptetTorol(rKezelo.getAktualisRecept().getMegnevezes());
-             }
+                 
+                 try{
+                 Recept receptGui = new Recept(gui.getShRPanel().getReceptNeve(), gui.getShRPanel().getLeiras());
+                 for (int i=0; i<gui.getShRPanel().getOtevoTablaSorokSzama(); i++)
+                 {
+                     Osszetevok otevo=new Osszetevok();
+                     otevo.setMennyiseg_egyseg(gui.getShRPanel().getOtevoTablaAdatCella(i, 0));
+                     otevo.setMennyiseg_tipus(gui.getShRPanel().getOtevoTablaAdatCella(i, 1));
+                     otevo.setOsszetevo_fajta(gui.getShRPanel().getOtevoTablaAdatCella(i, 2));
+                     receptGui.osszetevotHozzaad(otevo);
+                 }
+                 if (receptGui.equals(rKezelo.getAktualisRecept()))  rKezelo.receptetTorol(rKezelo.getAktualisRecept().getMegnevezes());
+                 gui.getSrchRPanel().setInitialized(false);
+                 CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
+                    cardLayout.show(gui.getCards(), "card4");
+                 gui.getSrchRPanel().inicSearchRecipePanelDefault(); 
+                 }
+                  catch (Exception ex)
+                {
+                    JOptionPane.showMessageDialog(gui, ex.getMessage(), "Hiba", JOptionPane.ERROR_MESSAGE);
+
+                }
+            }
+                 
          };
     }
     
@@ -207,8 +229,8 @@ public class Controller {
                  {
                      Osszetevok otevo=new Osszetevok();
                      otevo.setMennyiseg_egyseg(gui.getShRPanel().getOtevoTablaAdatCella(i, 0));
-                     otevo.setMennyiseg_tipus(gui.getShRPanel().getOtevoTablaAdatCella(i, 0));
-                     otevo.setOsszetevo_fajta(gui.getShRPanel().getOtevoTablaAdatCella(i, 0));
+                     otevo.setMennyiseg_tipus(gui.getShRPanel().getOtevoTablaAdatCella(i, 1));
+                     otevo.setOsszetevo_fajta(gui.getShRPanel().getOtevoTablaAdatCella(i, 2));
                      ujRecept.osszetevotHozzaad(otevo);
                  }
                  

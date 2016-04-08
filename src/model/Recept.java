@@ -7,6 +7,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -97,6 +98,48 @@ public class Recept {
 
     public void setLeiras(String leiras) {
         this.leiras = leiras;
+    }
+
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        boolean eredmeny=true;
+        final Recept other = (Recept) obj;
+            if (!this.megnevezes.equals(other.megnevezes )) 
+            {
+                eredmeny= false;
+                System.out.println("Megnevezés nem egyezik");
+            }
+            if (!this.leiras.equals(other.leiras))
+            {
+                eredmeny=false;
+                System.out.println("Leírás nem egyezik");
+            }
+            
+            if (this.osszetevok.size()!=other.osszetevok.size())
+            {
+                eredmeny=false;
+                System.out.println("Összetevők mérete nem egyezik");
+            }
+            
+            for (int i=0; i<this.osszetevok.size();i++)
+            {
+                if (!((this.osszetevok.get(i)).equals((other.osszetevok.get(i))))) 
+                {
+                    eredmeny=false;
+                System.out.println("Összetevő nem egyezik: this "+this.osszetevok.get(i)+" és other: "+other.osszetevok.get(i));
+                }
+            }
+            
+        if (!eredmeny) throw new RuntimeException("A recept szerkesztve lett. Recept törlését szerkesztés nélkül vigye véghez!");
+        return eredmeny;
     }
     
     

@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.Objects;
+
 
 
 /**
@@ -55,6 +57,23 @@ public class Osszetevok {
     @Override
     public String toString() {
         return "Osszetevok{" + "mennyiseg_egyseg=" + mennyiseg_egyseg + ", mennyiseg_tipus=" + mennyiseg_tipus + ", osszetevo_fajta=" + osszetevo_fajta + '}';
+    }
+
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Osszetevok other = (Osszetevok) obj;
+        if (this.mennyiseg_egyseg.equals(other.mennyiseg_egyseg) && this.mennyiseg_tipus.equals(other.mennyiseg_tipus) && this.osszetevo_fajta.equals(other.osszetevo_fajta)) 
+        {
+            return true;
+        }
+        return false;
     }
     
             
