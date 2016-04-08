@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package view;
 
 import controller.Controller;
@@ -12,10 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-/**
- *
- * @author Chlebovics Kornél
- */
 public class MainPanel extends JPanel{
     
     private JFrame pFrame;
@@ -26,27 +16,24 @@ public class MainPanel extends JPanel{
     private JPanel guiPanel;
     private JButton receptKeres;
     private JButton kilepes;
-
-    
-
     
     public MainPanel(Controller controller) {
 
         //construct components
-        this.cim = new JLabel("Recept Kezelő");
-        this.ujRecept = new JButton("Új recept hozzáadása");
-        this.space1 = new JLabel("");
-        this.receptKeres= new JButton("Recept Keresése");
-        this.space2 = new JLabel("");
-        this.kilepes= new JButton("Kilépés");
+        cim = new JLabel("Recept Kezelő");
+        ujRecept = new JButton("Új recept hozzáadása");
+        space1 = new JLabel("");
+        receptKeres= new JButton("Recept Keresése");
+        space2 = new JLabel("");
+        kilepes= new JButton("Kilépés");
+        
         ujRecept.addActionListener(controller.getUjReceptPanelListener());
         receptKeres.addActionListener(controller.getReceptKeresPanelListener());
         kilepes.addActionListener(controller.getKilepes());
-
         
         //adjust size and set layout
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setPreferredSize (new Dimension (400, 500));
+        setPreferredSize (new Dimension (400, 650));
         setBackground(Color.decode("#3AAACF"));
         setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.black));
                 
