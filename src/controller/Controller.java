@@ -65,8 +65,8 @@ public class Controller {
                  
                  CardLayout cardLayout = (CardLayout) gui.getCards().getLayout();
                  cardLayout.show(gui.getCards(), "card1");
-                 rKezelo.setAktualisMennyisegTipus("");
-                 rKezelo.getAktualisRecept().setMegnevezes("");
+                 //rKezelo.setAktualisMennyisegTipus("");
+                 //rKezelo.getAktualisRecept().setMegnevezes("");
              }
          };
     }
@@ -154,13 +154,13 @@ public class Controller {
                     gui.getNewRPanel().getReceptNeve();
                     
                 Recept ujRecept = new Recept(gui.getNewRPanel().getReceptNeve(), gui.getNewRPanel().getReceptLeiras());
-                System.out.println(gui.getNewRPanel().getReceptNeve()+" "+ gui.getNewRPanel().getReceptLeiras());
+                //System.out.println(gui.getNewRPanel().getReceptNeve()+" "+ gui.getNewRPanel().getReceptLeiras());
                 //Összetevők hozzáadása recepthez - ciklusba kell tenni, miután gui-ban az összetevők tábla implementálva lesz
                 for (int i=0;i<gui.getNewRPanel().getOtevoTablaSorokSzama();i++)
                     {
                         Osszetevok otevo=new Osszetevok();
                         otevo.setMennyiseg_egyseg(gui.getNewRPanel().getOtevoTablaAdatCella(i, 0));
-                        System.out.println(gui.getNewRPanel().getOtevoTablaAdatCella(i, 0));                           ;
+                        //System.out.println(gui.getNewRPanel().getOtevoTablaAdatCella(i, 0));                           ;
                         otevo.setMennyiseg_tipus(gui.getNewRPanel().getOtevoTablaAdatCella(i, 1));
              
                         otevo.setOsszetevo_fajta(gui.getNewRPanel().getOtevoTablaAdatCella(i, 2));

@@ -77,15 +77,15 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
             
-            System.out.println("Recept tábla létrehozása");
+            //System.out.println("Recept tábla létrehozása");
             String sql_recept_tabla =        
                     "CREATE TABLE Recept(id int NOT NULL PRIMARY KEY,nev varchar(255),elkeszites varchar(2000))" ;
             s.executeUpdate(sql_recept_tabla);
-            System.out.println("Recept sequence létrehozása");
+            //System.out.println("Recept sequence létrehozása");
             String sql_recept_sequence=
                     "CREATE SEQUENCE seq_recept MINVALUE 1 START WITH 1 INCREMENT BY 1 CACHE 100";
             s.executeUpdate(sql_recept_sequence);
-            System.out.println("Összetevő tábla létrehozása");
+            //System.out.println("Összetevő tábla létrehozása");
             String sql_osszetevo_table=
                     "CREATE TABLE Osszetevo" +
                     "(" +
@@ -93,11 +93,11 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                     "nev varchar(255)" +
                     ")" ;
             s.executeUpdate(sql_osszetevo_table);
-            System.out.println("Összetevő sequence létrehozása");
+            //System.out.println("Összetevő sequence létrehozása");
             String sql_osszetevo_sequence=
                     "CREATE SEQUENCE seq_osszetevo MINVALUE 1 START WITH 1 INCREMENT BY 1 CACHE 100" ;
             s.executeUpdate(sql_osszetevo_sequence);
-            System.out.println("Mennyiség tábla létrehozása");
+            //System.out.println("Mennyiség tábla létrehozása");
             String sql_mennyiseg_tabla=
                     "CREATE TABLE Mennyiseg" +
                     "(" +
@@ -105,11 +105,11 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                     "nev varchar(255)" +
                     ")" ;
             s.executeUpdate(sql_mennyiseg_tabla);
-            System.out.println("Mennyiség sequence létrehozása");
+            //System.out.println("Mennyiség sequence létrehozása");
             String sql_mennyiseg_sequence=
                     "CREATE SEQUENCE seq_mennyiseg MINVALUE 1 START WITH 1 INCREMENT BY 1 CACHE 100" ;
             s.executeUpdate(sql_mennyiseg_sequence);
-            System.out.println("Központi tábla létrehozása");
+            //System.out.println("Központi tábla létrehozása");
             String sql_kozponti_tabla=
                     "CREATE TABLE Kozponti" +
                     "(" +
@@ -135,7 +135,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
         try {
             kapcsolatNyit();
             Statement s=kapcsolat.createStatement();
-            System.out.println("Recept tesztadatok beszúrása Recept táblába");
+            //System.out.println("Recept tesztadatok beszúrása Recept táblába");
             String sql_recept_hozzad1 = "INSERT INTO Recept(id,nev,elkeszites) VALUES " +
                     "(seq_recept.nextval,'Rántott csirkecomb kukoricás rizzsel','A csirkecombokat enyhén sós vízben megfőzzük, aztán bepanírozzuk először lisztbe, aztán tojásba, és végül a zsemlemorzsába forgatjuk bele.Bő olajban kisütjük a rántott csirkecombokat.Közben megfőzzük a rizst, kukoricát pirítunk hozzá, és összekeverjük a kukoricát a rizzsel.')";
             s.executeUpdate(sql_recept_hozzad1);
@@ -161,7 +161,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                     "(seq_recept.nextval,'Babgulyás','A babot előző este beáztatjuk jó sok vízbe. Másnap a répákat felkarikázzuk, a paradicsomot, és a húst is felaprítjuk. A babot egy edénybe tesszük, teszünk bele babérlevelet, felengedjük vízzel, ami ellepi és elkezdjük főzni had, puhuljon. A hagymát apróra vágjuk, kevés olajon üvegesre dinszteljük. Beletesszük az összenyomott fokhagymát, hozzáadjuk a megmosott felkockázott húst és fehéredésig főzzük. Hozzáadjuk, a pirospaprikát elkeverjük. Ezután mehet bele az apró kocára vágott paradicsom, a karikára vágott répa és zöldség. Felöntjük vízzel és hozzáadjuk a kisebb darabokra vágott füstölt húst. Fél óra főzés után a babot is beletesszük, és a bab főzőlevét is adjuk hozzá, nagyon finom lesz tőle. Együtt főzzük, amíg a hús és a bab is puha lesz. Addig elkészítjük a csipetkét. Egy tálba tesszük a lisztet közepébe a tojást, sót, és jól összegyúrjuk, ha kell, még adunk hozzá lisztet az a lényeg a tészta ne ragadjon a kezünkhöz. Ha puha a hús és a bab is, akkor a tésztát tegyük a levesbe, és jól forraljuk össze. A kész tészták feljönnek a leves tetejére.')" ;
             s.executeUpdate(sql_recept_hozzad5);
             
-            System.out.println("Recept tesztadatok beszúrása Összetevő táblába");
+            //System.out.println("Recept tesztadatok beszúrása Összetevő táblába");
             String sql_osszetevo_hozzaad01=
                     "INSERT INTO Osszetevo(id,nev) VALUES " +
                     "(seq_osszetevo.nextval,'csirkecomb')";
@@ -260,7 +260,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
             "(seq_osszetevo.nextval,'fűszerpaprika')" ;
             s.executeUpdate(sql_osszetevo_hozzaad32);
              
-            System.out.println("Tesztadatok beszúrása Mennyiség táblába");
+            //System.out.println("Tesztadatok beszúrása Mennyiség táblába");
             String sql_mennyiseg_hozzaad1=
                         "INSERT INTO Mennyiseg(id,nev)" +
                         "VALUES" +
@@ -273,7 +273,7 @@ public class ReceptKezelo extends Observable  implements AdatbazisKapcsolat{
                         "(seq_mennyiseg.nextval,'ml')" ;
             s.executeUpdate(sql_mennyiseg_hozzaad3);
         
-            System.out.println("Recept tesztadatok beszúrása Központi táblába");
+            //System.out.println("Recept tesztadatok beszúrása Központi táblába");
             String sql_kozponti_hozzaad01=
             "INSERT INTO Kozponti(recept_id,osszetevo_id,mennyiseg,mennyiseg_id)" +
             "VALUES" +

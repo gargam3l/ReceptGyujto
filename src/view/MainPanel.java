@@ -16,6 +16,7 @@ public class MainPanel extends JPanel{
     private JPanel guiPanel;
     private JButton receptKeres;
     private JButton kilepes;
+    private boolean initialized;
     
     public MainPanel(Controller controller) {
 
@@ -66,7 +67,7 @@ public class MainPanel extends JPanel{
     
     
     public void addController(ActionListener  controller){
-		System.out.println("View      : adding controller");
+		//System.out.println("View      : adding controller");
 		this.ujRecept.addActionListener(controller);
                 this.receptKeres.addActionListener(controller);
     } //addController()
@@ -91,6 +92,7 @@ public class MainPanel extends JPanel{
     public JButton getKilepes() {
         return kilepes;
     }
+
     
     
 }
